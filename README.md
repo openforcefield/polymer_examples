@@ -2,10 +2,10 @@
 Example polymers for testing.
 
 ### Existing polymers
-simple_polymers/
-      * PANAM
-      * Natural rubber
-      * Vulcanized rubber
+* simple_polymers/
+   * PANAM
+   * Natural rubber
+   * Vulcanized rubber
 
 ### Cases we would still like to have
 
