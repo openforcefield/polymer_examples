@@ -9,14 +9,19 @@ Example polymers for testing.
 
 ### Cases we would still like to have
 
-  * Glycosylated proteins  (test connections of glycosylations)
-  * Crosslinked polyamide membrane
-  * Crosslinked LLC
-  * PEGylated protein 
+  * Glycosylated proteins (test connections of glycosylations)
   * Various sugars 
-  * DNA
-  * RNA
+  * Crosslinked polyamide membrane
+  * Crosslinked lytropic liquid crystal
+  * PEGylated protein
+  * Protein with dye attached
+  * Nucleic acid
+     * DNA
+     * RNA
+     * Artificial bases
   * Protein
-  * Large stress cases
+  * Large stress cases?  
+  * Sulfonamide polymer?  Sulfur with the SAME local connectivity but different formal charge.
+  * Random polymers?
   
   
