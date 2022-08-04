@@ -6,13 +6,22 @@ Example polymers for testing.
    * PANAM
    * Natural rubber
    * Vulcanized rubber
+* sugars/
+   * trimannose
+   * dextran
+   * chitin
+   * cellulose
+   * A really messy one with branches and lots of different sugars
+* crosslinked_polymers
+   * xlinked.pdb: crosslinked lyotropic liquid crystal
+* Functionalized proteins
 
+* Nucleic acids
+   * 
 ### Cases we would still like to have
 
   * Glycosylated proteins (test connections of glycosylations)
-  * Various sugars 
   * Crosslinked polyamide membrane
-  * Crosslinked lytropic liquid crystal
   * PEGylated protein
   * Protein with dye attached
   * Nucleic acid
