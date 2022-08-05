@@ -14,21 +14,18 @@ Example polymers for testing.
    * A really messy one with branches and lots of different sugars
 * crosslinked_polymers
    * xlinked.pdb: crosslinked lyotropic liquid crystal
-* Functionalized proteins
-
 * Nucleic acids
-   * 
+   * 2q1r (rna)
+   * 7sb8 (dna)
+   * 6x5d (dna, with chemical modifications)
+ * Functionalized proteins
+   * Cystine with a dye
+   * https://www.rcsb.org/structure/6cww
+   
 ### Cases we would still like to have
-
-  * Glycosylated proteins (test connections of glycosylations)
   * Crosslinked polyamide membrane
   * PEGylated protein
   * Protein with dye attached
-  * Nucleic acid
-     * DNA
-     * RNA
-     * Artificial bases
-  * Protein
   * Large stress cases?  
   * Sulfonamide polymer?  Sulfur with the SAME local connectivity but different formal charge.
   * Random polymers?
