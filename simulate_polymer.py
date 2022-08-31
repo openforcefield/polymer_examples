@@ -19,11 +19,13 @@ import parmed
 def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
     # mol should already have one conformer...
 
-    mol_conf, _ = Molecule.from_pdb_and_monomer_info(pdbfile, substructure_file)
-    pdbfile = PDBFile(pdbfile)
-    omm_topology = pdbfile.topology
+    # mol_conf, _ = Molecule.from_pdb_and_monomer_info(pdbfile, substructure_file)
+    omm_pdbfile = PDBFile(pdbfile)
+    omm_topology = omm_pdbfile.topology
 
-    off_topology = mol_conf.to_topology()
+    off_topology, _, error = Topology.from_pdb_and_monomer_info(pdbfile, substructure_file, strict=True)
+    if error:
+        print("unmatched atoms in topology: estimating as single bonds")
     forcefield = ForceField(offxml_file)
     forcefield.deregister_parameter_handler('ToolkitAM1BCC')
     forcefield.get_parameter_handler('ChargeIncrementModel', {"version":0.3, "partial_charge_method":"gasteiger"})
@@ -36,16 +38,16 @@ def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
     friction = 1/unit.picosecond  # collision rate
     integrator = openmm.LangevinIntegrator(temperature, friction, time_step)
     simulation = openmm.app.Simulation(omm_topology, system, integrator)
-    positions = pdbfile.getPositions() 
+    positions = omm_pdbfile.getPositions() 
     simulation.context.setPositions(positions)
 
     pdb_reporter = openmm.app.PDBReporter(f'{output}.pdb', 10)
-    # dcd_reporter = openmm.app.DCDReporter(f'{output}.dcd', 10)
+    dcd_reporter = openmm.app.DCDReporter(f'{output}.dcd', 10)
     simulation.reporters.append(pdb_reporter)
-    # simulation.reporters.append(dcd_reporter)
+    simulation.reporters.append(dcd_reporter)
     
-    simulation.minimizeEnergy(maxIterations=1000)
-    simulation.step(10000)
+    simulation.minimizeEnergy(maxIterations=10000)
+    simulation.step(1000)
     st = simulation.context.getState(getPositions=True, getEnergy=True)
     print(st.getPotentialEnergy())
     # print(st.getPositions())
@@ -59,13 +61,13 @@ def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
     return st, difference
 
 if __name__ == "__main__":
-    name = "atactic_styrene"
+    name = "polyethylene"
     pdb_file = None
     json_file = None
     for file in Path(Path.cwd() / Path('polymer_examples/compatible_pdbs')).glob("**/*.pdb"):
-        print(file.name)
         if file.stem != name:
             continue
+        print(file.name)
         pdb_file = file.absolute()
         json_file = file.parent / Path(f"{name}.json")
     if pdb_file == None or not pdb_file.exists():
