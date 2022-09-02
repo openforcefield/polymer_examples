@@ -28,6 +28,7 @@ def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
         print("unmatched atoms in topology: estimating as single bonds")
     forcefield = ForceField(offxml_file)
     forcefield.deregister_parameter_handler('ToolkitAM1BCC')
+    # get better charges 
     forcefield.get_parameter_handler('ChargeIncrementModel', {"version":0.3, "partial_charge_method":"gasteiger"})
     start = time.time()
     system = forcefield.create_openmm_system(off_topology, allow_nonintegral_charges=True) #WARNING: I have no idea that this means 

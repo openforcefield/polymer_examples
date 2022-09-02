@@ -28,7 +28,7 @@ for file in input_directory.glob('**/*.pdb'):
         continue
     if file.name == "xlinked.pdb":
         continue
-    if file.name != "7sb8_dna.pdb":
+    if file.name != "peg_c35r_no_wtr_modified.pdb":
         continue
     # if str(file) not in ['simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']:
     #     continue
