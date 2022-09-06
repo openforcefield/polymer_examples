@@ -14,7 +14,7 @@ from openmm.app import PDBFile
 if os.getcwd() == '/home/coda3831/openff-workspace':
     os.chdir('polymer_examples')
 
-input_directory = Path("")
+input_directory = Path("uncleaned_pdbs")
 output_directory = Path("compatible_pdbs")
 Path(output_directory).mkdir(parents=True, exist_ok=True)
 if not output_directory.exists() or not output_directory.is_dir() or output_directory == Path(""):
@@ -28,8 +28,8 @@ for file in input_directory.glob('**/*.pdb'):
         continue
     if file.name == "xlinked.pdb":
         continue
-    if file.name != "peg_c35r_no_wtr_modified.pdb":
-        continue
+    # if file.name != "peg_c35r_no_wtr_modified.pdb":
+    #     continue
     # if str(file) not in ['simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']:
     #     continue
     msg = f"processing {file.name}:\n" 
