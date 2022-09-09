@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import os
 from openff.toolkit.utils import toolkit_registry
 from rdkit import Chem
 from openff.toolkit.topology.molecule import FrozenMolecule, Molecule
@@ -18,16 +19,21 @@ def generate_charged_molecule(pdbfile, substructure_file):
     # get some conformers to run elf10 charge method. By default, `mol.assign_partial_charges`
     # uses 500 conformers, but we can generate and use 10 here for demonstration
     # mol.generate_conformers(
-    #                 n_conformers=10,
-    #                 rms_cutoff=0.25 * unit.angstrom,
-    #                 make_carboxylic_acids_cis=True,
-    #                 toolkit_registry=RDKitToolkitWrapper()
-    #             ) # very slow for large polymers! 
+    #     n_conformers=10,
+    #     rms_cutoff=0.25 * unit.angstrom,
+    #     make_carboxylic_acids_cis=True,
+    #     toolkit_registry=RDKitToolkitWrapper()
+    # ) # very slow for large polymers! 
+
     # finally, assign partial charges using those 10 conformers generated 
-    mol.assign_partial_charges(
-                    partial_charge_method='am1bcc', 
-                    toolkit_registry=OpenEyeToolkitWrapper()
-                )
+    # mol.assign_partial_charges(
+    #     partial_charge_method='am1bcc', 
+    #     toolkit_registry=OpenEyeToolkitWrapper()
+    # )
+    # mol.assign_partial_charges(
+    #     partial_charge_method='am1bcc', 
+    #     toolkit_registry=AmberToolsToolkitWrapper()
+    # )
     # code for exact how the above function works can be found in openff/toolkit/utils/openeye_wrapper.py under the assign_partial_charges() function
     return mol
 
@@ -35,12 +41,16 @@ if __name__ == "__main__":
     name = "naturalrubber" # finds this file name in the "compatible_pbds" folder
     pdb_file = None
     json_file = None
-    for file in Path(Path.cwd() / Path('polymer_examples/compatible_pdbs')).glob("**/*.pdb"):
+
+    os.chdir("openff-workspace/polymer_examples")
+    
+    for file in Path(Path.cwd() / Path('compatible_pdbs')).glob("**/*.pdb"):
         if file.stem != name:
             continue
         print(file.name)
         pdb_file = file.absolute()
         json_file = file.parent / Path(f"{name}.json")
+
     if pdb_file == None or not pdb_file.exists():
         print(f"could not find pdb file: {pdb_file}")
         sys.exit(0)
@@ -56,4 +66,4 @@ if __name__ == "__main__":
     # up the molecule into repeating sections to partition the library charges 
     for atom in charged_mol.atoms:
         assert(atom.metadata['already_matched'] == True)
-        print(atom.metadata['residue_name'])
+        print(atom.metadata)
