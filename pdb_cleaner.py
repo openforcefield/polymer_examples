@@ -28,8 +28,8 @@ for file in input_directory.glob('**/*.pdb'):
         continue
     if file.name == "xlinked.pdb":
         continue
-    # if file.name != "peg_c35r_no_wtr_modified.pdb":
-    #     continue
+    if file.name != "PEO_PLGA.pdb":
+        continue
     # if str(file) not in ['simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']:
     #     continue
     msg = f"processing {file.name}:\n" 
@@ -61,7 +61,7 @@ for file in input_directory.glob('**/*.pdb'):
                 print(msg)
                 log = log + msg
                 
-                ids = " 123456789abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&_+()<?>-=:}{][`~/*"
+                ids = "123456789abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&_+()<?>-=:}{][`~/*"
                 element_counts = defaultdict(int)
                 for atom in rdmol.GetAtoms():
                     ri = atom.GetPDBResidueInfo()
