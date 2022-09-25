@@ -65,7 +65,7 @@ if __name__ == "__main__":
     name = "polyethylene"
     pdb_file = None
     json_file = None
-    for file in Path(Path.cwd() / Path('polymer_examples/compatible_pdbs')).glob("**/*.pdb"):
+    for file in Path(Path.cwd() / Path('compatible_pdbs')).glob("**/*.pdb"):
         if file.stem != name:
             continue
         print(file.name)
@@ -78,7 +78,7 @@ if __name__ == "__main__":
         print(f"could not find json file file {json_file}")
         sys.exit(0)
 
-    offxml_file = 'openff_unconstrained_no_library_charges-2.0.0.offxml'
+    offxml_file = 'openff_unconstrained_library_charges-2.0.0.offxml'
     st, diff = simulate_polymer(str(pdb_file), json_file, offxml_file, name)
     print(f"time to create openmm system: {diff}")
 
