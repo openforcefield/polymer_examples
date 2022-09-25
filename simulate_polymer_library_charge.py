@@ -65,7 +65,7 @@ if __name__ == "__main__":
     name = "polyethylene"
     pdb_file = None
     json_file = None
-    for file in Path(Path.cwd() / Path('polymer_examples/compatible_pdbs')).glob("**/*.pdb"):
+    for file in Path(Path.cwd() / Path('compatible_pdbs')).glob("**/*.pdb"):
         if file.stem != name:
             continue
         print(file.name)
