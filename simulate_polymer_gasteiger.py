@@ -62,7 +62,7 @@ def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
     return st, difference
 
 if __name__ == "__main__":
-    name = "polyethylene"
+    name = "polyphenyleneII"
     pdb_file = None
     json_file = None
     for file in Path(Path.cwd() / Path('compatible_pdbs')).glob("**/*.pdb"):
