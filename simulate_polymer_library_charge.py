@@ -1,5 +1,5 @@
 from pathlib import Path
-import sys
+import sys, os
 from pygments import highlight
 from rdkit import Chem
 from random import randint
@@ -62,7 +62,8 @@ def simulate_polymer(pdbfile, substructure_file, offxml_file, output):
     return st, difference
 
 if __name__ == "__main__":
-    name = "polyethylene"
+    os.chdir("openff-workspace/polymer_examples")
+    name = "PEO_PLGA"
     pdb_file = None
     json_file = None
     for file in Path(Path.cwd() / Path('compatible_pdbs')).glob("**/*.pdb"):
