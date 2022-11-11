@@ -1,15 +1,15 @@
 '''Charge Averaging functions - made into .py file to allow for debugging'''
+import csv, json
 from pathlib import Path
 from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Any, Callable, Optional, Union
 
 from rdkit import Chem
 from openff.units import unit
 from openff.interchange import Interchange
 
 from openff.toolkit.topology import Topology
-from openff.toolkit.topology.molecule import Atom, FrozenMolecule, Molecule
+from openff.toolkit.topology.molecule import FrozenMolecule, Molecule, Atom
 from openff.toolkit.utils import toolkit_registry
 from openff.toolkit.utils.toolkits import RDKitToolkitWrapper, OpenEyeToolkitWrapper, AmberToolsToolkitWrapper
 from openff.toolkit.typing.engines.smirnoff import ForceField
@@ -19,12 +19,9 @@ from openmm import LangevinMiddleIntegrator
 from openmm.app import Simulation, PDBReporter, StateDataReporter
 from openmm.unit import kelvin, picosecond, picoseconds, nanometer # need to do some unit conversion with both packages
 
-
 # Charge calculation methods
-def fetch_mol(filename : str, parent_path : Path=Path.cwd()/'compatible_pdbs'/'simple_polymers', extensions : tuple[str, ...]=('pdb', 'json'), verbose : bool=False) -> tuple[Molecule, Topology]:
-    '''Takes the name of a molecule and searches for associated .pbd and .json files
-    If found, will load Topology and extract first found molecule (assume that the topology only has ONE simple homopolymer)
-    Returns the found Topology and Molecule'''
+def search_mol_files(filename : str, parent_path : Path=Path.cwd()/'compatible_pdbs', extensions : tuple[str, ...]=('pdb', 'json')) -> dict[str, Path]:
+    '''Search file tree for a pdb and monomer file with matching names'''
     mol_files = {
         ext : path
             for path in parent_path.glob('**/*.*')
@@ -36,10 +33,40 @@ def fetch_mol(filename : str, parent_path : Path=Path.cwd()/'compatible_pdbs'/'s
         if ext not in mol_files:
             raise FileNotFoundError(f'Could not find a(n) {ext} file \"{filename}.{ext}\"')
     else:
-        off_topology, _, error = Topology.from_pdb_and_monomer_info(str(mol_files['pdb']), mol_files['json'], strict=True, verbose=verbose)
-        mol = next(off_topology.molecules) # get the first molecule (assumed to be the polymer of interest)
+        return mol_files
 
-        return mol, off_topology
+def load_mol_and_topo(pdb_path : Path, json_path : Path, verbose : bool=False):
+    '''Load Molecule and Topology from a pdb and a monomer json file, performing residue matching on monomer units
+    Assumes that the pdb only contains has ONE simple homopolymer (will only load first molecule if multiple are present'''
+    off_topology, _, error = Topology.from_pdb_and_monomer_info(str(pdb_path), json_path, strict=True, verbose=verbose)
+    mol = next(off_topology.molecules) # get the first molecule (assumed to be the polymer of interest)
+
+    return mol, off_topology
+
+def poll_and_count_molecules(pdb_folder : Path, outname : str=None) -> dict[str, int]:
+    '''Takes a path to a folder containing multiple .pdb files and produces
+    a csv listing all found molecules and how many atoms each contains'''
+    mol_sizes = {}
+    mol_names = {path.stem for path in pdb_folder.iterdir()}
+    for name in mol_names:
+        try:
+            mol_files = search_mol_files(name)
+            mol, topology = load_mol_and_topo(mol_files['pdb'], mol_files['json'])  # will raise exception if files for molecule are not found
+            mol_sizes[name] = len(mol.atoms)
+        except FileNotFoundError:
+            pass
+
+    if outname is not None: # also write to file if a name for the output is specified
+        outpath = pdb_folder/f'{outname}.csv'
+        outpath.touch()
+
+        with outpath.open('w') as mol_file:
+            writer = csv.writer(mol_file, delimiter=',')
+            writer.writerow(['Molecule Name', '# Atoms']) # add columns headers
+            for mol_name, mol_size in mol_sizes.items():
+                writer.writerow([mol_name, mol_size])
+
+    return mol_sizes
 
 def generate_molecule_charges(mol : Molecule, toolkit_method : str='openeye', partial_charge_method : str='am1bcc') -> Molecule:
     '''Takes a Molecule object and computes partial charges with AM1BCC using toolkit method of choice. Returns charged molecule'''
@@ -73,6 +100,8 @@ def generate_molecule_charges(mol : Molecule, toolkit_method : str='openeye', pa
     return charged_mol # code for exact how thely above function works can be found in openff/toolkit/utils/openeye_wrapper.py under the assign_partial_charges()
 
 # charge averaging methods
+AveragedChargeMap = defaultdict[str, dict[int, float]] # makes typehinting clearer
+
 @dataclass
 class Accumulator:
     '''Compact container for accumulating averages'''
@@ -83,7 +112,12 @@ class Accumulator:
     def average(self) -> float:
         return self.sum / self.count
 
-AveragedChargeMap = defaultdict[str, dict[int, float]] # makes typehinting clearer
+@dataclass
+class AvgResidueCharges:
+    '''Dataclass for more conveniently storing averaged charges for a residue group'''
+    charges : dict[int, float]
+    residue_name : str
+    SMARTS : str
 
 def find_repr_residues(cmol : Molecule) -> dict[str, int]:
     '''Determine names and smallest residue numbers of all unique residues in charged molecule
@@ -97,47 +131,53 @@ def find_repr_residues(cmol : Molecule) -> dict[str, int]:
 
     return rep_res_nums
 
-def averaged_charges_by_SMARTS(cmol : Molecule) -> AveragedChargeMap:
-    '''Takes a charged molecule and averages charges for each repeating residues
-    Returns a dict (indexed by SMARTS strings) of subdicts containing averaged charges for each atom in a residue'''
+def get_averaged_charges(cmol : Molecule, index_by : str='SMARTS') -> list[AvgResidueCharges]:
+    '''Takes a charged molecule and averages charges for each repeating residue. 
+    Returns a list of AvgResidueCharge objects each of which holds:
+        - A dict of the averaged charges by atom 
+        - The name of the residue associated with the charges
+        - A SMARTS string of the residue's structure'''
     rdmol = cmol.to_rdkit() # create rdkit representation of Molecule to allow for SMARTS generation
     rep_res_nums = find_repr_residues(cmol) # determine ids of representatives of each unique residue
 
     atom_ids_for_SMARTS = defaultdict(list)
-    avg_charges_by_res = defaultdict(lambda : defaultdict(Accumulator))
+    res_charge_accums   = defaultdict(lambda : defaultdict(Accumulator))
     for atom in cmol.atoms: # accumulate counts and charge values across matching substructures
         res_name, substruct_id, atom_id = atom.metadata['residue_name'], atom.metadata['substructure_id'], atom.metadata['pdb_atom_id']
         if atom.metadata['residue_number'] == rep_res_nums[res_name]: # if atom is member of representative group for any residue...
             atom_ids_for_SMARTS[res_name].append(atom_id)             # ...collect pdb id...
             rdmol.GetAtomWithIdx(atom_id).SetAtomMapNum(substruct_id) # ...and set atom number for labelling in SMARTS string
 
-        curr_accum = avg_charges_by_res[res_name][substruct_id] # accumulate charge info for averaging
+        curr_accum = res_charge_accums[res_name][substruct_id] # accumulate charge info for averaging
         curr_accum.sum += atom.partial_charge.magnitude # eschew units (easier to handle, added back when writing to XML)
         curr_accum.count += 1
 
-    avg_charges_by_SMARTS = defaultdict(dict)
-    for res_name, charge_map in avg_charges_by_res.items():
+    avg_charges_by_residue = []
+    for res_name, charge_map in res_charge_accums.items():
         SMARTS = Chem.rdmolfiles.MolFragmentToSmarts(rdmol, atomsToUse=atom_ids_for_SMARTS[res_name]) # determine SMARTS for the current residue's representative group
-        for substruct_id, accum in charge_map.items():
-            avg_charges_by_SMARTS[SMARTS][substruct_id] = accum.average # collapse accumulators into actual average values
+        charge_map = {substruct_id : accum.average for substruct_id, accum in charge_map.items()}
+        charge_container = AvgResidueCharges(charges=charge_map, residue_name=res_name, SMARTS=SMARTS)
+        avg_charges_by_residue.append(charge_container)
 
-    return avg_charges_by_SMARTS
+    return avg_charges_by_residue
 
-def write_new_library_charges(avgs : AveragedChargeMap, offxml_src : Path, output_path : Path) -> ForceField:
+def write_new_library_charges(avgs : list[AvgResidueCharges], offxml_src : Path, output_path : Path) -> tuple[ForceField, list[offtk_parameters.LibraryChargeHandler]]:
     '''Takes dict of residue-averaged charges to generate and append library charges to an .offxml file of choice, creating a new xml with the specified filename'''
     assert(output_path.suffix == '.offxml') # ensure output path is pointing to correct file type
-    forcefield = ForceField(offxml_src, allow_cosmetic_attributes=True) # simpler to add library charges through forcefield API than to directly write to xml
+    forcefield = ForceField(offxml_src)     # simpler to add library charges through forcefield API than to directly write to xml
     lc_handler = forcefield["LibraryCharges"]
 
-    for smirks, charges in avgs.items():
-        lc_entry = {f'charge{cid}' : f'{charge} * elementary_charge' for cid, charge in charges.items()} # stringify charges into form usable for library charges
-        lc_entry['smirks'] = smirks # add SMIRKS string to library charge entry to allow for correct labelling
-
+    lib_chgs = [] #  all library charges generated from the averaged charges for each residue
+    for averaged_res in avgs:
+        lc_entry = {f'charge{cid}' : f'{charge} * elementary_charge' for cid, charge in averaged_res.charges.items()} # stringify charges into form usable for library charges
+        lc_entry['smirks'] = averaged_res.SMARTS # add SMIRKS string to library charge entry to allow for correct labelling
         lc_params = offtk_parameters.LibraryChargeHandler.LibraryChargeType(allow_cosmetic_attributes=True, **lc_entry) # must enable cosmetic params for general kwarg passing
+        
         lc_handler.add_parameter(parameter=lc_params)
+        lib_chgs.append(lc_params)   # record library charges for reference
     forcefield.to_file(output_path) # write modified library charges to new xml (avoid overwrites in case of mistakes)
     
-    return forcefield
+    return forcefield, lib_chgs
 
 # OpenMM simulation methods
 def create_sim_from_interchange(interchange : Interchange) -> Simulation:
