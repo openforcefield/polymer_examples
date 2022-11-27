@@ -1,0 +1,205 @@
+HEADER    
+TITLE     MDANALYSIS FRAMES FROM 0, STEP 1: Created by PDBWriter
+REMARK     1 CREATED WITH OPENMM 7.7, 2022-11-18
+CRYST1    1.000    1.000    1.000  90.00  90.00  90.00 P 1           1
+REMARK     285 UNITARY VALUES FOR THE UNIT CELL AUTOMATICALLY SET
+REMARK     285 BY MDANALYSIS PDBWRITER BECAUSE UNIT CELL INFORMATION
+REMARK     285 WAS MISSING.
+REMARK     285 PROTEIN DATA BANK CONVENTIONS REQUIRE THAT
+REMARK     285 CRYST1 RECORD IS INCLUDED, BUT THE VALUES ON
+REMARK     285 THIS RECORD ARE MEANINGLESS.
+MODEL        1
+ATOM      1  O1  UNK X   0      -1.442  -2.409   4.147  1.00 20.00      SYST O  
+ATOM      2  C1  UNK X   0      -1.287  -0.992   4.225  1.00 20.00      SYST C  
+ATOM      3  C2  UNK X   0       0.038  -0.613   4.876  1.00 20.00      SYST C  
+ATOM      4  O2  UNK X   0       0.181   0.819   4.837  1.00 20.00      SYST O  
+ATOM      5  C3  UNK X   0       1.454   1.299   4.374  1.00 20.00      SYST C  
+ATOM      6  C4  UNK X   0       1.513   1.397   2.844  1.00 20.00      SYST C  
+ATOM      7  O3  UNK X   0       1.584   0.097   2.242  1.00 20.00      SYST O  
+ATOM      8  C5  UNK X   0       1.935   0.111   0.849  1.00 20.00      SYST C  
+ATOM      9  C6  UNK X   0       3.461   0.080   0.686  1.00 20.00      SYST C  
+ATOM     10  O4  UNK X   0       3.840  -0.559  -0.547  1.00 20.00      SYST O  
+ATOM     11  C7  UNK X   0       3.576   0.135  -1.685  1.00 20.00      SYST C  
+ATOM     12  O5  UNK X   0       3.359   1.344  -1.747  1.00 20.00      SYST O  
+ATOM     13  C8  UNK X   0       3.560  -0.677  -3.002  1.00 20.00      SYST C  
+ATOM     14  O6  UNK X   0       2.512  -0.257  -3.901  1.00 20.00      SYST O  
+ATOM     15  C9  UNK X   0       1.245  -0.423  -3.426  1.00 20.00      SYST C  
+ATOM     16  O7  UNK X   0       0.914  -1.252  -2.584  1.00 20.00      SYST O  
+ATOM     17  Ca  UNK X   0       0.148   0.494  -4.000  1.00 20.00      SYST C  
+ATOM     18  O8  UNK X   0       0.465   1.892  -3.803  1.00 20.00      SYST O  
+ATOM     19  Cb  UNK X   0       0.366   2.353  -2.521  1.00 20.00      SYST C  
+ATOM     20  O9  UNK X   0      -0.188   1.756  -1.602  1.00 20.00      SYST O  
+ATOM     21  Cc  UNK X   0       0.929   3.755  -2.245  1.00 20.00      SYST C  
+ATOM     22  Oa  UNK X   0       0.198   4.502  -1.238  1.00 20.00      SYST O  
+ATOM     23  Cd  UNK X   0       0.540   4.274   0.065  1.00 20.00      SYST C  
+ATOM     24  Ob  UNK X   0       1.564   3.710   0.441  1.00 20.00      SYST O  
+ATOM     25  Ce  UNK X   0      -0.412   4.821   1.137  1.00 20.00      SYST C  
+ATOM     26  Oc  UNK X   0      -1.103   3.788   1.871  1.00 20.00      SYST O  
+ATOM     27  Cf  UNK X   0      -2.240   3.234   1.189  1.00 20.00      SYST C  
+ATOM     28  Cg  UNK X   0      -2.774   2.036   1.972  1.00 20.00      SYST C  
+ATOM     29  Od  UNK X   0      -3.987   1.570   1.356  1.00 20.00      SYST O  
+ATOM     30  Ch  UNK X   0      -4.457   0.374   1.818  1.00 20.00      SYST C  
+ATOM     31  Oe  UNK X   0      -4.013  -0.233   2.789  1.00 20.00      SYST O  
+ATOM     32  Ci  UNK X   0      -5.653  -0.235   1.047  1.00 20.00      SYST C  
+ATOM     33  Of  UNK X   0      -5.681  -1.683   1.052  1.00 20.00      SYST O  
+ATOM     34  Cj  UNK X   0      -4.950  -2.418   0.151  1.00 20.00      SYST C  
+ATOM     35  Og  UNK X   0      -4.936  -3.642   0.149  1.00 20.00      SYST O  
+ATOM     36  Ck  UNK X   0      -4.166  -1.789  -1.026  1.00 20.00      SYST C  
+ATOM     37  Oh  UNK X   0      -3.337  -0.660  -0.674  1.00 20.00      SYST O  
+ATOM     38  Cl  UNK X   0      -1.929  -0.909  -0.509  1.00 20.00      SYST C  
+ATOM     39  Cm  UNK X   0      -1.587  -1.924   0.584  1.00 20.00      SYST C  
+ATOM     40  Oi  UNK X   0      -1.622  -3.255   0.048  1.00 20.00      SYST O  
+ATOM     41  Cn  UNK X   0      -0.653  -4.149   0.620  1.00 20.00      SYST C  
+ATOM     42  Co  UNK X   0       0.691  -4.008  -0.109  1.00 20.00      SYST C  
+ATOM     43  Oj  UNK X   0       1.724  -4.711   0.601  1.00 20.00      SYST O  
+ATOM     44  Cp  UNK X   0       2.699  -3.884   1.250  1.00 20.00      SYST C  
+ATOM     45  Cq  UNK X   0       2.147  -3.277   2.539  1.00 20.00      SYST C  
+ATOM     46  Cr  UNK X   0      -6.960   0.218   1.701  1.00 20.00      SYST C  
+ATOM     47  Cs  UNK X   0      -0.007   0.269  -5.507  1.00 20.00      SYST C  
+ATOM     48  Ct  UNK X   0       4.893  -0.514  -3.737  1.00 20.00      SYST C  
+ATOM     49  Hk4 UNK X   0      -2.329  -2.630   3.807  1.00 20.00      SYST H  
+ATOM     50  H12 UNK X   0      -1.321  -0.568   3.216  1.00 20.00      SYST H  
+ATOM     51  H13 UNK X   0      -2.110  -0.553   4.797  1.00 20.00      SYST H  
+ATOM     52  H22 UNK X   0       0.040  -0.947   5.917  1.00 20.00      SYST H  
+ATOM     53  H23 UNK X   0       0.857  -1.120   4.358  1.00 20.00      SYST H  
+ATOM     54  H32 UNK X   0       1.599   2.296   4.788  1.00 20.00      SYST H  
+ATOM     55  H33 UNK X   0       2.271   0.667   4.734  1.00 20.00      SYST H  
+ATOM     56  H42 UNK X   0       0.626   1.925   2.483  1.00 20.00      SYST H  
+ATOM     57  H43 UNK X   0       2.395   1.984   2.560  1.00 20.00      SYST H  
+ATOM     58  H52 UNK X   0       1.512  -0.782   0.376  1.00 20.00      SYST H  
+ATOM     59  H53 UNK X   0       1.514   0.983   0.344  1.00 20.00      SYST H  
+ATOM     60  H62 UNK X   0       3.866   1.100   0.756  1.00 20.00      SYST H  
+ATOM     61  H63 UNK X   0       3.887  -0.497   1.517  1.00 20.00      SYST H  
+ATOM     62  H1  UNK X   0       3.434  -1.734  -2.747  1.00 20.00      SYST H  
+ATOM     63  H2  UNK X   0      -0.804   0.238  -3.510  1.00 20.00      SYST H  
+ATOM     64  H72 UNK X   0       1.991   3.654  -1.985  1.00 20.00      SYST H  
+ATOM     65  H73 UNK X   0       0.881   4.320  -3.177  1.00 20.00      SYST H  
+ATOM     66  H82 UNK X   0       0.173   5.421   1.839  1.00 20.00      SYST H  
+ATOM     67  H83 UNK X   0      -1.135   5.486   0.657  1.00 20.00      SYST H  
+ATOM     68  H92 UNK X   0      -1.966   2.912   0.178  1.00 20.00      SYST H  
+ATOM     69  H93 UNK X   0      -3.026   3.991   1.108  1.00 20.00      SYST H  
+ATOM     70  Ha2 UNK X   0      -2.005   1.255   1.977  1.00 20.00      SYST H  
+ATOM     71  Ha3 UNK X   0      -2.970   2.332   3.012  1.00 20.00      SYST H  
+ATOM     72  H3  UNK X   0      -5.632   0.150   0.023  1.00 20.00      SYST H  
+ATOM     73  Hb2 UNK X   0      -4.896  -1.457  -1.767  1.00 20.00      SYST H  
+ATOM     74  Hb3 UNK X   0      -3.555  -2.571  -1.501  1.00 20.00      SYST H  
+ATOM     75  Hc2 UNK X   0      -1.486  -1.228  -1.458  1.00 20.00      SYST H  
+ATOM     76  Hc3 UNK X   0      -1.461   0.038  -0.235  1.00 20.00      SYST H  
+ATOM     77  Hd2 UNK X   0      -0.592  -1.694   0.976  1.00 20.00      SYST H  
+ATOM     78  Hd3 UNK X   0      -2.294  -1.838   1.415  1.00 20.00      SYST H  
+ATOM     79  He2 UNK X   0      -1.005  -5.182   0.525  1.00 20.00      SYST H  
+ATOM     80  He3 UNK X   0      -0.521  -3.945   1.688  1.00 20.00      SYST H  
+ATOM     81  Hf2 UNK X   0       0.942  -2.949  -0.216  1.00 20.00      SYST H  
+ATOM     82  Hf3 UNK X   0       0.598  -4.426  -1.117  1.00 20.00      SYST H  
+ATOM     83  Hg2 UNK X   0       3.573  -4.494   1.494  1.00 20.00      SYST H  
+ATOM     84  Hg3 UNK X   0       3.034  -3.084   0.584  1.00 20.00      SYST H  
+ATOM     85  H11 UNK X   0       1.817  -4.074   3.212  1.00 20.00      SYST H  
+ATOM     86  Hh2 UNK X   0       2.925  -2.694   3.043  1.00 20.00      SYST H  
+ATOM     87  Hh3 UNK X   0       1.312  -2.613   2.327  1.00 20.00      SYST H  
+ATOM     88  H21 UNK X   0      -7.008  -0.146   2.734  1.00 20.00      SYST H  
+ATOM     89  Hi2 UNK X   0      -7.026   1.309   1.706  1.00 20.00      SYST H  
+ATOM     90  Hi3 UNK X   0      -7.817  -0.176   1.151  1.00 20.00      SYST H  
+ATOM     91  H31 UNK X   0       0.919   0.524  -6.035  1.00 20.00      SYST H  
+ATOM     92  Hj2 UNK X   0      -0.256  -0.778  -5.712  1.00 20.00      SYST H  
+ATOM     93  Hj3 UNK X   0      -0.809   0.905  -5.899  1.00 20.00      SYST H  
+ATOM     94  H41 UNK X   0       5.722  -0.836  -3.098  1.00 20.00      SYST H  
+ATOM     95  Hk2 UNK X   0       5.051   0.539  -4.011  1.00 20.00      SYST H  
+ATOM     96  Hk3 UNK X   0       4.896  -1.123  -4.645  1.00 20.00      SYST H  
+ENDMDL
+CONECT    1    2   49
+CONECT    2    1    3   50   51
+CONECT    3    2    4   52   53
+CONECT    4    3    5
+CONECT    5    4    6   54   55
+CONECT    6    5    7   56   57
+CONECT    7    6    8
+CONECT    8    7    9   58   59
+CONECT    9    8   10   60   61
+CONECT   10    9   11
+CONECT   11   10   12   13
+CONECT   12   11
+CONECT   13   11   14   48   62
+CONECT   14   13   15
+CONECT   15   14   16   17
+CONECT   16   15
+CONECT   17   15   18   47   63
+CONECT   18   17   19
+CONECT   19   18   20   21
+CONECT   20   19
+CONECT   21   19   22   64   65
+CONECT   22   21   23
+CONECT   23   22   24   25
+CONECT   24   23
+CONECT   25   23   26   66   67
+CONECT   26   25   27
+CONECT   27   26   28   68   69
+CONECT   28   27   29   70   71
+CONECT   29   28   30
+CONECT   30   29   31   32
+CONECT   31   30
+CONECT   32   30   33   46   72
+CONECT   33   32   34
+CONECT   34   33   35   36
+CONECT   35   34
+CONECT   36   34   37   73   74
+CONECT   37   36   38
+CONECT   38   37   39   75   76
+CONECT   39   38   40   77   78
+CONECT   40   39   41
+CONECT   41   40   42   79   80
+CONECT   42   41   43   81   82
+CONECT   43   42   44
+CONECT   44   43   45   83   84
+CONECT   45   44   85   86   87
+CONECT   46   32   88   89   90
+CONECT   47   17   91   92   93
+CONECT   48   13   94   95   96
+CONECT   49    1
+CONECT   50    2
+CONECT   51    2
+CONECT   52    3
+CONECT   53    3
+CONECT   54    5
+CONECT   55    5
+CONECT   56    6
+CONECT   57    6
+CONECT   58    8
+CONECT   59    8
+CONECT   60    9
+CONECT   61    9
+CONECT   62   13
+CONECT   63   17
+CONECT   64   21
+CONECT   65   21
+CONECT   66   25
+CONECT   67   25
+CONECT   68   27
+CONECT   69   27
+CONECT   70   28
+CONECT   71   28
+CONECT   72   32
+CONECT   73   36
+CONECT   74   36
+CONECT   75   38
+CONECT   76   38
+CONECT   77   39
+CONECT   78   39
+CONECT   79   41
+CONECT   80   41
+CONECT   81   42
+CONECT   82   42
+CONECT   83   44
+CONECT   84   44
+CONECT   85   45
+CONECT   86   45
+CONECT   87   45
+CONECT   88   46
+CONECT   89   46
+CONECT   90   46
+CONECT   91   47
+CONECT   92   47
+CONECT   93   47
+CONECT   94   48
+CONECT   95   48
+CONECT   96   48
+END
