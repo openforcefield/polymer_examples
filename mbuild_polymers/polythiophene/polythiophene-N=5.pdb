@@ -1,0 +1,238 @@
+REMARK   1 CREATED WITH MDTraj 1.9.7, 2022-12-22
+CRYST1   34.911   20.510   24.925  90.00  90.00  90.00 P 1           1 
+MODEL        0
+ATOM      1  C   RES A   0       3.508  -1.279  -0.141  1.00  0.00           C  
+ATOM      2  C   RES A   0       2.339  -0.808  -0.721  1.00  0.00           C  
+ATOM      3  C   RES A   0       1.696   0.182   0.038  1.00  0.00           C  
+ATOM      4  C   RES A   0       2.348   0.481   1.229  1.00  0.00           C  
+ATOM      5  S   RES A   0       3.728  -0.474   1.317  1.00  0.00           S  
+ATOM      6  C   RES A   0       0.391   0.807  -0.362  1.00  0.00           C  
+ATOM      7  C   RES A   0      -0.785  -0.014   0.176  1.00  0.00           C  
+ATOM      8  C   RES A   0      -2.124   0.615  -0.227  1.00  0.00           C  
+ATOM      9  C   RES A   0      -3.298  -0.200   0.307  1.00  0.00           C  
+ATOM     10  H   RES A   0       1.960  -1.176  -1.666  1.00  0.00           H  
+ATOM     11  H   RES A   0       2.023   1.197   1.973  1.00  0.00           H  
+ATOM     12  H   RES A   0       0.334   0.864  -1.471  1.00  0.00           H  
+ATOM     13  H   RES A   0       0.340   1.844   0.036  1.00  0.00           H  
+ATOM     14  H   RES A   0      -0.727  -1.049  -0.229  1.00  0.00           H  
+ATOM     15  H   RES A   0      -0.721  -0.064   1.286  1.00  0.00           H  
+ATOM     16  H   RES A   0      -2.189   1.648   0.178  1.00  0.00           H  
+ATOM     17  H   RES A   0      -2.196   0.665  -1.336  1.00  0.00           H  
+ATOM     18  H   RES A   0      -3.270  -1.232  -0.103  1.00  0.00           H  
+ATOM     19  H   RES A   0      -4.252   0.278   0.000  1.00  0.00           H  
+ATOM     20  C   RES A   0      -3.264  -0.244   1.402  1.00  0.00           C  
+ATOM     21  C   RES A   0      -3.927   0.612   2.270  1.00  0.00           C  
+ATOM     22  C   RES A   0      -3.701   0.321   3.625  1.00  0.00           C  
+ATOM     23  C   RES A   0      -2.873  -0.778   3.828  1.00  0.00           C  
+ATOM     24  S   RES A   0      -2.415  -1.365   2.322  1.00  0.00           S  
+ATOM     25  C   RES A   0      -4.349   1.079   4.746  1.00  0.00           C  
+ATOM     26  C   RES A   0      -5.706   0.461   5.099  1.00  0.00           C  
+ATOM     27  C   RES A   0      -6.377   1.227   6.244  1.00  0.00           C  
+ATOM     28  C   RES A   0      -7.729   0.615   6.599  1.00  0.00           C  
+ATOM     29  H   RES A   0      -4.560   1.421   1.930  1.00  0.00           H  
+ATOM     30  H   RES A   0      -2.582  -1.188   4.786  1.00  0.00           H  
+ATOM     31  H   RES A   0      -4.486   2.140   4.444  1.00  0.00           H  
+ATOM     32  H   RES A   0      -3.684   1.061   5.637  1.00  0.00           H  
+ATOM     33  H   RES A   0      -6.365   0.485   4.203  1.00  0.00           H  
+ATOM     34  H   RES A   0      -5.559  -0.600   5.402  1.00  0.00           H  
+ATOM     35  H   RES A   0      -5.725   1.204   7.144  1.00  0.00           H  
+ATOM     36  H   RES A   0      -6.530   2.288   5.947  1.00  0.00           H  
+ATOM     37  H   RES A   0      -8.410   0.648   5.722  1.00  0.00           H  
+ATOM     38  H   RES A   0      -8.191   1.189   7.429  1.00  0.00           H  
+ATOM     39  C   RES A   0      -7.603  -0.426   6.920  1.00  0.00           C  
+ATOM     40  C   RES A   0      -7.465  -0.860   8.231  1.00  0.00           C  
+ATOM     41  C   RES A   0      -7.318  -2.251   8.348  1.00  0.00           C  
+ATOM     42  C   RES A   0      -7.359  -2.920   7.129  1.00  0.00           C  
+ATOM     43  S   RES A   0      -7.557  -1.773   5.917  1.00  0.00           S  
+ATOM     44  C   RES A   0      -7.202  -2.957   9.667  1.00  0.00           C  
+ATOM     45  C   RES A   0      -8.589  -3.310  10.212  1.00  0.00           C  
+ATOM     46  C   RES A   0      -8.483  -4.032  11.560  1.00  0.00           C  
+ATOM     47  C   RES A   0      -9.863  -4.385  12.107  1.00  0.00           C  
+ATOM     48  H   RES A   0      -7.475  -0.187   9.078  1.00  0.00           H  
+ATOM     49  H   RES A   0      -7.284  -3.990   6.985  1.00  0.00           H  
+ATOM     50  H   RES A   0      -6.669  -2.302  10.390  1.00  0.00           H  
+ATOM     51  H   RES A   0      -6.600  -3.884   9.539  1.00  0.00           H  
+ATOM     52  H   RES A   0      -9.183  -2.378  10.339  1.00  0.00           H  
+ATOM     53  H   RES A   0      -9.114  -3.967   9.483  1.00  0.00           H  
+ATOM     54  H   RES A   0      -7.893  -4.967  11.440  1.00  0.00           H  
+ATOM     55  H   RES A   0      -7.962  -3.379  12.295  1.00  0.00           H  
+ATOM     56  H   RES A   0     -10.465  -3.464  12.260  1.00  0.00           H  
+ATOM     57  H   RES A   0      -9.755  -4.906  13.082  1.00  0.00           H  
+ATOM     58  C   RES A   0     -10.389  -5.050  11.411  1.00  0.00           C  
+ATOM     59  C   RES A   0     -10.405  -6.436  11.468  1.00  0.00           C  
+ATOM     60  C   RES A   0     -11.162  -7.030  10.446  1.00  0.00           C  
+ATOM     61  C   RES A   0     -11.759  -6.111   9.589  1.00  0.00           C  
+ATOM     62  S   RES A   0     -11.325  -4.571  10.101  1.00  0.00           S  
+ATOM     63  C   RES A   0     -11.366  -8.512  10.330  1.00  0.00           C  
+ATOM     64  C   RES A   0     -12.587  -8.952  11.145  1.00  0.00           C  
+ATOM     65  C   RES A   0     -12.805 -10.465  11.034  1.00  0.00           C  
+ATOM     66  C   RES A   0     -14.020 -10.907  11.844  1.00  0.00           C  
+ATOM     67  H   RES A   0      -9.887  -7.000  12.233  1.00  0.00           H  
+ATOM     68  H   RES A   0     -12.398  -6.345   8.748  1.00  0.00           H  
+ATOM     69  H   RES A   0     -10.458  -9.040  10.697  1.00  0.00           H  
+ATOM     70  H   RES A   0     -11.509  -8.784   9.261  1.00  0.00           H  
+ATOM     71  H   RES A   0     -12.434  -8.679  12.212  1.00  0.00           H  
+ATOM     72  H   RES A   0     -13.490  -8.421  10.769  1.00  0.00           H  
+ATOM     73  H   RES A   0     -12.961 -10.745   9.970  1.00  0.00           H  
+ATOM     74  H   RES A   0     -11.907 -11.002  11.411  1.00  0.00           H  
+ATOM     75  H   RES A   0     -13.878 -10.662  12.918  1.00  0.00           H  
+ATOM     76  H   RES A   0     -14.153 -12.005  11.746  1.00  0.00           H  
+ATOM     77  C   RES A   0     -14.925 -10.410  11.476  1.00  0.00           C  
+ATOM     78  C   RES A   0     -15.810 -10.925  10.539  1.00  0.00           C  
+ATOM     79  C   RES A   0     -16.884 -10.068  10.253  1.00  0.00           C  
+ATOM     80  C   RES A   0     -16.859  -8.881  10.979  1.00  0.00           C  
+ATOM     81  S   RES A   0     -15.490  -8.901  11.953  1.00  0.00           S  
+ATOM     82  C   RES A   0     -17.994 -10.428   9.309  1.00  0.00           C  
+ATOM     83  C   RES A   0     -19.110 -11.170  10.050  1.00  0.00           C  
+ATOM     84  C   RES A   0     -20.250 -11.544   9.095  1.00  0.00           C  
+ATOM     85  C   RES A   0     -21.364 -12.284   9.829  1.00  0.00           C  
+ATOM     86  H   RES A   0     -15.682 -11.896  10.080  1.00  0.00           H  
+ATOM     87  H   RES A   0     -17.593  -8.088  10.931  1.00  0.00           H  
+ATOM     88  H   RES A   0     -17.591 -11.069   8.494  1.00  0.00           H  
+ATOM     89  H   RES A   0     -18.400  -9.503   8.845  1.00  0.00           H  
+ATOM     90  H   RES A   0     -18.696 -12.096  10.508  1.00  0.00           H  
+ATOM     91  H   RES A   0     -19.508 -10.521  10.861  1.00  0.00           H  
+ATOM     92  H   RES A   0     -20.671 -10.623   8.636  1.00  0.00           H  
+ATOM     93  H   RES A   0     -19.860 -12.196   8.283  1.00  0.00           H  
+ATOM     94  H   RES A   0     -20.974 -13.223  10.277  1.00  0.00           H  
+ATOM     95  H   RES A   0     -22.173 -12.541   9.114  1.00  0.00           H  
+ATOM     96  C   RES A   0       4.158  -2.039  -0.554  1.00  0.00           C  
+ATOM     97  C   RES A   0       3.765  -3.072  -1.395  1.00  0.00           C  
+ATOM     98  C   RES A   0       4.819  -3.915  -1.782  1.00  0.00           C  
+ATOM     99  C   RES A   0       6.048  -3.534  -1.247  1.00  0.00           C  
+ATOM    100 Br   RES A   0       7.738  -4.384  -1.515  1.00  0.00          Br  
+ATOM    101  S   RES A   0       5.814  -2.169  -0.297  1.00  0.00           S  
+ATOM    102  C   RES A   0       4.633  -5.080  -2.717  1.00  0.00           C  
+ATOM    103  C   RES A   0       5.031  -4.732  -4.158  1.00  0.00           C  
+ATOM    104  C   RES A   0       4.078  -3.711  -4.796  1.00  0.00           C  
+ATOM    105  C   RES A   0       4.445  -3.452  -6.254  1.00  0.00           C  
+ATOM    106  H   RES A   0       2.742  -3.206  -1.723  1.00  0.00           H  
+ATOM    107  H   RES A   0       3.576  -5.426  -2.691  1.00  0.00           H  
+ATOM    108  H   RES A   0       5.257  -5.929  -2.366  1.00  0.00           H  
+ATOM    109  H   RES A   0       6.071  -4.339  -4.177  1.00  0.00           H  
+ATOM    110  H   RES A   0       5.012  -5.668  -4.757  1.00  0.00           H  
+ATOM    111  H   RES A   0       3.034  -4.090  -4.750  1.00  0.00           H  
+ATOM    112  H   RES A   0       4.129  -2.748  -4.243  1.00  0.00           H  
+ATOM    113  H   RES A   0       3.745  -2.707  -6.687  1.00  0.00           H  
+ATOM    114  H   RES A   0       4.372  -4.392  -6.843  1.00  0.00           H  
+ATOM    115  H   RES A   0       5.479  -3.053  -6.326  1.00  0.00           H  
+ATOM    116  H   RES A   0     -21.782 -11.653  10.619  1.00  0.00           H  
+TER     117      RES A   0
+ENDMDL
+CONECT    1    2    5   96
+CONECT    2    1    3   10
+CONECT    3    2    4    6
+CONECT    4    3    5   11
+CONECT    5    1    4
+CONECT    6    3    7   12   13
+CONECT    7    6    8   14   15
+CONECT    8    7    9   16   17
+CONECT    9    8   18   19   20
+CONECT   10    2
+CONECT   11    4
+CONECT   12    6
+CONECT   13    6
+CONECT   14    7
+CONECT   15    7
+CONECT   16    8
+CONECT   17    8
+CONECT   18    9
+CONECT   19    9
+CONECT   20    9   21   24
+CONECT   21   20   22   29
+CONECT   22   21   23   25
+CONECT   23   22   24   30
+CONECT   24   20   23
+CONECT   25   22   26   31   32
+CONECT   26   25   27   33   34
+CONECT   27   26   28   35   36
+CONECT   28   27   37   38   39
+CONECT   29   21
+CONECT   30   23
+CONECT   31   25
+CONECT   32   25
+CONECT   33   26
+CONECT   34   26
+CONECT   35   27
+CONECT   36   27
+CONECT   37   28
+CONECT   38   28
+CONECT   39   28   40   43
+CONECT   40   39   41   48
+CONECT   41   40   42   44
+CONECT   42   41   43   49
+CONECT   43   39   42
+CONECT   44   41   45   50   51
+CONECT   45   44   46   52   53
+CONECT   46   45   47   54   55
+CONECT   47   46   56   57   58
+CONECT   48   40
+CONECT   49   42
+CONECT   50   44
+CONECT   51   44
+CONECT   52   45
+CONECT   53   45
+CONECT   54   46
+CONECT   55   46
+CONECT   56   47
+CONECT   57   47
+CONECT   58   47   59   62
+CONECT   59   58   60   67
+CONECT   60   59   61   63
+CONECT   61   60   62   68
+CONECT   62   58   61
+CONECT   63   60   64   69   70
+CONECT   64   63   65   71   72
+CONECT   65   64   66   73   74
+CONECT   66   65   75   76   77
+CONECT   67   59
+CONECT   68   61
+CONECT   69   63
+CONECT   70   63
+CONECT   71   64
+CONECT   72   64
+CONECT   73   65
+CONECT   74   65
+CONECT   75   66
+CONECT   76   66
+CONECT   77   66   78   81
+CONECT   78   77   79   86
+CONECT   79   78   80   82
+CONECT   80   79   81   87
+CONECT   81   77   80
+CONECT   82   79   83   88   89
+CONECT   83   82   84   90   91
+CONECT   84   83   85   92   93
+CONECT   85   84   94   95  116
+CONECT   86   78
+CONECT   87   80
+CONECT   88   82
+CONECT   89   82
+CONECT   90   83
+CONECT   91   83
+CONECT   92   84
+CONECT   93   84
+CONECT   94   85
+CONECT   95   85
+CONECT   96    1   97  101
+CONECT   97   96   98  106
+CONECT   98   97   99  102
+CONECT   99   98  100  101
+CONECT  100   99
+CONECT  101   96   99
+CONECT  102   98  103  107  108
+CONECT  103  102  104  109  110
+CONECT  104  103  105  111  112
+CONECT  105  104  113  114  115
+CONECT  106   97
+CONECT  107  102
+CONECT  108  102
+CONECT  109  103
+CONECT  110  103
+CONECT  111  104
+CONECT  112  104
+CONECT  113  105
+CONECT  114  105
+CONECT  115  105
+CONECT  116   85
+END

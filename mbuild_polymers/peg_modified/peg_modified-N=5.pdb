@@ -1,0 +1,102 @@
+REMARK   1 CREATED WITH MDTraj 1.9.7, 2022-12-22
+CRYST1   14.506   12.670   13.391  90.00  90.00  90.00 P 1           1 
+MODEL        0
+ATOM      1  C   RES A   0       0.919  -0.059   0.122  1.00  0.00           C  
+ATOM      2  C   RES A   0      -0.571  -0.342  -0.029  1.00  0.00           C  
+ATOM      3  O   RES A   0      -1.320   0.792   0.312  1.00  0.00           O  
+ATOM      4  H   RES A   0       1.225   0.756  -0.568  1.00  0.00           H  
+ATOM      5  H   RES A   0       1.500  -0.973  -0.123  1.00  0.00           H  
+ATOM      6  H   RES A   0      -0.853  -1.174   0.650  1.00  0.00           H  
+ATOM      7  H   RES A   0      -0.794  -0.659  -1.074  1.00  0.00           H  
+ATOM      8  C   RES A   0      -1.248   1.455  -0.502  1.00  0.00           C  
+ATOM      9  C   RES A   0      -2.626   2.003  -0.851  1.00  0.00           C  
+ATOM     10  O   RES A   0      -3.184   2.661   0.253  1.00  0.00           O  
+ATOM     11  H   RES A   0      -0.563   2.288  -0.235  1.00  0.00           H  
+ATOM     12  H   RES A   0      -0.829   0.912  -1.374  1.00  0.00           H  
+ATOM     13  H   RES A   0      -3.289   1.160  -1.137  1.00  0.00           H  
+ATOM     14  H   RES A   0      -2.551   2.694  -1.721  1.00  0.00           H  
+ATOM     15  C   RES A   0      -2.705   3.595   0.320  1.00  0.00           C  
+ATOM     16  C   RES A   0      -3.737   4.696   0.532  1.00  0.00           C  
+ATOM     17  O   RES A   0      -4.476   4.454   1.698  1.00  0.00           O  
+ATOM     18  H   RES A   0      -1.987   3.578   1.167  1.00  0.00           H  
+ATOM     19  H   RES A   0      -2.146   3.782  -0.621  1.00  0.00           H  
+ATOM     20  H   RES A   0      -4.432   4.714  -0.334  1.00  0.00           H  
+ATOM     21  H   RES A   0      -3.231   5.686   0.588  1.00  0.00           H  
+ATOM     22  C   RES A   0      -3.858   4.721   2.506  1.00  0.00           C  
+ATOM     23  C   RES A   0      -4.640   5.569   3.502  1.00  0.00           C  
+ATOM     24  O   RES A   0      -5.759   4.865   3.969  1.00  0.00           O  
+ATOM     25  H   RES A   0      -3.484   3.800   3.000  1.00  0.00           H  
+ATOM     26  H   RES A   0      -2.992   5.300   2.122  1.00  0.00           H  
+ATOM     27  H   RES A   0      -4.986   6.495   2.997  1.00  0.00           H  
+ATOM     28  H   RES A   0      -3.982   5.864   4.350  1.00  0.00           H  
+ATOM     29  C   RES A   0      -5.403   4.166   4.670  1.00  0.00           C  
+ATOM     30  C   RES A   0      -6.271   4.196   5.922  1.00  0.00           C  
+ATOM     31  O   RES A   0      -7.605   3.911   5.598  1.00  0.00           O  
+ATOM     32  H   RES A   0      -5.422   3.153   4.217  1.00  0.00           H  
+ATOM     33  H   RES A   0      -4.356   4.423   4.935  1.00  0.00           H  
+ATOM     34  H   RES A   0      -6.222   5.210   6.373  1.00  0.00           H  
+ATOM     35  H   RES A   0      -5.886   3.467   6.670  1.00  0.00           H  
+ATOM     36  C   RES A   0       1.145   0.243   1.169  1.00  0.00           C  
+ATOM     37  O   RES A   0      -0.036   0.526   1.884  1.00  0.00           O  
+ATOM     38  C   RES A   0      -0.703   1.611   1.275  1.00  0.00           C  
+ATOM     39  C   RES A   0      -1.985   1.915   2.046  1.00  0.00           C  
+ATOM     40  O   RES A   0      -2.839   0.802   2.041  1.00  0.00           O  
+ATOM     41  H   RES A   0       1.842   1.110   1.181  1.00  0.00           H  
+ATOM     42  H   RES A   0       1.660  -0.608   1.659  1.00  0.00           H  
+ATOM     43  H   RES A   0      -0.065   2.525   1.293  1.00  0.00           H  
+ATOM     44  H   RES A   0      -0.972   1.373   0.220  1.00  0.00           H  
+ATOM     45  H   RES A   0      -2.496   2.798   1.598  1.00  0.00           H  
+ATOM     46  H   RES A   0      -1.731   2.167   3.097  1.00  0.00           H  
+ATOM     47  H   RES A   0      -3.255   0.768   1.141  1.00  0.00           H  
+ATOM     48  H   RES A   0      -7.664   2.830   5.440  1.00  0.00           H  
+TER      49      RES A   0
+ENDMDL
+CONECT    1    2    4    5   36
+CONECT    2    1    3    6    7
+CONECT    3    2    8
+CONECT    4    1
+CONECT    5    1
+CONECT    6    2
+CONECT    7    2
+CONECT    8    3    9   11   12
+CONECT    9    8   10   13   14
+CONECT   10    9   15
+CONECT   11    8
+CONECT   12    8
+CONECT   13    9
+CONECT   14    9
+CONECT   15   10   16   18   19
+CONECT   16   15   17   20   21
+CONECT   17   16   22
+CONECT   18   15
+CONECT   19   15
+CONECT   20   16
+CONECT   21   16
+CONECT   22   17   23   25   26
+CONECT   23   22   24   27   28
+CONECT   24   23   29
+CONECT   25   22
+CONECT   26   22
+CONECT   27   23
+CONECT   28   23
+CONECT   29   24   30   32   33
+CONECT   30   29   31   34   35
+CONECT   31   30   48
+CONECT   32   29
+CONECT   33   29
+CONECT   34   30
+CONECT   35   30
+CONECT   36    1   37   41   42
+CONECT   37   36   38
+CONECT   38   37   39   43   44
+CONECT   39   38   40   45   46
+CONECT   40   39   47
+CONECT   41   36
+CONECT   42   36
+CONECT   43   38
+CONECT   44   38
+CONECT   45   39
+CONECT   46   39
+CONECT   47   40
+CONECT   48   31
+END
