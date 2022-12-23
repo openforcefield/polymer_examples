@@ -1,0 +1,20 @@
+{
+    "polyvinylchloride": 62,
+    "PEO_PLGA": 98,
+    "vulcanizedrubber": 103,
+    "naturalrubber": 106,
+    "polyphenylenesulfone": 106,
+    "polyethylmethacrylate": 110,
+    "polymethylketone": 118,
+    "polyphenyleneII": 145,
+    "atactic_styrene": 162,
+    "syntactic_styrene": 162,
+    "polythiophene": 192,
+    "peg_modified": 261,
+    "polyphenyleneI": 262,
+    "bisphenolA": 331,
+    "PolyphenyleneIII": 372,
+    "paam_modified": 422,
+    "PAMAM": 530,
+    "polyethylene": 4808
+}
