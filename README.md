@@ -25,7 +25,6 @@ Example polymers for testing.
 ### Cases we would still like to have
   * Crosslinked polyamide membrane
   * PEGylated protein
-  * Protein with dye attached
   * Large stress cases?  
   * Sulfonamide polymer?  Sulfur with the SAME local connectivity but different formal charge.
   * Random polymers?
