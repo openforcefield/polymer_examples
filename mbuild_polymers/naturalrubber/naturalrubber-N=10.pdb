@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH MDTraj 1.9.7, 2022-12-22
+REMARK   1 CREATED WITH MDTraj 1.9.7, 2023-01-19
 CRYST1   38.641   28.478   25.500  90.00  90.00  90.00 P 1           1 
 MODEL        0
 ATOM      1  C   RES A   0       1.965   0.185  -0.523  1.00  0.00           C  
