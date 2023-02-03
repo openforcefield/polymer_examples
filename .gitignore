@@ -1,2 +1,3 @@
 oe_license.txt
-mbuild_polymers/10-monomer chains mbuild_polymers/atactic_styrene mbuild_polymers/bisphenolA mbuild_polymers/mbuild examples mbuild_polymers/mda_output mbuild_polymers/naturalrubber mbuild_polymers/paam_modified mbuild_polymers/PDB save test mbuild_polymers/peg_modified mbuild_polymers/polyethylene mbuild_polymers/polyethylmethacrylate mbuild_polymers/polymethylketone mbuild_polymers/polyphenylenesulfone mbuild_polymers/polythiophene mbuild_polymers/polyvinylchloride mbuild_polymers/syntactic_styrene
+mbuild_polymers/
+packmol_solva/
