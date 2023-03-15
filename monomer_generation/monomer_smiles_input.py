@@ -71,7 +71,7 @@ ALL_SMILES_INPUT["polyphenyleneI"] = {
         "polyphenylene_mid": ("*-[#6:1]1-[#6:2](=[#6:9](-[#6:6](=[#6:4](-[#6:3]=1-[#1:5])-[#1:7])-[#6:8](-[#6:17]1-[#6:15](=[#6:14](-[#6:12](-*)=[#6:13](-[#6:19]=1-[#1:20])-[#1:21])-[#1:16])-[#1:18])(-[#1:22])-[#1:23])-[#1:10])-[#1:11]", [])
     }
 ALL_SMILES_INPUT["polyphenyleneII"] = ALL_SMILES_INPUT["polyphenyleneI"]
-ALL_SMILES_INPUT["polyphenyleneIiI"] = ALL_SMILES_INPUT["polyphenyleneI"]
+ALL_SMILES_INPUT["polyphenyleneIII"] = ALL_SMILES_INPUT["polyphenyleneI"]
 
 ALL_SMILES_INPUT["polyphenylenesulfone"] = {
         "polyphenylenesulfone": ("*-[#6:1]1=[#6:2](-[#6:3](=[#6:4](-[#16:5](=[#8:6])(=[#8:9])-*)-[#6:7](=[#6:8]-1-[#1:13])-[#1:12])-[#1:11])-[#1:10]", []),
