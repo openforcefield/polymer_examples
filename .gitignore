@@ -7,3 +7,10 @@ mbuild_polymers/
 packmol_solva/
 averaged_polymers/
 .ipynb_checkpoints/
+
+# PyCache
+__pycache__
+*/__pycache__
+
+# JSONs
+monomer_generation/json_files/*
