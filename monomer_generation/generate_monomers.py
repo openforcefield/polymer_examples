@@ -29,7 +29,7 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
             engine.add_monomer_as_smarts_fragment(smarts, name, caps)
         else:
             engine.add_monomer(name, smarts)
-    json_file = json_dir / Path(file_name + "json")
+    json_file = json_dir / Path(file_name + ".json")
     engine.output_monomer_info_json(json_file)
 
     pdb_file = PDBFiles.search(file_name)
