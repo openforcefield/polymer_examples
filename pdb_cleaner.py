@@ -46,13 +46,19 @@ skipped_folders = [Path("uncleaned_pdbs/manually_modified_pdbs")]
 for file in input_directory.glob('**/*.pdb'):
     if file.name in skipped_files or file.parent in skipped_folders:
         continue
-    if "functionalized_proteins" not in str(file.parent):
+    if "polyamide" not in str(file.parent):
         continue
 
     log.append_info(f"processing {file.name}: ")
     try:
         start = time.time()
-        mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
+        try:
+            mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
+        except Exception as e:
+            log.append_info("openeye failed to read, trying with rdkit. ")
+            rdmol = Chem.MolFromPDBFile(str(file), removeHs=False, sanitize=False)
+            mol = Molecule.from_rdkit(rdmol, allow_undefined_stereo=True)
+
         oemol = mol.to_openeye()
         openeye.OEPerceiveBondOrders(oemol)
         mol = Molecule.from_openeye(oemol, allow_undefined_stereo=True)
