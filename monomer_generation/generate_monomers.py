@@ -9,7 +9,7 @@ import os
 from monomer_smiles_input import ALL_SMILES_INPUT
 from pathlib import Path
 
-sys.path.append(os.path.abspath(__file__ + "/../../compatible_pdbs")) # TODO: fix this mess
+sys.path.append(os.path.abspath(__file__ + "/../..")) # TODO: fix this mess
 from pdb_file_search import PDBFiles
 
 # Make a file to store new jsons (TODO: change this to any new file structure)

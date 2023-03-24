@@ -10,9 +10,28 @@ from openff.toolkit.utils.utils import temporary_cd   # this is really cool btw
 from tempfile import TemporaryDirectory
 import sys
 from openmm.app import PDBFile
+import time
 
-if os.getcwd() == '/home/coda3831/openff-workspace':
-    os.chdir('polymer_examples')
+class Log:
+    def __init__(self):
+        self.info = ""
+        self.failed_files = {}
+    def append_info(self, new_info):
+        self.info += new_info
+    def append_ffile(self, file, reason):
+        self.failed_files[file] = reason
+    def printout(self):
+        print("___________RESULTS/LOG___________")
+        print(self.info)
+        if self.failed_files:
+            "The following files failed to either load, or convert to rdkit"
+            for file, reason in self.failed_files.items():
+                print(f"\t{file} -> {reason}")
+        else:
+            print("No files failed, yay!")
+
+cwd = Path(__file__).parent.absolute()
+os.chdir(cwd)
 
 input_directory = Path("uncleaned_pdbs")
 output_directory = Path("compatible_pdbs")
@@ -20,77 +39,54 @@ Path(output_directory).mkdir(parents=True, exist_ok=True)
 if not output_directory.exists() or not output_directory.is_dir() or output_directory == Path(""):
     print("bad output directory")
     sys.exit(0)
-log = ""
-failed_files = []
+log = Log()
 #['nucleic_acids/7sb8_dna.pdb', 'simple_polymers/paam_drei_no_wtr.pdb', 'simple_polymers/peg_c35r_no_wtr.pdb', 'simple_polymers/pnipam_drei_no_wtr.pdb', 'simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']
+skipped_files = ["xlinked.pdb"]
+skipped_folders = [Path("uncleaned_pdbs/manually_modified_pdbs")]
 for file in input_directory.glob('**/*.pdb'):
-    if str(output_directory) in str(file): # prevents recursive nightmare
+    if file.name in skipped_files or file.parent in skipped_folders:
         continue
-    if file.name == "xlinked.pdb":
+    if "polyamide" not in str(file.parent):
         continue
-    if file.name != "paam_modified.pdb":
-        continue
-    # if str(file) not in ['simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']:
-    #     continue
-    msg = f"processing {file.name}:\n" 
-    print(msg)
-    log = log + msg
-    mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
-    oemol = mol.to_openeye()
-    openeye.OEPerceiveBondOrders(oemol)
-    mol = Molecule.from_openeye(oemol, allow_undefined_stereo=True)
-    original_n_atoms = mol.n_atoms
-    # output to a pdb file and attempt reading by openmm
-    with TemporaryDirectory() as tmpdir:
-        with temporary_cd(tmpdir):
-            mol.to_file("temp.pdb", 'PDB', toolkit_registry=OpenEyeToolkitWrapper())
-            rdmol = Chem.MolFromPDBFile("temp.pdb", sanitize=False, removeHs=False)
-            if rdmol == None or rdmol.GetNumAtoms() != oemol.NumAtoms():
-                msg = f"\t****unable to process****\n" 
-                print(msg)
-                log = log + msg
-                failed_files.append(str(file))
-                continue
-            Chem.rdmolfiles.MolToPDBFile(rdmol, "temp.pdb")
-            pdb = PDBFile("temp.pdb")
-            topology = pdb.topology
-            new_n_atoms = topology.getNumAtoms()
-            if original_n_atoms != new_n_atoms:
+
+    log.append_info(f"processing {file.name}: ")
+    try:
+        start = time.time()
+        try:
+            mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
+        except Exception as e:
+            log.append_info("openeye failed to read, trying with rdkit. ")
+            rdmol = Chem.MolFromPDBFile(str(file), removeHs=False, sanitize=False)
+            mol = Molecule.from_rdkit(rdmol, allow_undefined_stereo=True)
+
+        oemol = mol.to_openeye()
+        openeye.OEPerceiveBondOrders(oemol)
+        mol = Molecule.from_openeye(oemol, allow_undefined_stereo=True)
+        original_n_atoms = mol.n_atoms
+
+        rdmol = None
+        with TemporaryDirectory() as tmpdir:
+            with temporary_cd(tmpdir):
+                mol.to_file("temp.pdb", 'PDB', toolkit_registry=OpenEyeToolkitWrapper())
                 rdmol = Chem.MolFromPDBFile("temp.pdb", sanitize=False, removeHs=False)
-                msg = "\tmaking unique atoms\n"
-                print(msg)
-                log = log + msg
-                
-                ids = "123456789abcdefghijklmnopqrstuvwxzyABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&_+()<?>-=:}{][`~/*"
-                element_counts = defaultdict(int)
-                for atom in rdmol.GetAtoms():
-                    ri = atom.GetPDBResidueInfo()
-                    name = ri.GetName()
-                    element_counts[name] += 1
-                    id = element_counts[name] - 1
-                    id1 = int(id / 84) + 1
-                    id2 = id % 84 + 1
-                    if id < 83:
-                        str_id = ids[id]
-                    else:
-                        str_id = ids[id1] + ids[id2]
-                    new_name = name[0:2] + str_id + name[(3-1+len(str_id)):] 
-                    ri.SetName(new_name)
+                if rdmol == None:
+                    log.append_ffile(str(file), "rdkit failed to load pdb file processed with openeye")
+                    continue
+                if rdmol.GetNumAtoms() != oemol.NumAtoms():
+                    log.append_ffile(str(file), "rdkit read a different number of atoms compared to openeye")
+                    continue
 
-    Path(output_directory / file.parent).mkdir(parents=True, exist_ok=True)
-    output_path = str(output_directory) + "/" + str(file)
-    Chem.MolToPDBFile(rdmol, output_path)
-    # finally, check to see all programs can read the output
-    mol = Molecule.from_file(output_path, "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
-    rdmol = Chem.MolFromPDBFile(output_path, sanitize=False, removeHs=False)
-    pdb = PDBFile(output_path)
-    topology = pdb.topology
-    if not (mol.n_atoms == rdmol.GetNumAtoms() == topology.getNumAtoms()):
-        msg = f"\tprocessing error. toolkits not equivalent after cleaning:\n" 
-        print(msg)
-        log = log + msg
+        relative_file_path = Path(os.path.relpath(file, input_directory))
+        Path(output_directory / relative_file_path.parent).mkdir(parents=True, exist_ok=True)
+        output_path = str(output_directory / relative_file_path)
+        Chem.MolToPDBFile(rdmol, output_path)
+        # finally, check to see all programs can read the output
+        mol = Molecule.from_file(output_path, "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
+        rdmol = Chem.MolFromPDBFile(output_path, sanitize=False, removeHs=False)
+        if not (mol.n_atoms == rdmol.GetNumAtoms()):
+            log.append_ffile(str(file), "toolkits did not read an equivalent number of atoms in the final pdb")
+        log.append_info(f"{time.time()-start:2f}s\n")
+    except Exception as e:
+        log.append_ffile(str(file), f"Critical error: {e}")
 
-    
-print("___________RESULTS/LOG___________")
-print(log)
-print(f"failed files: {failed_files}")
+log.printout()
