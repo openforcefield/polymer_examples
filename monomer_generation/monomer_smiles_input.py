@@ -94,6 +94,9 @@ ALL_SMILES_INPUT["syntactic_styrene"] = {
         "syntactic_styrene_TERM7": ("[#6:1](-*)(-[#1:2])(-[#1:3])-[#6:4](-[#6:5]1=[#6:6](-[#6:10](=[#6:9](-[#6:8](=[#6:7]-1-[#1:13])-[#1:14])-[#1:15])-[#1:16])-[#1:12])(-[#1:11])-[#1:17]", [])
     }
 
+ALL_SMILES_INPUT["pnipam_modified"] = {
+    "pnipam": ("[#1]-C(-[#1])(-[#1])-C(-[#1])(-C(=O)(-N(-[#1])-C(-[#1])(-C(-[#1])(-[#1])(-[#1]))-C(-[#1])(-[#1])(-[#1])))-[#1]", [0,-1])
+}
 #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 #                                  SUGARS
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW

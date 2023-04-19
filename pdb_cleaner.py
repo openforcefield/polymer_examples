@@ -42,7 +42,7 @@ if not output_directory.exists() or not output_directory.is_dir() or output_dire
 log = Log()
 #['nucleic_acids/7sb8_dna.pdb', 'simple_polymers/paam_drei_no_wtr.pdb', 'simple_polymers/peg_c35r_no_wtr.pdb', 'simple_polymers/pnipam_drei_no_wtr.pdb', 'simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']
 skipped_files = ["xlinked.pdb"]
-skipped_folders = [Path("uncleaned_pdbs/manually_modified_pdbs")]
+skipped_folders = [Path("uncleaned_pdbs/manually_modified_pdbs"), Path("uncleaned_pdbs/polyamide")]
 for file in input_directory.glob('**/*.pdb'):
     if file.name in skipped_files or file.parent in skipped_folders:
         continue

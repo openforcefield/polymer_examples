@@ -41,24 +41,26 @@ class SubstructureGenerator:
         # caps are found by finding all connected fragments with ids in "caps"
         cap_fragments = []
         if add_caps_from_discarded_ids:
-            for idx in cap_ids:
-                atom = rdmol.GetAtomWithIdx(idx)
+            for atom in rdmol.GetAtoms():
+                id = atom.GetIdx()
+                if id not in cap_ids:
+                    continue
                 # if neighbor in existing fragment, add id to that fragment
                 connected_fragments = []
                 for neighbor in atom.GetNeighbors():
                     n_id = neighbor.GetIdx()
-                    for cap_frag, fragment_id in zip(cap_fragments, range(0, len(cap_fragments))):
+                    for fragment_id, cap_frag in enumerate(cap_fragments):
                         if n_id in cap_frag:
                             connected_fragments.append(fragment_id)
                 
                 if len(connected_fragments) > 0:
-                    new_fragment = {idx}
+                    new_fragment = {id}
                     for frag_id in sorted(connected_fragments, reverse=True):
                         frag = cap_fragments.pop(frag_id)
                         new_fragment = new_fragment | frag
                     cap_fragments.append(new_fragment)
                 else:
-                    cap_fragments.append(set([idx]))
+                    cap_fragments.append(set([id]))
 
         # find where each monomer connects to the cap, and replace with wildtype atoms 
         # but with the same bond order 
