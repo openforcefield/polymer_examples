@@ -18,7 +18,7 @@ json_dir = current_dir / Path("json_files")
 json_dir.mkdir(parents=False, exist_ok=True)
 
 # set flag if the script should try to test_load the new json file
-test_load = True
+test_load = False
 
 # create object for json creation and loading:
 for file_name, monomer_info in ALL_SMILES_INPUT.items():

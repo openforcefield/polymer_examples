@@ -181,7 +181,31 @@ class SubstructureGenerator:
     #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
     #                        WRITERS
     #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-
+    def _get_maximum_map_num(self, rdmol):
+        return max([atom.GetAtomMapNum() for atom in rdmol.GetAtoms()])
+    
+    def _fill_out_query(self, query_input):
+        rdmol = Chem.MolFromSmarts(query_input)
+        current_map_num = 1 + self._get_maximum_map_num(rdmol)
+        for atom in rdmol.GetAtoms():
+            if atom.GetAtomicNum() > 0:
+                atom.SetAtomMapNum(current_map_num)
+                a_num = atom.GetAtomicNum()
+                D_num = len([0 for _ in atom.GetBonds()])
+                F_num = atom.GetFormalCharge()
+                query_string = f"[#{a_num}D{D_num}{F_num:+}:{current_map_num}]"
+                query = Chem.AtomFromSmarts(query_string)
+                atom.SetQuery(query)
+            elif atom.GetAtomicNum() == 0:
+                atom.SetAtomMapNum(current_map_num)
+                query_string = f"[*:{current_map_num}]"
+                query = Chem.AtomFromSmarts(query_string)
+                atom.SetQuery(query)
+            else:
+                raise Exception
+            current_map_num += 1
+        return Chem.MolToSmarts(rdmol)
+    
     def _enumerate_substructures_with_caps(self, name, remove_complete_substructures=True):
         # for a named substructure, returns all possible combinations
         # of caps and inter-monomer bonds. 
@@ -300,10 +324,10 @@ class SubstructureGenerator:
             if expand == True:
                 enumerated_monomers = self._enumerate_substructures_with_caps(name)
                 for name, capped_monomer in enumerated_monomers.items():
-                    monomer_dict["monomers"][name] = capped_monomer
+                    monomer_dict["monomers"][name] = self._fill_out_query(capped_monomer)
             else:
-                monomer_dict["monomers"][name] = monomer.smarts
-                monomer_dict["caps"][name] = monomer.caps
+                monomer_dict["monomers"][name] = self._fill_out_query(monomer.smarts)
+                monomer_dict["caps"][name] = self._fill_out_query(monomer.caps)
 
         return monomer_dict 
 

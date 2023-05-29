@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<SMIRNOFF version="0.3" aromaticity_model="OEAroModel_MDL">
-    <Author>The Open Force Field Initiative</Author>
-    <Date>2021-08-16</Date>
-    <Angles version="0.3" potential="harmonic">
-        <Angle smirks="[*:1]~;!@[*;r3:2]~;!@[*:3]" angle="116.2306504027 * degree" k="166.1786805468 * mole**-1 * radian**-2 * kilocalorie" id="a5"></Angle>
-    </Angles>
-    <ToolkitAM1BCC version="0.3"></ToolkitAM1BCC>
-</SMIRNOFF>
