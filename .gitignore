@@ -3,9 +3,6 @@ oe_license.txt
 File Search Benchmark.png
 
 # Directories
-mbuild_polymers/
-packmol_solva/
-averaged_polymers/
 .ipynb_checkpoints/
 
 # PyCache

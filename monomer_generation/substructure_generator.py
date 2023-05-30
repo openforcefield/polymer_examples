@@ -143,13 +143,6 @@ class SubstructureGenerator:
             self.read_monomer_info_dict(data)
 
     def add_monomer(self, name, smarts):
-        # adds monomer information
-        # name: any string to specify the samrts (must be unique)
-        # smarts: smarts of the monomer unit as it would appear in the middle of 
-        #         a polymer. Wildtype atoms ("[*]") represent the beginning of a 
-        #         neighboring monomer. MUST CONTAIN EXPLICIT HYDROGENS
-        #         ex) [*]-[C:1](-[H])(-[H])-[C:2](-[H])(-[H])-[*]
-        #               -> use AtomMapNums ([C:1]) to assign caps later 
         if name in self.monomers.keys():
             print("monomer name already exists")
             return
@@ -188,23 +181,34 @@ class SubstructureGenerator:
         rdmol = Chem.MolFromSmarts(query_input)
         current_map_num = 1 + self._get_maximum_map_num(rdmol)
         for atom in rdmol.GetAtoms():
-            if atom.GetAtomicNum() > 0:
+            if atom.GetAtomMapNum() == 0:
                 atom.SetAtomMapNum(current_map_num)
+            if atom.GetAtomicNum() > 0:
                 a_num = atom.GetAtomicNum()
                 D_num = len([0 for _ in atom.GetBonds()])
                 F_num = atom.GetFormalCharge()
-                query_string = f"[#{a_num}D{D_num}{F_num:+}:{current_map_num}]"
+                query_string = f"[#{a_num}D{D_num}{F_num:+}:{atom.GetAtomMapNum()}]"
                 query = Chem.AtomFromSmarts(query_string)
                 atom.SetQuery(query)
             elif atom.GetAtomicNum() == 0:
-                atom.SetAtomMapNum(current_map_num)
-                query_string = f"[*:{current_map_num}]"
+                query_string = f"[*:{atom.GetAtomMapNum()}]"
                 query = Chem.AtomFromSmarts(query_string)
                 atom.SetQuery(query)
             else:
                 raise Exception
             current_map_num += 1
-        return Chem.MolToSmarts(rdmol)
+
+        # fill bond queries to explicity specific singles and aromatics (these can often be omitted)
+        for bond in rdmol.GetBonds():
+            if bond.GetIsAromatic():
+                query = Chem.BondFromSmarts(":")
+                bond.SetQuery(query)
+            elif bond.GetBondType() == Chem.rdchem.BondType.SINGLE:
+                query = Chem.BondFromSmarts("-")
+                bond.SetQuery(query)
+
+        smarts_string = Chem.MolToSmarts(rdmol)
+        return smarts_string.replace('&', '') # all & are removed for rdkit to read query and read molecule info
     
     def _enumerate_substructures_with_caps(self, name, remove_complete_substructures=True):
         # for a named substructure, returns all possible combinations

@@ -2,8 +2,8 @@
 Generates jsons files using the new format up-to-date as of 3/14/23
 """
 
+from openff.toolkit import Topology
 from substructure_generator import SubstructureGenerator
-from substructure_vizualizer import ChemistryEngine
 import sys
 import os
 from monomer_smiles_input import ALL_SMILES_INPUT
@@ -12,13 +12,17 @@ from pathlib import Path
 sys.path.append(os.path.abspath(__file__ + "/../..")) # TODO: fix this mess
 from pdb_file_search import PDBFiles
 
+def successfully_loaded(top):
+    match_info = [atom.metadata["match_info"] for atom in top.atoms]
+    return all([bool(match) for match in match_info])
+
 # Make a file to store new jsons (TODO: change this to any new file structure)
 current_dir = Path(__file__).parent.resolve()
 json_dir = current_dir / Path("json_files")
 json_dir.mkdir(parents=False, exist_ok=True)
 
 # set flag if the script should try to test_load the new json file
-test_load = False
+test_load = True
 
 # create object for json creation and loading:
 for file_name, monomer_info in ALL_SMILES_INPUT.items():
@@ -33,12 +37,8 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
     engine.output_monomer_info_json(json_file)
 
     pdb_file = PDBFiles.search(file_name)
-    if test_load and pdb_file != None:
-        chem_engine = ChemistryEngine(str(pdb_file))
-        assigned_atoms, assigned_bonds, unassigned_atoms, unassigned_bonds, _, _ = chem_engine.test_polymer_load(str(json_file), verbose=False)
-        if len(unassigned_atoms) == 0 and len(unassigned_bonds) == 0:
-            print(f"{file_name} successfully created with full coverage of the molecule")
-        else:
-            print(f"--> ***WARNING*** {file_name} missed {unassigned_atoms} atoms and {unassigned_bonds} during loading ***WARNING*** <--")
-
-
+    if test_load:
+        assert pdb_file != None
+        substructs = engine.get_monomer_info_dict()["monomers"]
+        top = Topology.from_pdb(str(pdb_file), _custom_substructures=substructs)
+        assert successfully_loaded(top)
