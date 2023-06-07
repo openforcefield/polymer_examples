@@ -45,82 +45,94 @@ if not output_directory.exists() or not output_directory.is_dir() or output_dire
 
 log = Log()
 #['nucleic_acids/7sb8_dna.pdb', 'simple_polymers/paam_drei_no_wtr.pdb', 'simple_polymers/peg_c35r_no_wtr.pdb', 'simple_polymers/pnipam_drei_no_wtr.pdb', 'simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']
-skipped_files = ["xlinked.pdb", "6cww.pdb"]
+skipped_files = ["xlinked.pdb", "6cww.cif", "7xjf.cif", "7fse.cif", "7pvu.cif", "7ond.cif", "8ovp.cif"]
 
 standard_workflow = [
-                    #  input_directory / Path("crosslinked_polymers"),
-                    #  input_directory / Path("peptoids"),
-                    #  input_directory / Path("simple_polymers"),
-                    #  input_directory / Path("sugars"),
-                    #  input_directory / Path("nucleic_acids"),
+                    #  input_directory / Path("crosslinked_polymers"),   # done 
+                    #  input_directory / Path("peptoids"),               # done
+                    #  input_directory / Path("simple_polymers"),        # done
+                    #  input_directory / Path("sugars"),                 # done  
                      ]
 
 protein_workflow = [
-                    input_directory / Path("proteins")
+                    # input_directory / Path("proteins")                 # done
                     ]
-# for directory in standard_workflow:
-#     for file in directory.glob('**/*.pdb'):
-#         if file.name in skipped_files:
-#             continue
 
-#         log.append_info(f"processing {file.name}: ")
-#         try:
-#             start = time.time()
-#             try:
-#                 mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
-#             except Exception as e:
-#                 log.append_info("openeye failed to read, trying with rdkit. ")
-#                 rdmol = Chem.MolFromPDBFile(str(file), removeHs=False, sanitize=False)
-#                 mol = Molecule.from_rdkit(rdmol, allow_undefined_stereo=True)
+DNA_workflow = [
+               input_directory / Path("DNA")
+               ]
 
-#             oemol = mol.to_openeye()
-#             openeye.OEPerceiveBondOrders(oemol)
-#             mol = Molecule.from_openeye(oemol, allow_undefined_stereo=True)
-#             original_n_atoms = mol.n_atoms
+# RNA_workflow = [
+#                input_directory / Path("RNA")
+#                ]
+for directory in standard_workflow:
+    for file in directory.glob('**/*.pdb'):
+        if file.name in skipped_files:
+            continue
 
-#             rdmol = None
-#             with TemporaryDirectory() as tmpdir:
-#                 with temporary_cd(tmpdir):
-#                     mol.to_file("temp.pdb", 'PDB', toolkit_registry=OpenEyeToolkitWrapper())
-#                     rdmol = Chem.MolFromPDBFile("temp.pdb", sanitize=False, removeHs=False)
-#                     if rdmol == None:
-#                         log.append_ffile(str(file), "rdkit failed to load pdb file processed with openeye")
-#                         continue
-#                     if rdmol.GetNumAtoms() != oemol.NumAtoms():
-#                         log.append_ffile(str(file), "rdkit read a different number of atoms compared to openeye")
-#                         continue
-#             # make atom and residue names unique
-#             element_counts = defaultdict(int)
-#             res_number = 1
-#             for atom in rdmol.GetAtoms():
-#                 ri = atom.GetPDBResidueInfo()
-#                 name = ri.GetName()
-#                 if len(atom.GetSymbol()) == 1:
-#                     new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:02d}"
-#                 else:
-#                     new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:01d}"
-#                 ri.SetResidueNumber(res_number)
-#                 ri.SetResidueName("UNK")
-#                 ri.SetName(new_name)
+        print(f"processing {file.name}: ")
+        log.append_info(f"processing {file.name}: ")
+        try:
+            start = time.time()
+            try:
+                mol = Molecule.from_file(str(file), "PDB", allow_undefined_stereo=True, toolkit_registry=OpenEyeToolkitWrapper())
+                if isinstance(mol, list):
+                    mol = mol[0]
+            except Exception as e:
+                log.append_info("openeye failed to read, trying with rdkit. ")
+                rdmol = Chem.MolFromPDBFile(str(file), removeHs=False, sanitize=False)
+                mol = Molecule.from_rdkit(rdmol, allow_undefined_stereo=True)
 
-#                 element_counts[atom.GetSymbol()] += 1
-#                 if element_counts[atom.GetSymbol()] >= 100 / (10**(len(atom.GetSymbol())-1)): # if any atoms exceed 100 
-#                     res_number += 1
-#                     element_counts = defaultdict(int)
+            # oemol = mol.to_openeye()
+            # openeye.OEPerceiveBondOrders(oemol)
+            # mol = Molecule.from_openeye(oemol, allow_undefined_stereo=True)
+            # original_n_atoms = mol.n_atoms
+
+            # rdmol = None
+            # with TemporaryDirectory() as tmpdir:
+            #     with temporary_cd(tmpdir):
+            #         mol.to_file("temp.pdb", 'PDB', toolkit_registry=OpenEyeToolkitWrapper())
+            #         rdmol = Chem.MolFromPDBFile("temp.pdb", sanitize=False, removeHs=False)
+            #         if rdmol == None:
+            #             log.append_ffile(str(file), "rdkit failed to load pdb file processed with openeye")
+            #             continue
+            #         if rdmol.GetNumAtoms() != oemol.NumAtoms():
+            #             log.append_ffile(str(file), "rdkit read a different number of atoms compared to openeye")
+            #             continue
+            # make atom and residue names unique
+            rdmol = mol.to_rdkit()
+            element_counts = defaultdict(int)
+            res_number = 1
+            for atom in rdmol.GetAtoms():
+                ri = atom.GetPDBResidueInfo()
+                name = ri.GetName()
+                if len(atom.GetSymbol()) == 1:
+                    new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:02d}"
+                else:
+                    new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:01d}"
+                ri.SetResidueNumber(res_number)
+                ri.SetChainId("")
+                ri.SetResidueName("UNK")
+                ri.SetName(new_name)
+
+                element_counts[atom.GetSymbol()] += 1
+                if element_counts[atom.GetSymbol()] >= 100 / (10**(len(atom.GetSymbol())-1)): # if any atoms exceed 100 
+                    res_number += 1
+                    element_counts = defaultdict(int)
                 
 
 
-#             relative_file_path = Path(os.path.relpath(file, input_directory))
-#             output_path = str(output_directory / relative_file_path)
-#             Chem.MolToPDBFile(rdmol, output_path)
-#             # finally, check to see all programs can read the output
-#             openmm_mol = PDBFile(output_path)
-#             rdmol = Chem.MolFromPDBFile(output_path, sanitize=False, removeHs=False)
-#             if not (mol.n_atoms == openmm_mol.topology.getNumAtoms()):
-#                 log.append_ffile(str(file), "toolkits did not read an equivalent number of atoms in the final pdb")
-#             log.append_info(f"{time.time()-start:2f}s\n")
-#         except Exception as e:
-#             log.append_ffile(str(file), f"Critical error: {e}")
+            relative_file_path = Path(os.path.relpath(file, input_directory))
+            output_path = str(output_directory / relative_file_path)
+            Chem.MolToPDBFile(rdmol, output_path)
+            # finally, check to see all programs can read the output
+            openmm_mol = PDBFile(output_path)
+            rdmol = Chem.MolFromPDBFile(output_path, sanitize=False, removeHs=False)
+            if not (mol.n_atoms == openmm_mol.topology.getNumAtoms()):
+                log.append_ffile(str(file), "toolkits did not read an equivalent number of atoms in the final pdb")
+            log.append_info(f"{time.time()-start:2f}s\n")
+        except Exception as e:
+            log.append_ffile(str(file), f"Critical error: {e}")
 
 for directory in protein_workflow:
     for file in directory.glob('**/*.cif'):
@@ -155,7 +167,7 @@ for directory in protein_workflow:
                     rdmol = mol 
 
             stand_aminos = ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "HIS", "ILE", "LYS", "LEU", "MET", "ASN", "PRO", "GLN", "ARG", 
-                            "SER", "THR", "VAL", "TRP", "TYR", "PYL", "SEC", "DA", "DC", "DG", "DT", "DI", "A", "C", "G", "U", "I", "HOH"]
+                            "SER", "THR", "VAL", "TRP", "TYR", "PYL", "SEC", "HOH"]
             for atom_idx, atom_info in residue_info.items():
                 res_name, res_num, atom_name, chain_id = atom_info
                 if res_name not in stand_aminos:
@@ -184,6 +196,94 @@ for directory in protein_workflow:
             relative_file_path = Path(os.path.relpath(file, input_directory))
             output_path = str((output_directory / relative_file_path).parent / Path(f"{file.stem}.pdb"))
             PDBFile.writeFile(fixer.topology, fixer.positions, open(output_path, 'w'))
+            log.append_info(f"{time.time()-start:2f}s\n")
+        except Exception as e:
+            log.append_ffile(str(file), f"Critical error: {e}")
+
+for directory in DNA_workflow:
+    for file in directory.glob('**/*.cif'):
+        if file.name in skipped_files:
+            continue
+        print(f"processing {file.name}: ")
+        log.append_info(f"processing {file.name}: ")
+        try:
+            start = time.time()
+            # use openeye to read the first alternate location from cif file. Save chemical info in
+            # sdf file and manually save residue info for any uses later
+            relative_file_path = Path(os.path.relpath(file, input_directory))
+            output_path = str((output_directory / relative_file_path).parent / Path(f"{file.stem}.pdb"))
+
+            ifs = oechem.oemolistream(str(file.absolute()))
+            # ofs = oechem.oemolostream("temp.sdf")
+            ofs = oechem.oemolostream(str(output_path))
+
+            flavor = oechem.OEIFlavor_Generic_Default | oechem.OEIFlavor_MMCIF_NoAltLoc 
+            ifs.SetFlavor(oechem.OEFormat_MMCIF, flavor)
+
+            flavor = oechem.OEIFlavor_Generic_Default | oechem.OEIFlavor_PDB_Connect
+            ofs.SetFlavor(oechem.OEFormat_PDB, flavor)
+
+            residue_info = {}
+            for mol in ifs.GetOEGraphMols():
+                for atom in mol.GetAtoms():
+                    r = oechem.OEAtomGetResidue(atom)
+                    residue_info[atom.GetIdx()] = tuple([r.GetName(), r.GetResidueNumber(), atom.GetName(), r.GetChainID()])
+                # clean up chemistry around Phos bonds
+                ss = oechem.OESubSearch("P(~[OD1])(~[OD1])(~[OD2]-*)(~[OD2]-*)")
+                ss.SetMaxMatches(1000)
+                oechem.OEPrepareSearch(mol, ss) 
+                for match in ss.GetMatchIter(mol, True):
+                    for matched_atom in match.GetAtoms():
+                        if matched_atom.pattern.GetIdx() == 1:
+                            matched_atom.target.SetFormalCharge(-1)
+                        elif matched_atom.pattern.GetIdx() == 2:
+                            matched_atom.target.SetFormalCharge(0)
+                    for matched_bond in match.GetBonds():
+                        if {matched_bond.pattern.GetBgnIdx(), matched_bond.pattern.GetEndIdx()} == {0,1}:
+                            matched_bond.target.SetOrder(1)
+                        elif {matched_bond.pattern.GetBgnIdx(), matched_bond.pattern.GetEndIdx()} == {0,2}:
+                            matched_bond.target.SetOrder(2)
+                oechem.OEAddExplicitHydrogens(mol)
+                oechem.OEWriteMolecule(ofs, mol)
+
+            # # load into rdkit to add explicit hydrogens for nonstandard residuse. 
+            # # Could also be done with OEAddExplicitHydrogens but 
+            # # I'm not sure if openeye can add residue info like rdkit. More testing maybe needed 
+            # rdmol = None
+            # nonstandard_atoms = []
+            # with Chem.SDMolSupplier('temp.sdf', removeHs=False) as suppl:
+            #     for mol in suppl:
+            #         rdmol = mol 
+
+            # # rdmol = Chem.MolFromPDBFile("temp.pdb", flavor=6)
+
+            # for atom_idx, atom_info in residue_info.items():
+            #     res_name, res_num, atom_name, chain_id = atom_info
+            #     atom = rdmol.GetAtomWithIdx(atom_idx)
+            #     ri = Chem.AtomPDBResidueInfo()
+            #     ri.SetResidueNumber(res_num)
+            #     ri.SetChainId(chain_id)
+            #     ri.SetResidueName(res_name)
+            #     ri.SetName(atom_name)
+            #     atom.SetPDBResidueInfo(ri)
+            # rdmol = Chem.AddHs(rdmol, addCoords=True, addResidueInfo=True)
+
+            # relative_file_path = Path(os.path.relpath(file, input_directory))
+            # output_path = str((output_directory / relative_file_path).parent / Path(f"{file.stem}.pdb"))
+            # Chem.MolToPDBFile(rdmol, str(output_path))
+
+            # # run pdb fixer on the resulting file to close terminal groups and fill loops
+            # fixer = PDBFixer(filename='pre_fixer_file.pdb')
+            # fixer.findMissingResidues()
+            # # fixer.findNonstandardResidues()      # we often do contain Nonstandard residues
+            # # fixer.replaceNonstandardResidues()   # ^^
+            # # fixer.removeHeterogens(True)
+            # fixer.findMissingAtoms()
+            # fixer.addMissingAtoms()
+            # fixer.addMissingHydrogens(7.0)
+            # # fixer.addSolvent(fixer.topology.getUnitCellDimensions())
+            
+            # PDBFile.writeFile(fixer.topology, fixer.positions, open(output_path, 'w'))
             log.append_info(f"{time.time()-start:2f}s\n")
         except Exception as e:
             log.append_ffile(str(file), f"Critical error: {e}")

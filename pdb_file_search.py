@@ -9,7 +9,7 @@ class PDBFiles:
     def search(self, pdb_file_name):
         self.cwdir = Path(__file__).parent.resolve()
         file_path = None
-        for file in self.cwdir.glob("**/*.pdb"):
+        for file in (self.cwdir / Path("compatible_pdbs")).glob("**/*.pdb"):
             if file.is_file() and file.stem == pdb_file_name:
                 file_path = file
 

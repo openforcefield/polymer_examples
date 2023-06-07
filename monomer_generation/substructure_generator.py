@@ -178,7 +178,7 @@ class SubstructureGenerator:
         return max([atom.GetAtomMapNum() for atom in rdmol.GetAtoms()])
     
     def _fill_out_query(self, query_input):
-        rdmol = Chem.MolFromSmarts(query_input)
+        rdmol = Chem.MolFromSmarts(query_input.replace('&', ''))
         current_map_num = 1 + self._get_maximum_map_num(rdmol)
         for atom in rdmol.GetAtoms():
             if atom.GetAtomMapNum() == 0:

@@ -8,6 +8,7 @@ import sys
 import os
 from monomer_smiles_input import ALL_SMILES_INPUT
 from pathlib import Path
+from partition import partition
 
 sys.path.append(os.path.abspath(__file__ + "/../..")) # TODO: fix this mess
 from pdb_file_search import PDBFiles
@@ -29,6 +30,7 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
     engine = SubstructureGenerator()
     for name, substructure_and_caps in monomer_info.items():
         smarts, caps = substructure_and_caps
+        
         if caps:
             engine.add_monomer_as_smarts_fragment(smarts, name, caps)
         else:
@@ -38,7 +40,11 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
 
     pdb_file = PDBFiles.search(file_name)
     if test_load:
+        print(f"testing {file_name}")
         assert pdb_file != None
         substructs = engine.get_monomer_info_dict()["monomers"]
         top = Topology.from_pdb(str(pdb_file), _custom_substructures=substructs)
         assert successfully_loaded(top)
+
+        if partition(top):
+            print("\t sucessfully partitioned!")
