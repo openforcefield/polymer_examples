@@ -45,12 +45,12 @@ if not output_directory.exists() or not output_directory.is_dir() or output_dire
 
 log = Log()
 #['nucleic_acids/7sb8_dna.pdb', 'simple_polymers/paam_drei_no_wtr.pdb', 'simple_polymers/peg_c35r_no_wtr.pdb', 'simple_polymers/pnipam_drei_no_wtr.pdb', 'simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']
-skipped_files = ["xlinked.pdb", "6cww.cif", "7xjf.cif", "7fse.cif", "7pvu.cif", "7ond.cif", "8ovp.cif"]
+skipped_files = ["xlinked.pdb", "6cww.cif", "7xjf.cif", "7fse.cif", "7pvu.cif", "7ond.cif", "8ovp.cif", "2q1r.cif", "130d.cif"]
 
 standard_workflow = [
                     #  input_directory / Path("crosslinked_polymers"),   # done 
                     #  input_directory / Path("peptoids"),               # done
-                    #  input_directory / Path("simple_polymers"),        # done
+                     input_directory / Path("simple_polymers"),        # done
                     #  input_directory / Path("sugars"),                 # done  
                      ]
 
@@ -59,7 +59,8 @@ protein_workflow = [
                     ]
 
 DNA_workflow = [
-               input_directory / Path("DNA")
+            #    input_directory / Path("DNA"),
+            #    input_directory / Path("RNA")
                ]
 
 # RNA_workflow = [
@@ -214,13 +215,13 @@ for directory in DNA_workflow:
             output_path = str((output_directory / relative_file_path).parent / Path(f"{file.stem}.pdb"))
 
             ifs = oechem.oemolistream(str(file.absolute()))
-            # ofs = oechem.oemolostream("temp.sdf")
+            # ofs = oechem.oemolostream('pre_fixer_file.pdb')
             ofs = oechem.oemolostream(str(output_path))
 
             flavor = oechem.OEIFlavor_Generic_Default | oechem.OEIFlavor_MMCIF_NoAltLoc 
             ifs.SetFlavor(oechem.OEFormat_MMCIF, flavor)
 
-            flavor = oechem.OEIFlavor_Generic_Default | oechem.OEIFlavor_PDB_Connect
+            flavor = oechem.OEOFlavor_PDB_BONDS | oechem.OEOFlavor_PDB_HETBONDS
             ofs.SetFlavor(oechem.OEFormat_PDB, flavor)
 
             residue_info = {}
@@ -243,7 +244,30 @@ for directory in DNA_workflow:
                             matched_bond.target.SetOrder(1)
                         elif {matched_bond.pattern.GetBgnIdx(), matched_bond.pattern.GetEndIdx()} == {0,2}:
                             matched_bond.target.SetOrder(2)
+
+                # remove water 
+                for atom in mol.GetAtoms():
+                    r = oechem.OEAtomGetResidue(atom)
+                    if "HOH" in r.GetName():
+                        mol.DeleteAtom(atom) # this is stable during looping
+
                 oechem.OEAddExplicitHydrogens(mol)
+                # deduplify hydrogens where they appear
+                hydrogens = []
+                for atom in mol.GetAtoms():
+                    if atom.GetAtomicNum() == 1:
+                        r = oechem.OEAtomGetResidue(atom)
+                        atom_id = tuple([r.GetName(), r.GetResidueNumber(), atom.GetName(), r.GetChainID()])
+                        if atom_id in hydrogens:
+                            atom.SetName(" H  ") # generic H
+                        hydrogens.append(atom_id)
+
+                # redo hydrogen numbering
+                for atom in mol.GetAtoms():
+                    r = oechem.OEAtomGetResidue(atom)
+                    r.SetSerialNumber(atom.GetIdx() + 1)
+
+                
                 oechem.OEWriteMolecule(ofs, mol)
 
             # # load into rdkit to add explicit hydrogens for nonstandard residuse. 
@@ -272,16 +296,16 @@ for directory in DNA_workflow:
             # output_path = str((output_directory / relative_file_path).parent / Path(f"{file.stem}.pdb"))
             # Chem.MolToPDBFile(rdmol, str(output_path))
 
-            # # run pdb fixer on the resulting file to close terminal groups and fill loops
+            # run pdb fixer on the resulting file to close terminal groups and fill loops
             # fixer = PDBFixer(filename='pre_fixer_file.pdb')
             # fixer.findMissingResidues()
-            # # fixer.findNonstandardResidues()      # we often do contain Nonstandard residues
-            # # fixer.replaceNonstandardResidues()   # ^^
-            # # fixer.removeHeterogens(True)
+            # fixer.findNonstandardResidues()      # we often do contain Nonstandard residues
+            # fixer.replaceNonstandardResidues()   # ^^
+            # fixer.removeHeterogens(True)
             # fixer.findMissingAtoms()
             # fixer.addMissingAtoms()
             # fixer.addMissingHydrogens(7.0)
-            # # fixer.addSolvent(fixer.topology.getUnitCellDimensions())
+            # fixer.addSolvent(fixer.topology.getUnitCellDimensions())
             
             # PDBFile.writeFile(fixer.topology, fixer.positions, open(output_path, 'w'))
             log.append_info(f"{time.time()-start:2f}s\n")

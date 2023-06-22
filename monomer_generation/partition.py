@@ -146,8 +146,11 @@ def partition(offtop):
                         bond_entry = tuple([begin_atom.molecule_atom_index, end_atom.molecule_atom_index])
                         if bond_entry not in bond_info[query_num]:
                             bond_info[query_num][bond_entry] = b.bond_order
-
+        if len(bond_info) == 0:
+            continue 
+        
         assert len(target_ids) == len(bond_info)
+
         isomorphism_info_dict = {idx: (target_ids[idx], bond_info[idx]) for idx in target_ids}
         idx_to_match_id = {idx: match_id for idx, match_id in enumerate(target_ids)}
         choice_G = _create_choice_graph(isomorphism_info_dict)
