@@ -1,10 +1,8 @@
 from openff.toolkit import Topology, Molecule
-from substructure_generator import SubstructureGenerator
 import sys
 import os
-from monomer_smiles_input import ALL_SMILES_INPUT
 from pathlib import Path
-from partition import partition
+from monomer_generation.partition import partition
 from rdkit import Chem
 from openeye import oechem
 import openmm
@@ -47,4 +45,31 @@ def successfully_loaded(top):
     return all([bool(match) for match in match_info])
 
 
-pdb_file = PDBFiles.search(file_name)
+pdb_file = "compatible_pdbs/proteins/6cww.pdb"
+json_file = "monomer_generation/json_files/6cww.json"
+
+substructs = dict()
+with open(json_file, "r") as file:
+    substructs = json.load(file)
+substructs = substructs["monomers"]
+
+top = Topology.from_pdb(str(pdb_file), _custom_substructures=substructs)
+assert successfully_loaded(top)
+print("\t sucessfully loaded!")
+
+if partition(top):
+    print("\t sucessfully partitioned!")
+
+general_offxml = '/home/coda3831/openff-workspace/openff-forcefields/openforcefields/offxml/openff-2.0.0.offxml'
+amber_offxml = '/home/coda3831/openff-workspace/openff-amber-ff-ports/openff/amber_ff_ports/offxml/ff14sb_off_impropers_0.0.3.offxml'
+forcefield = ForceField(general_offxml, amber_offxml)
+new_parameter = vdWHandler.vdWType(
+            smirks='[*:1]',
+            epsilon=0.0157*unit.kilocalories_per_mole,
+            rmin_half=0.6000*unit.angstroms,
+        )
+forcefield.get_parameter_handler('vdW').parameters.insert(0, new_parameter)
+
+energy = simulate_polymer(str(pdb_file), top, forcefield)
+print("\t sucessfully parameterized!")
+print(energy)
