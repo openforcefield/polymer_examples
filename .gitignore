@@ -8,6 +8,3 @@ File Search Benchmark.png
 # PyCache
 __pycache__
 */__pycache__
-
-# JSONs
-monomer_generation/json_files/*
