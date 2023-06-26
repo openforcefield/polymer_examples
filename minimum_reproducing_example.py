@@ -13,6 +13,7 @@ import json
 from openff.toolkit.typing.engines.smirnoff import ForceField
 from openff.toolkit.typing.engines.smirnoff import vdWHandler
 from openff.toolkit.utils.toolkits import GLOBAL_TOOLKIT_REGISTRY, ToolkitRegistry, OpenEyeToolkitWrapper
+from openff.amber_ff_ports.amber_ff_ports import get_forcefield_dirs_paths
 
 GLOBAL_TOOLKIT_REGISTRY.deregister_toolkit(OpenEyeToolkitWrapper)
 
@@ -44,6 +45,8 @@ def successfully_loaded(top):
     match_info = [atom.metadata["match_info"] for atom in top.atoms]
     return all([bool(match) for match in match_info])
 
+current_dir = Path(__file__).parent.resolve()
+os.chdir(current_dir)
 
 pdb_file = "compatible_pdbs/proteins/6cww.pdb"
 json_file = "monomer_generation/json_files/6cww.json"
@@ -60,15 +63,17 @@ print("\t sucessfully loaded!")
 if partition(top):
     print("\t sucessfully partitioned!")
 
-general_offxml = '/home/coda3831/openff-workspace/openff-forcefields/openforcefields/offxml/openff-2.0.0.offxml'
-amber_offxml = '/home/coda3831/openff-workspace/openff-amber-ff-ports/openff/amber_ff_ports/offxml/ff14sb_off_impropers_0.0.3.offxml'
-forcefield = ForceField(general_offxml, amber_offxml)
-new_parameter = vdWHandler.vdWType(
-            smirks='[*:1]',
-            epsilon=0.0157*unit.kilocalories_per_mole,
-            rmin_half=0.6000*unit.angstroms,
-        )
-forcefield.get_parameter_handler('vdW').parameters.insert(0, new_parameter)
+general_offxml = 'openff-2.0.0.offxml'
+amber_offxml = 'ff14sb_off_impropers_0.0.3.offxml'
+water_model = 'tip3p_fb-1.1.0.offxml'
+
+forcefield = ForceField(general_offxml, amber_offxml, water_model)
+# new_parameter = vdWHandler.vdWType(
+#             smirks='[*:1]',
+#             epsilon=0.0157*unit.kilocalories_per_mole,
+#             rmin_half=0.6000*unit.angstroms,
+#         )
+# forcefield.get_parameter_handler('vdW').parameters.insert(0, new_parameter)
 
 energy = simulate_polymer(str(pdb_file), top, forcefield)
 print("\t sucessfully parameterized!")
