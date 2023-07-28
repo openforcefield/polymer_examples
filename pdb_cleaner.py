@@ -45,7 +45,7 @@ if not output_directory.exists() or not output_directory.is_dir() or output_dire
 
 log = Log()
 #['nucleic_acids/7sb8_dna.pdb', 'simple_polymers/paam_drei_no_wtr.pdb', 'simple_polymers/peg_c35r_no_wtr.pdb', 'simple_polymers/pnipam_drei_no_wtr.pdb', 'simple_polymers/polythiophene.pdb', 'simple_polymers/polyvinylchloride.pdb']
-skipped_files = ["xlinked.pdb", "6cww.cif", "7xjf.cif", "7fse.cif", "7pvu.cif", "7ond.cif", "8ovp.cif", "2q1r.cif", "130d.cif"]
+skipped_files = ["atactic_styrene-s9.pdb", "xlinked.pdb", "6cww.cif", "7xjf.cif", "7fse.cif", "7pvu.cif", "7ond.cif", "8ovp.cif", "2q1r.cif", "130d.cif"]
 
 standard_workflow = [
                     #  input_directory / Path("crosslinked_polymers"),   # done 
@@ -171,7 +171,7 @@ for directory in protein_workflow:
                             "SER", "THR", "VAL", "TRP", "TYR", "PYL", "SEC", "HOH"]
             for atom_idx, atom_info in residue_info.items():
                 res_name, res_num, atom_name, chain_id = atom_info
-                if res_name not in stand_aminos:
+                if res_name.strip() not in stand_aminos:
                     nonstandard_atoms.append(atom_idx)
                 atom = rdmol.GetAtomWithIdx(atom_idx)
                 ri = Chem.AtomPDBResidueInfo()
@@ -180,7 +180,8 @@ for directory in protein_workflow:
                 ri.SetResidueName(res_name)
                 ri.SetName(atom_name)
                 atom.SetPDBResidueInfo(ri)
-            rdmol = Chem.AddHs(rdmol, addCoords=True, addResidueInfo=True, onlyOnAtoms=nonstandard_atoms)
+            if nonstandard_atoms:
+                rdmol = Chem.AddHs(rdmol, addCoords=True, addResidueInfo=True, onlyOnAtoms=nonstandard_atoms)
             Chem.MolToPDBFile(rdmol, "pre_fixer_file.pdb")
 
             # run pdb fixer on the resulting file to close terminal groups and fill loops

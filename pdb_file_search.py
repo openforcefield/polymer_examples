@@ -8,9 +8,13 @@ class PDBFiles:
     @classmethod
     def search(self, pdb_file_name):
         self.cwdir = Path(__file__).parent.resolve()
-        file_path = None
+        file_paths = []
         for file in (self.cwdir / Path("compatible_pdbs")).glob("**/*.pdb"):
-            if file.is_file() and file.stem == pdb_file_name:
-                file_path = file
+            if "-s" in file.stem:
+                polymer_name = file.stem.split("-s")[0]
+            else:
+                polymer_name = file.stem
+            if file.is_file() and pdb_file_name == polymer_name:
+                file_paths.append(file)
 
-        return file_path
+        return file_paths
