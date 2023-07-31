@@ -208,7 +208,7 @@ class SubstructureGenerator:
                 bond.SetQuery(query)
 
         smarts_string = Chem.MolToSmarts(rdmol)
-        return smarts_string.replace('&', '') # all & are removed for rdkit to read query and read molecule info
+        return [smarts_string.replace('&', '')] # all & are removed for rdkit to read query and read molecule info
     
     def _enumerate_substructures_with_caps(self, name, remove_complete_substructures=True):
         # for a named substructure, returns all possible combinations

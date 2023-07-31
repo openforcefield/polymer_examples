@@ -98,7 +98,7 @@ for data_type in ["time_to_parameterize"]:
 ax1.set_yscale("log")
 ax1.set_xscale("log")
 
-ax1.set_title('(a)', y=-0.25)
+ax1.set_title('(b)', y=-0.25)
 ax1.set_xlabel("Number of Atoms")
 ax1.set_ylabel("Time to Parameterize (sec)")
 ax1.legend()
@@ -142,7 +142,7 @@ ax2.set_yscale("log")
 #         )
 
 
-ax2.set_title('(b)', y=-0.25)
+ax2.set_title('(a)', y=-0.25)
 ax2.set_xlabel('System Size (Num. Atoms)')
 ax2.set_ylabel('Average Time (sec)')
 ax2.set_xticks(x_indices)
@@ -150,4 +150,4 @@ ax2.set_xticklabels(["Small \n($<10^2$)", "Medium \n($10^2$-$10^3$)", "Large\n($
 ax2.legend()
 
 fig.tight_layout()
-fig.savefig("loading_times.png")
+fig.savefig("loading_times.png", dpi=300)
