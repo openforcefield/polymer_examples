@@ -150,7 +150,6 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
                     break # if successfully minimized without coordinate explosion
                 except openmm.OpenMMException as e:
                     print(f"openmm exception: {e}")
-            # manually supress identical_molecule_groups to test un-optimized time complexity
 
             print(energy)
             with open("polymer_energies.txt", "a") as file:
