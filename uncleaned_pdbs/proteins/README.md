@@ -1,0 +1,1 @@
+All files can be found from the [Protein Data Bank](https://www.rcsb.org/) using the file stem (ex. "8ovp") to search for the entry id. Files may be downloaded by navigating to the "Download Files v" blue button in the top right of the entry page and clicking on the "PDBx/mmCIF Format" button.
