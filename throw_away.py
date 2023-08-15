@@ -1,6 +1,6 @@
-from openff.toolkit import Topology
+from openff.toolkit import Topology # openff-toolkit v.0.13.2+53.g99099607
 from openff.toolkit.utils import get_data_file_path
-from rdkit import Chem
+from rdkit import Chem # rdkit v.2022.09.1
 
 middle_monomer = "*CC*" # simple smiles repr of monomer 
 end_group = "*CC" # "*" represents neighboring atoms

@@ -10,25 +10,15 @@ from collections import defaultdict
 
 random.seed(6626)
 
-current_dir = Path(__file__).parent.resolve()
-os.chdir(current_dir)
-os.chdir("..")
-
-template_dir = Path("uncleaned_pdbs/homopolymer_templates")
-for file in template_dir.glob("**/*.pdb"):
-    # if file.stem != "peg_modified":
-    #     continue
-    print(file.stem)
-    rdmol = Chem.MolFromPDBFile(str(file), removeHs=False, proximityBonding=False)
+def multiply_polymers(ifile, ofile, n_new_polymers):
+    print(ifile.stem)
+    rdmol = Chem.MolFromPDBFile(str(ifile), removeHs=False, proximityBonding=False)
     if rdmol == None:
-        continue
+        return
     pts = rdmol.GetConformer().GetPositions()
     n_pts, _ = pts.shape
 
     com = np.average(pts, axis=0) # center of mass
-
-    # # transpose points to lie at origin 
-    # pts = pts - com
     
     P = np.eye(n_pts) * (1-(1/n_pts)) + ((-(np.eye(n_pts)-1))*(-1/n_pts))
     cov = np.matmul(np.matmul(np.transpose(pts),P),pts)
@@ -55,9 +45,13 @@ for file in template_dir.glob("**/*.pdb"):
 
     # create new conformers based on the two minor eigenvalues
     
-    n_new_polymers = random.randint(3,9)**2 # generate a random square between 9 and 100 to use as the size of our final polymers
     n_x = int(math.sqrt(n_new_polymers))
     n_y = int(math.sqrt(n_new_polymers))
+    remainder = n_new_polymers - n_x*n_y
+    while remainder > 0: # fill the square 
+        n_y += 1
+        remainder = n_new_polymers - n_x*n_y
+
     X, Y = np.meshgrid(np.linspace(-n_x/2.0, n_x/2.0, n_x), np.linspace(-n_y/2.0, n_y/2.0, n_y))
 
     new_conformers = np.array([])
@@ -104,4 +98,22 @@ for file in template_dir.glob("**/*.pdb"):
         if element_counts[atom.GetSymbol()] >= 100 / (10**(len(atom.GetSymbol())-1)): # if any atoms exceed 100 
             res_number += 1
             element_counts = defaultdict(int)
-    Chem.MolToPDBFile(erdmol, f"compatible_pdbs/simple_polymers/{file.stem}-s{n_new_polymers}.pdb")
+    Chem.MolToPDBFile(erdmol, ofile)
+
+current_dir = Path(__file__).parent.resolve()
+os.chdir(current_dir)
+os.chdir("..")
+
+template_dir = Path("uncleaned_pdbs/homopolymer_templates")
+for ifile in template_dir.glob("**/*.pdb"):
+    # output randomly sized polymers to simple_polymers for testing with the rest of the workflow
+    n_new_polymers = random.randint(3,9)**2 # generate a random square between 9 and 100 to use as the size of our final polymers
+    ofile = f"compatible_pdbs/simple_polymers/{ifile.stem}-s{n_new_polymers}.pdb"
+    multiply_polymers(ifile, ofile, n_new_polymers)
+
+    # output polymers that are about 10k atoms long for 1k vs 10k testing
+    n_new_polymers = 10
+    ofile = f"onek_vs_tenk_tests/onek_polymers/{ifile.stem}.pdb"
+    multiply_polymers(ifile, ofile, n_new_polymers)
+
+    

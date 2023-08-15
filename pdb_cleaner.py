@@ -50,8 +50,12 @@ skipped_files = ["atactic_styrene-s9.pdb", "xlinked.pdb", "6cww.cif", "7xjf.cif"
 standard_workflow = [
                     #  input_directory / Path("crosslinked_polymers"),   # done 
                     #  input_directory / Path("peptoids"),               # done
-                     input_directory / Path("simple_polymers"),        # done
+                    #  input_directory / Path("simple_polymers"),        # done
                     #  input_directory / Path("sugars"),                 # done  
+                     ]
+
+tenk_workflow = [
+                     input_directory / Path("tenk_polymers")           # done 
                      ]
 
 protein_workflow = [
@@ -132,6 +136,88 @@ for directory in standard_workflow:
             if not (mol.n_atoms == openmm_mol.topology.getNumAtoms()):
                 log.append_ffile(str(file), "toolkits did not read an equivalent number of atoms in the final pdb")
             log.append_info(f"{time.time()-start:2f}s\n")
+        except Exception as e:
+            log.append_ffile(str(file), f"Critical error: {e}")
+
+for directory in tenk_workflow:
+    for file in directory.glob('**/*.pdb'):
+        if file.name in skipped_files:
+            continue
+        print(f"processing {file.name}: ")
+        log.append_info(f"processing {file.name}: ")
+        try:
+            start = time.time()
+            # rdmol = Chem.MolFromPDBFile(str(file), proximityBonding=False, sanitize=True, removeHs=False) # due to explicit valence errors
+            # emol = Molecule.from_file(str(file), file_format="PDB")
+            ifs = oechem.oemolistream(str(file.absolute()))
+
+            flavor = oechem.OEIFlavor_PDB_DEFAULT
+            ifs.SetFlavor(oechem.OEFormat_PDB, flavor)
+
+            emol = None
+            for mol in ifs.GetOEGraphMols():
+                emol = mol
+                break
+
+            # make atom and residue names unique
+            element_counts = defaultdict(int)
+            res_number = 1
+            for atom in emol.GetAtoms():
+                ri = oechem.OEAtomGetResidue(atom)
+                name = ri.GetName()
+                symbol = oechem.OEGetAtomicSymbol(atom.GetAtomicNum())
+                if len(symbol) == 1:
+                    new_name = symbol + f"{element_counts[symbol]:02d}"
+                else:
+                    new_name = symbol + f"{element_counts[symbol]:01d}"
+                ri.SetResidueNumber(res_number)
+                # ri.SetChainID("")
+                ri.SetName("UNK")
+                atom.SetName(new_name)
+
+                element_counts[symbol] += 1
+                if element_counts[symbol] >= 100 / (10**(len(symbol)-1)): # if any atoms exceed 100 
+                    res_number += 1
+                    element_counts = defaultdict(int)
+                
+            relative_file_path = Path(os.path.relpath(file, input_directory))
+            output_path = str(output_directory / relative_file_path)
+
+            ofs = oechem.oemolostream(output_path)
+            flavor = oechem.OEOFlavor_PDB_BONDS | oechem.OEOFlavor_PDB_HETBONDS
+            ofs.SetFlavor(oechem.OEFormat_PDB, flavor)
+
+            oechem.OEWriteMolecule(ofs, emol)
+
+            # # make atom and residue names unique
+            # element_counts = defaultdict(int)
+            # res_number = 1
+            # for atom in rdmol.GetAtoms():
+            #     ri = atom.GetPDBResidueInfo()
+            #     name = ri.GetName()
+            #     if len(atom.GetSymbol()) == 1:
+            #         new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:02d}"
+            #     else:
+            #         new_name = atom.GetSymbol() + f"{element_counts[atom.GetSymbol()]:01d}"
+            #     ri.SetResidueNumber(res_number)
+            #     ri.SetChainId("")
+            #     ri.SetResidueName("UNK")
+            #     ri.SetName(new_name)
+
+            #     element_counts[atom.GetSymbol()] += 1
+            #     if element_counts[atom.GetSymbol()] >= 100 / (10**(len(atom.GetSymbol())-1)): # if any atoms exceed 100 
+            #         res_number += 1
+            #         element_counts = defaultdict(int)
+                
+            # relative_file_path = Path(os.path.relpath(file, input_directory))
+            # output_path = str(output_directory / relative_file_path)
+            # Chem.MolToPDBFile(rdmol, output_path)
+            # # finally, check to see all programs can read the output
+            # openmm_mol = PDBFile(output_path)
+            # if not (rdmol.GetNumAtoms() == openmm_mol.topology.getNumAtoms()):
+            #     print(f"{rdmol.GetNumAtoms()}  {openmm_mol.topology.getNumAtoms()}")
+            #     log.append_ffile(str(file), "toolkits did not read an equivalent number of atoms in the final pdb")
+            # log.append_info(f"{time.time()-start:2f}s\n")
         except Exception as e:
             log.append_ffile(str(file), f"Critical error: {e}")
 
