@@ -7,6 +7,7 @@ import sys
 import os
 import numpy as np
 from pathlib import Path
+import pstats
 from rdkit import Chem
 import time
 import openmm
@@ -15,14 +16,13 @@ from simtk import unit
 from openff.toolkit.typing.engines.smirnoff import ForceField
 from openff.toolkit.utils.toolkits import GLOBAL_TOOLKIT_REGISTRY, ToolkitRegistry, OpenEyeToolkitWrapper
 from openff.units.openmm import to_openmm as to_openmm_quantity
+import cProfile as profile
 
 from typing import (
     Dict,
     List,
     Tuple,
 )
-
-GLOBAL_TOOLKIT_REGISTRY.deregister_toolkit(OpenEyeToolkitWrapper)
 
 def _identify_all_molecules(
     self,
@@ -41,20 +41,25 @@ def _identify_all_molecules(
 
     return identity_maps
 
-def parameterize(off_topology, forcefield):
+def parameterize(off_topology, forcefield, prof):
     # mol should already have one conformer...
 
     # pdbfile = PDBFile(pdbfile)
     # omm_topology = pdbfile.topology
     omm_topology = off_topology.to_openmm()
 
+    for m in off_topology.molecules:
+        m.assign_partial_charges(partial_charge_method="gasteiger")
+
     start = time.time()
-    system = forcefield.create_openmm_system(off_topology, allow_nonintegral_charges=True)
+    prof.enable()
+    system = forcefield.create_openmm_system(off_topology, allow_nonintegral_charges=True, charge_from_molecules=off_topology.molecules)
+    prof.disable()
     time_to_parameterize = time.time() - start
 
     return time_to_parameterize
 
-def test_load(name, top, out_file):
+def test_load(name, top, out_file, prof):
     
     # try:
     #     start = time.time()
@@ -85,7 +90,7 @@ def test_load(name, top, out_file):
 
     energy = np.nan
     try:
-        time_to_parameterize = parameterize(top, forcefield)
+        time_to_parameterize = parameterize(top, forcefield, prof)
     except Exception as e:
         print(e)
         return
@@ -110,53 +115,28 @@ def successfully_loaded(top):
 current_dir = Path(__file__).parent.resolve()
 os.chdir(current_dir)
 
-with open("tenk_timed_tests.txt", "w") as file:
+with open("tenk_timed_tests_variable_N.txt", "w") as file:
     file.write("name, num_atoms, time_to_parameterize\n")
 
-# for onek_file in Path("onek_polymers").iterdir():
-#     tenk_file = ""
-#     for file in Path("tenk_polymers").iterdir():
-#         if file.stem.split("_10000")[0] == onek_file.stem:
-#             tenk_file = file
-#     if not tenk_file:
-#         print(f"failed to find both onek and tenk files for {onek_file.stem}")
-#         continue
-
-    # monomer_info = {}
-    # for file_name, monomer_info_query in ALL_SMILES_INPUT.items():
-    #     if file_name.split("_modified")[0] == onek_file.stem.split("_modified")[0]:
-    #         monomer_info = monomer_info_query
-    #         break
-    # if not monomer_info:
-    #     print(f"failed to find monomer info for {onek_file}")
-    #     continue
-
-    # engine = SubstructureGenerator()
-    # for name, substructure_and_caps in monomer_info.items():
-    #     smarts, caps = substructure_and_caps
-    #     if caps:
-    #         engine.add_monomer_as_smarts_fragment(smarts, name, caps)
-    #     else:
-    #         engine.add_monomer(name, smarts)
-
-    # substructs = engine.get_monomer_info_dict()["monomers"]
-
-    # test_load(onek_file, substructs, "onek_timed_tests.txt")
-
-systems = [
-           (2500, 1),
-           (1250, 2), 
-           (833, 3), 
-           (625, 4),
-           (500, 5)
-          ]
-for num_atoms, num_chains in systems:
-    mol = Molecule.from_smiles("CC"*num_atoms)
-    for i in range(0,3):
-        # manually ensure that no molecules are cached to obtain the worst-case time complexity 
-        # for if parameterization should be done over ALL atoms, since that is the time-complexity
-        # problem we are interested in solving. This can be done with some manipulation of
-        # openff's identical_molecule_groups property for version 0.13.2
-        Topology._identify_chemically_identical_molecules = _identify_all_molecules
-        top = Topology.from_molecules([mol]*num_chains)
-        test_load(f"PE_{num_atoms}x{num_chains}", top, "tenk_timed_tests.txt")
+Ns = [3000]
+for dop in Ns:
+    for num_chains in [10]:
+        dop_per_chain = int(dop / num_chains)
+        mol = Molecule.from_smiles("CC"*dop_per_chain)
+        for i in [3]: # range(0,3):
+            # manually ensure that no molecules are cached to obtain the worst-case time complexity 
+            # for if parameterization should be done over ALL atoms, since that is the time-complexity
+            # problem we are interested in solving. This can be done with some manipulation of
+            # openff's identical_molecule_groups property for version 0.13.2
+            Topology._identify_chemically_identical_molecules = _identify_all_molecules
+            top = Topology.from_molecules([mol]*num_chains)
+            entry_name = f"PE_{dop_per_chain}x{num_chains}"
+            run_string = f"test_load(\"{entry_name}\", top, \"tenk_timed_tests_variable_N.txt\")"
+            
+            prof = profile.Profile()
+            test_load(entry_name, top, "tenk_timed_tests_variable_N.txt", prof)
+            stream = open(f'profile_data/{entry_name}_t{i}.txt', 'w')
+            stats = pstats.Stats(prof, stream=stream)
+            stats.sort_stats('cumtime')
+            stats.strip_dirs()
+            stats.print_stats()

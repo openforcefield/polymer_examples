@@ -1,0 +1,2 @@
+name, num_atoms, time_to_parameterize
+PE_300x10, 18020, 476.0990536212921

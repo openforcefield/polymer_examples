@@ -1,0 +1,667 @@
+         121205109 function calls (118465929 primitive calls) in 332.289 seconds
+
+   Random listing order was used
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    36001    0.055    0.000    0.055    0.000 _valence.py:312(_is_constrained)
+        1    0.000    0.000    0.005    0.005 _valence.py:274(_process_improper_torsion_forces)
+        1    2.126    2.126   57.262   57.262 _valence.py:191(_process_proper_torsion_forces)
+   219925    0.244    0.000    0.244    0.000 _valence.py:202(<genexpr>)
+        1    0.000    0.000   57.262   57.262 _valence.py:184(_process_torsion_forces)
+        1    1.097    1.097   26.471   26.471 _valence.py:100(_process_angle_forces)
+    96000    0.110    0.000    0.110    0.000 _valence.py:137(<genexpr>)
+        1    0.223    0.223    4.575    4.575 _valence.py:47(_process_bond_forces)
+    36003    0.038    0.000    0.038    0.000 _valence.py:76(<genexpr>)
+        1    0.247    0.247    3.298    3.298 _valence.py:14(_process_constraints)
+    24006    0.027    0.000    0.027    0.000 _valence.py:31(<genexpr>)
+        1    0.000    0.000    0.001    0.001 _nonbonded.py:967(_apply_switching_function)
+        1    0.000    0.000    0.232    0.232 _nonbonded.py:435(_create_exceptions)
+        1    0.039    0.039    0.195    0.195 _nonbonded.py:443(<listcomp>)
+    36003    0.059    0.000    0.087    0.000 _nonbonded.py:444(<genexpr>)
+        1    1.360    1.360   14.676   14.676 _nonbonded.py:244(_create_single_nonbonded_force)
+        1    0.000    0.000    0.000    0.000 _nonbonded.py:260(<listcomp>)
+        1    0.000    0.000    0.000    0.000 _nonbonded.py:188(_prepare_input_data)
+        1    0.053    0.053    1.157    1.157 _nonbonded.py:141(_add_particles_to_system)
+        1    0.000    0.000   15.834   15.834 _nonbonded.py:33(_process_nonbonded_forces)
+        1    0.000    0.000    0.000    0.000 _gbsa.py:7(_process_gbsa)
+        1    0.000    0.000  107.453  107.453 __init__.py:23(to_openmm)
+        1    0.000    0.000    0.000    0.000 _create.py:69(_check_supported_handlers)
+        1    0.007    0.007  224.790  224.790 _create.py:84(_create_interchange)
+        1    0.000    0.000   19.713   19.713 _create.py:133(_bonds)
+        1    0.000    0.000    0.000    0.000 _create.py:167(<listcomp>)
+        1    0.000    0.000    3.783    3.783 _create.py:158(_constraints)
+        1    0.000    0.000   28.681   28.681 _create.py:182(_angles)
+        1    0.000    0.000   96.292   96.292 _create.py:196(_propers)
+        1    0.000    0.000    1.255    1.255 _create.py:216(_impropers)
+        1    0.000    0.000   11.949   11.949 _create.py:230(_vdw)
+        1    0.000    0.000    0.000    0.000 _create.py:264(<listcomp>)
+        1    0.000    0.000    0.000    0.000 _create.py:266(<listcomp>)
+        1    0.000    0.000   42.871   42.871 _create.py:244(_electrostatics)
+        1    0.000    0.000    0.000    0.000 _create.py:285(_gbsa)
+        1    0.000    0.000    0.000    0.000 _create.py:303(_virtual_sites)
+        1    0.000    0.000    0.000    0.000 _create.py:344(_plugins)
+        1    0.000    0.000    0.000    0.000 _positions.py:8(_infer_positions)
+        1    0.000    0.000    0.000    0.000 _valence.py:110(allowed_parameter_handlers)
+    12001    0.013    0.000    0.013    0.000 _valence.py:120(potential_parameters)
+        1    0.024    0.024    0.048    0.048 _valence.py:128(<listcomp>)
+        1    0.000    0.000    0.048    0.048 _valence.py:125(valence_terms)
+        1    0.304    0.304   11.880   11.880 _valence.py:130(store_matches)
+    12001    0.041    0.000    0.162    0.000 _valence.py:219(<dictcomp>)
+        1    0.526    0.526    7.765    7.765 _valence.py:176(store_potentials)
+        1    0.003    0.003    0.065    0.065 _valence.py:229(_get_uses_interpolation)
+        1    0.003    0.003   19.713   19.713 _valence.py:238(create)
+        2    0.000    0.000    0.000    0.000 _valence.py:289(allowed_parameter_handlers)
+        1    0.001    0.001    3.783    3.783 _valence.py:304(create)
+        1    0.000    0.000    0.000    0.000 _valence.py:344(<listcomp>)
+        1    0.000    0.000    0.000    0.000 _valence.py:352(<listcomp>)
+        1    0.000    0.000    0.000    0.000 _valence.py:353(<listcomp>)
+        1    0.728    0.728    3.782    3.782 _valence.py:333(store_constraints)
+        1    0.000    0.000    0.000    0.000 _valence.py:398(allowed_parameter_handlers)
+    24000    0.026    0.000    0.026    0.000 _valence.py:408(potential_parameters)
+        1    0.022    0.022    1.855    1.855 _valence.py:413(valence_terms)
+    24000    0.082    0.000    0.326    0.000 _valence.py:427(<dictcomp>)
+        1    1.003    1.003   10.244   10.244 _valence.py:418(store_potentials)
+        1    1.316    1.316   40.005   40.005 _valence.py:460(store_matches)
+        1    3.247    3.247   56.174   56.174 _valence.py:507(store_potentials)
+     2841    0.006    0.000    0.096    0.000 _valence.py:570(<genexpr>)
+        1    0.014    0.014   96.292   96.292 _valence.py:552(create)
+        1    0.000    0.000    0.000    0.000 _valence.py:601(allowed_parameter_handlers)
+        1    0.000    0.000    1.255    1.255 _valence.py:616(store_matches)
+        1    0.000    0.000    0.000    0.000 _valence.py:661(store_potentials)
+        3    0.000    0.000    0.000    0.000 _base.py:103(_check_all_valence_terms_assigned)
+        2    1.028    0.514   25.001   12.501 _base.py:233(store_matches)
+        2    0.006    0.003   29.936   14.968 _base.py:274(create)
+        1    0.000    0.000    0.000    0.000 _nonbonded.py:91(allowed_parameter_handlers)
+    12002    0.013    0.000    0.013    0.000 _nonbonded.py:106(potential_parameters)
+    12002    0.040    0.000    0.162    0.000 _nonbonded.py:124(<dictcomp>)
+        1    0.506    0.506    5.370    5.370 _nonbonded.py:111(store_potentials)
+        1    0.007    0.007   11.949   11.949 _nonbonded.py:132(create)
+        2    0.000    0.000    0.277    0.139 _nonbonded.py:214(charges)
+        1    0.150    0.150    0.277    0.277 _nonbonded.py:240(_get_charges)
+        1    0.000    0.000    0.000    0.000 _nonbonded.py:359(<listcomp>)
+        1    0.008    0.008   42.871   42.871 _nonbonded.py:332(create)
+        1    0.364    0.364   23.797   23.797 _nonbonded.py:689(_assign_charges_from_molecules)
+        1    0.000    0.000    0.000    0.000 _nonbonded.py:750(<dictcomp>)
+        1   16.386   16.386   42.862   42.862 _nonbonded.py:736(store_matches)
+   583904    3.234    0.000   48.157    0.000 types.py:35(validate_type)
+    72008    0.153    0.000    0.228    0.000 models.py:46(__hash__)
+   111992    0.990    0.000   25.194    0.000 potentials.py:78(validate_parameters)
+        2    0.000    0.000    0.000    0.000 potentials.py:306(__getattr__)
+    28005    0.062    0.000    0.092    0.000 models.py:71(__hash__)
+    43985    0.097    0.000    0.145    0.000 models.py:121(__hash__)
+    24004    0.023    0.000    0.023    0.000 models.py:154(atom_indices)
+    36006    0.084    0.000    0.122    0.000 models.py:159(__hash__)
+   235986    0.558    0.000    0.819    0.000 models.py:284(__hash__)
+        1    0.000    0.000    0.000    0.000 interchange.py:152(validate_box)
+        2    0.000    0.000   20.239   10.119 interchange.py:170(validate_topology)
+        1    0.000    0.000  224.791  224.791 interchange.py:210(from_smirnoff)
+        1    0.001    0.001  107.453  107.453 interchange.py:359(to_openmm)
+        5    0.000    0.000    0.000    0.000 interchange.py:725(__getitem__)
+        2    0.000    0.000    0.000    0.000 __init__.py:27(__getattr__)
+    81083    0.170    0.000    0.769    0.000 parameters.py:1228(_split_attribute_index)
+    81083    0.181    0.000    0.834    0.000 parameters.py:1246(_split_attribute_index_mapping)
+183976/91988    1.663    0.000    4.662    0.000 parameters.py:1471(index)
+    91988    0.437    0.000    5.279    0.000 parameters.py:1529(__getitem__)
+    91990    0.115    0.000    0.115    0.000 parameters.py:1894(parameters)
+    48007    0.049    0.000    0.049    0.000 parameters.py:1899(TAGNAME)
+   147990    0.155    0.000    0.155    0.000 parameters.py:2123(parameter_type)
+   231984    0.267    0.000    0.267    0.000 parameters.py:2133(__init__)
+        5    0.000    0.000   68.150   13.630 parameters.py:2146(find_matches)
+        6    0.900    0.150   69.405   11.568 parameters.py:2166(_find_matches)
+        1    0.000    0.000    1.255    1.255 parameters.py:2711(find_matches)
+   175940    0.566    0.000    0.908    0.000 collections.py:109(__getitem__)
+        2    0.029    0.014    1.922    0.961 topology.py:1188(_build_atom_index_cache)
+        2    0.026    0.013    0.049    0.025 topology.py:1197(_invalidate_cached_properties)
+        2    0.006    0.003   20.235   10.118 topology.py:1203(copy_initializer)
+        2    0.000    0.000    0.623    0.311 topology.py:1232(<listcomp>)
+        2    0.000    0.000    0.623    0.311 topology.py:1207(to_dict)
+        2    0.000    0.000   12.638    6.319 topology.py:1255(_initialize_from_dict)
+        2    0.000    0.000    7.524    3.762 topology.py:2321(_add_molecule_keep_cache)
+        9    0.000    0.000    0.000    0.000 forcefield.py:620(registered_parameter_handlers)
+        6    0.000    0.000    0.000    0.000 forcefield.py:634(get_parameter_handler)
+        1    0.044    0.044  332.288  332.288 forcefield.py:1126(create_openmm_system)
+        1    0.000    0.000  224.791  224.791 forcefield.py:1172(create_interchange)
+        6    0.000    0.000    0.000    0.000 forcefield.py:1310(_get_parameter_handler_class)
+        6    0.000    0.000    0.000    0.000 forcefield.py:1396(__getitem__)
+        1    0.000    0.000    0.000    0.000 version.py:69(__lt__)
+        1    0.000    0.000    0.000    0.000 version.py:81(__eq__)
+        9    0.000    0.000    0.000    0.000 version.py:271(<genexpr>)
+        3    0.000    0.000    0.000    0.000 version.py:261(__init__)
+        3    0.000    0.000    0.000    0.000 version.py:301(<genexpr>)
+        1    0.000    0.000    0.000    0.000 version.py:293(__str__)
+        1    0.000    0.000    0.000    0.000 version.py:321(epoch)
+        1    0.000    0.000    0.000    0.000 version.py:326(release)
+        1    0.000    0.000    0.000    0.000 version.py:331(pre)
+        1    0.000    0.000    0.000    0.000 version.py:336(post)
+        1    0.000    0.000    0.000    0.000 version.py:340(dev)
+        1    0.000    0.000    0.000    0.000 version.py:344(local)
+        9    0.000    0.000    0.000    0.000 version.py:393(_parse_letter_version)
+        3    0.000    0.000    0.000    0.000 version.py:432(_parse_local_version)
+        3    0.000    0.000    0.000    0.000 version.py:459(<lambda>)
+        3    0.000    0.000    0.000    0.000 version.py:444(_cmpkey)
+       16    0.000    0.000    0.000    0.000 <string>:1(<lambda>)
+  1423966    2.900    0.000    6.787    0.000 parameters.py:358(__get__)
+    81083    0.706    0.000    2.309    0.000 parameters.py:1078(__getattr__)
+   323980    0.371    0.000    0.371    0.000 topology.py:149(key_transform)
+   323980    0.631    0.000    1.002    0.000 topology.py:189(__keytransform__)
+        2    0.003    0.002   20.239   10.119 topology.py:404(__init__)
+        2    0.000    0.000    0.000    0.000 topology.py:432(_initialize)
+        1    0.000    0.000    0.000    0.000 topology.py:573(box_vectors)
+        1    0.000    0.000    0.000    0.000 topology.py:669(n_molecules)
+       24    0.000    0.000    0.000    0.000 topology.py:674(molecules)
+    19417    0.028    0.000    0.028    0.000 topology.py:688(molecule)
+        1    0.000    0.000    0.000    0.000 topology.py:698(n_atoms)
+    24006    0.023    0.000    0.023    0.000 topology.py:712(atoms)
+   823922    0.911    0.000    2.833    0.000 topology.py:724(atom_index)
+    24001    0.023    0.000    1.833    0.000 topology.py:821(angles)
+    35992    0.038    0.000    0.769    0.000 topology.py:833(propers)
+   231984    0.228    0.000    0.228    0.000 topology.py:969(topology_atom_indices)
+   231984    0.711    0.000    1.136    0.000 topology.py:974(__init__)
+     7400    3.460    0.000   66.325    0.009 topology.py:996(chemical_environment_matches)
+     7401    0.016    0.000    0.017    0.000 topology.py:1071(identical_molecule_groups)
+    24004    0.034    0.000    0.034    0.000 {built-in method _oechem3400.OEAtomBase_SetPartialCharge}
+    12002    0.020    0.000    0.020    0.000 {built-in method _oechem3400.OEAtomBase_SetName}
+    12002    0.016    0.000    0.016    0.000 {built-in method _oechem3400.OEAtomBase_SetMapIdx}
+   787918    0.827    0.000    0.827    0.000 {built-in method _oechem3400.OEAtomBase_GetIdx}
+  1511826    1.532    0.000    1.532    0.000 {built-in method _oechem3400.OEAtomBase_GetMapIdx}
+    12001    0.014    0.000    0.014    0.000 {built-in method _oechem3400.OEBondBase_GetBgnIdx}
+    12001    0.014    0.000    0.014    0.000 {built-in method _oechem3400.OEBondBase_GetEndIdx}
+     7401   18.463    0.002   18.463    0.002 {built-in method _oechem3400.new_OEMol}
+        1    0.000    0.000    0.000    0.000 {built-in method _oechem3400.OEMol_SetTitle}
+        3    0.000    0.000    0.000    0.000 {built-in method _oechem3400.OEMol_GetAtoms}
+        1    0.000    0.000    0.000    0.000 {built-in method _oechem3400.OEMol_GetBonds}
+     7401    0.039    0.000    0.039    0.000 {built-in method _oechem3400.OEMol_swiginit}
+     7400    0.021    0.000    0.021    0.000 {built-in method _oechem3400.new_OEQMol}
+     7400    0.014    0.000    0.014    0.000 {built-in method _oechem3400.OEQMol_swiginit}
+    12002    0.022    0.000    0.022    0.000 {built-in method _oechem3400.OEResidue_SetName}
+    12002    0.015    0.000    0.015    0.000 {built-in method _oechem3400.OEResidue_SetResidueNumber}
+    12002    0.015    0.000    0.015    0.000 {built-in method _oechem3400.OEResidue_SetSerialNumber}
+    12002    0.018    0.000    0.018    0.000 {built-in method _oechem3400.OEResidue_SetChainID}
+    12002    0.016    0.000    0.016    0.000 {built-in method _oechem3400.OEResidue_SetInsertCode}
+   231984    0.297    0.000    0.297    0.000 {built-in method _oechem3400.OEMatchBase_GetAtoms}
+    36009    0.037    0.000    0.037    0.000 {built-in method _oechem3400.OEAtomIter___nonzero__}
+    36006    0.041    0.000    0.041    0.000 {built-in method _oechem3400.OEAtomIter_Target}
+    36006    0.046    0.000    0.046    0.000 {built-in method _oechem3400.OEAtomIter_Next}
+    12002    0.017    0.000    0.017    0.000 {built-in method _oechem3400.OEBondIter___nonzero__}
+    12001    0.018    0.000    0.018    0.000 {built-in method _oechem3400.OEBondIter_Target}
+    12001    0.022    0.000    0.022    0.000 {built-in method _oechem3400.OEBondIter_Next}
+   239384    0.254    0.000    0.254    0.000 {built-in method _oechem3400.OEMatchBaseIter___nonzero__}
+   231984    0.263    0.000    0.263    0.000 {built-in method _oechem3400.OEMatchBaseIter_Target}
+   231984    0.283    0.000    0.283    0.000 {built-in method _oechem3400.OEMatchBaseIter_Next}
+   991898    1.000    0.000    1.000    0.000 {built-in method _oechem3400.OEMatchBaseAtomIter___nonzero__}
+   759914    0.875    0.000    0.875    0.000 {built-in method _oechem3400.OEMatchBaseAtomIter_Target}
+   759914    0.888    0.000    0.888    0.000 {built-in method _oechem3400.OEMatchBaseAtomIter_Next}
+     7400    0.020    0.000    0.020    0.000 {built-in method _oechem3400.OEClearAromaticFlags}
+     7400    0.036    0.000    0.036    0.000 {built-in method _oechem3400.OEAssignAromaticFlags}
+     7400    0.018    0.000    0.018    0.000 {built-in method _oechem3400.OEAssignHybridization}
+        1    2.554    2.554    2.554    2.554 {built-in method _oechem3400.OECreateSmiString}
+     7400    0.340    0.000    0.340    0.000 {built-in method _oechem3400.OEParseSmarts}
+    12002    0.020    0.000    0.020    0.000 {built-in method _oechem3400.OEAtomSetResidue}
+    12002    0.020    0.000    0.020    0.000 {built-in method _oechem3400.OEAtomGetResidue}
+     7400    0.546    0.000    0.546    0.000 {built-in method _oechem3400.new_OESubSearch}
+     7400    1.067    0.000    1.067    0.000 {built-in method _oechem3400.OESubSearch_Match}
+     7400    0.013    0.000    0.013    0.000 {built-in method _oechem3400.OESubSearch_SetMaxMatches}
+     7400    0.022    0.000    0.022    0.000 {built-in method _oechem3400.OESubSearch_swiginit}
+     7400    0.041    0.000    0.041    0.000 {built-in method _oechem3400.OEPrepareSearch}
+        1    0.000    0.000    0.000    0.000 topology.py:752(molecule_index)
+    24004    0.022    0.000    0.022    0.000 topology.py:804(bonds)
+    24003    0.049    0.000    0.074    0.000 oechem.py:13685(__eq__)
+    24004    0.051    0.000    0.085    0.000 oechem.py:15343(SetPartialCharge)
+    12002    0.025    0.000    0.045    0.000 oechem.py:15355(SetName)
+    12002    0.023    0.000    0.039    0.000 oechem.py:15363(SetMapIdx)
+   787918    1.519    0.000    2.346    0.000 oechem.py:15411(GetIdx)
+  1511826    2.910    0.000    4.442    0.000 oechem.py:15415(GetMapIdx)
+    12001    0.028    0.000    0.042    0.000 oechem.py:15662(GetBgnIdx)
+    12001    0.025    0.000    0.039    0.000 oechem.py:15666(GetEndIdx)
+     7401    0.043    0.000   18.544    0.003 oechem.py:17153(__init__)
+        1    0.000    0.000    0.000    0.000 oechem.py:17277(SetTitle)
+        3    0.003    0.001    0.003    0.001 oechem.py:17363(GetAtoms)
+        1    0.000    0.000    0.000    0.000 oechem.py:17370(GetBonds)
+     7400    0.032    0.000    0.068    0.000 oechem.py:17501(__init__)
+    12002    0.026    0.000    0.047    0.000 oechem.py:17842(SetName)
+    12002    0.025    0.000    0.040    0.000 oechem.py:17854(SetResidueNumber)
+    12002    0.027    0.000    0.042    0.000 oechem.py:17862(SetSerialNumber)
+    12002    0.025    0.000    0.043    0.000 oechem.py:17882(SetChainID)
+    12002    0.026    0.000    0.042    0.000 oechem.py:17894(SetInsertCode)
+        1    0.002    0.002    0.002    0.002 openeye_wrapper.py:1536(<listcomp>)
+        1    0.634    0.634    8.750    8.750 openeye_wrapper.py:1481(to_openeye)
+        1    0.000    0.000    0.000    0.000 openeye_wrapper.py:1710(_get_smiles_flavor)
+        1    0.041    0.041   11.579   11.579 openeye_wrapper.py:1735(to_smiles)
+   983896    0.976    0.000    0.976    0.000 openeye_wrapper.py:2772(<genexpr>)
+     7400    6.724    0.001   51.114    0.007 openeye_wrapper.py:2686(_find_smarts_matches)
+     7400    2.950    0.000   58.119    0.008 openeye_wrapper.py:2777(find_smarts_matches)
+        2    0.000    0.000    0.000    0.000 toolkit_registry.py:111(registered_toolkits)
+        8    0.000    0.000    0.000    0.000 toolkit_registry.py:143(register_toolkit)
+        8    0.000    0.000    0.000    0.000 toolkit_registry.py:185(deregister_toolkit)
+        1    0.000    0.000    0.000    0.000 toolkit_registry.py:256(resolve)
+     7400    0.054    0.000   58.190    0.008 toolkit_registry.py:304(call)
+        2    0.000    0.000    0.000    0.000 toolkit_registry.py:378(_toolkit_registry_manager)
+     7401    0.013    0.000    0.013    0.000 __init__.py:66(__getitem__)
+     7401    0.009    0.000    0.009    0.000 __init__.py:93(__contains__)
+     7401    0.041    0.000    0.095    0.000 __init__.py:210(__getitem__)
+     7401    0.020    0.000    0.031    0.000 __init__.py:233(__update)
+     7401    0.035    0.000    4.055    0.001 __init__.py:731(wrapper)
+        4    0.000    0.000    0.001    0.000 utils.py:355(serialize_numpy)
+        4    0.000    0.000    0.000    0.000 utils.py:380(deserialize_numpy)
+     3999    0.007    0.000    0.007    0.000 {built-in method openmm._openmm.HarmonicBondForce_addBond}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.new_HarmonicBondForce}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.HarmonicBondForce_swiginit}
+    24000    0.045    0.000    0.045    0.000 {built-in method openmm._openmm.HarmonicAngleForce_addAngle}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.new_HarmonicAngleForce}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.HarmonicAngleForce_swiginit}
+    12002    0.016    0.000    0.016    0.000 {built-in method openmm._openmm.System_addParticle}
+     8002    0.013    0.000    0.013    0.000 {built-in method openmm._openmm.System_addConstraint}
+        4    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.System_addForce}
+        1    0.003    0.003    0.003    0.003 {built-in method openmm._openmm.System_getNumForces}
+        2    0.002    0.001    0.002    0.001 {built-in method openmm._openmm.System_getForce}
+        1    0.002    0.002    0.002    0.002 {built-in method openmm._openmm.new_System}
+        1    0.001    0.001    0.001    0.001 {built-in method openmm._openmm.System_swiginit}
+    43985    0.086    0.000    0.086    0.000 {built-in method openmm._openmm.PeriodicTorsionForce_addTorsion}
+        1    0.004    0.004    0.004    0.004 {built-in method openmm._openmm.new_PeriodicTorsionForce}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.PeriodicTorsionForce_swiginit}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_setNonbondedMethod}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_setCutoffDistance}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_setUseSwitchingFunction}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_setSwitchingDistance}
+    12002    0.017    0.000    0.017    0.000 {built-in method openmm._openmm.NonbondedForce_addParticle}
+    12002    0.024    0.000    0.024    0.000 {built-in method openmm._openmm.NonbondedForce_setParticleParameters}
+        1    0.036    0.036    0.036    0.036 {built-in method openmm._openmm.NonbondedForce_createExceptionsFromBonds}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_setUseDispersionCorrection}
+        1    0.001    0.001    0.001    0.001 {built-in method openmm._openmm.new_NonbondedForce}
+        1    0.000    0.000    0.000    0.000 {built-in method openmm._openmm.NonbondedForce_swiginit}
+        8    0.000    0.000    0.000    0.000 {method 'own' of 'SwigPyObject' objects}
+       24    0.000    0.000    0.000    0.000 unit.py:203(__hash__)
+        2    0.000    0.000    0.000    0.000 unit.py:308(is_compatible)
+        2    0.000    0.000    0.000    0.000 unit.py:338(is_dimensionless)
+        2    0.000    0.000    0.000    0.000 unit.py:354(conversion_factor_to)
+        4    0.000    0.000    0.000    0.000 quantity.py:97(__init__)
+        2    0.000    0.000    0.000    0.000 unit.py:703(is_unit)
+        2    0.000    0.000    0.000    0.000 quantity.py:619(value_in_unit)
+        2    0.000    0.000    0.000    0.000 quantity.py:647(in_units_of)
+        2    0.000    0.000    0.000    0.000 quantity.py:663(_change_units_with_factor)
+   235994    0.462    0.000    0.688    0.000 quantity.py:787(is_quantity)
+        2    0.000    0.000    0.000    0.000 unit_operators.py:80(_unit_class_mul)
+        1    0.000    0.000    0.000    0.000 openmm.py:5632(<lambda>)
+     3999    0.019    0.000    0.050    0.000 openmm.py:5642(addBond)
+        1    0.000    0.000    0.000    0.000 openmm.py:5759(__init__)
+        1    0.000    0.000    0.000    0.000 openmm.py:5808(<lambda>)
+    24000    0.117    0.000    0.304    0.000 openmm.py:5818(addAngle)
+        1    0.000    0.000    0.000    0.000 openmm.py:5941(__init__)
+     7401    0.027    0.000    3.926    0.001 base_wrapper.py:21(_mol_to_ctab_and_aro_key)
+    12002    0.037    0.000    0.087    0.000 openmm.py:10890(addParticle)
+     8002    0.029    0.000    0.066    0.000 openmm.py:11009(addConstraint)
+        4    0.000    0.000    0.001    0.000 openmm.py:11099(addForce)
+        1    0.000    0.000    0.003    0.003 openmm.py:11129(getNumForces)
+        2    0.000    0.000    0.002    0.001 openmm.py:11136(getForce)
+        1    0.000    0.000    0.002    0.002 openmm.py:11238(<listcomp>)
+        1    0.000    0.000    0.005    0.005 openmm.py:11236(getForces)
+        1    0.005    0.005    0.008    0.008 openmm.py:11245(__init__)
+        1    0.000    0.000    0.000    0.000 openmm.py:12740(<lambda>)
+    43985    0.218    0.000    0.561    0.000 openmm.py:12750(addTorsion)
+        1    0.000    0.000    0.004    0.004 openmm.py:12885(__init__)
+        1    0.000    0.000    0.000    0.000 openmm.py:13655(<lambda>)
+        1    0.000    0.000    0.001    0.001 openmm.py:13712(setNonbondedMethod)
+        1    0.000    0.000    0.000    0.000 openmm.py:13737(setCutoffDistance)
+        1    0.000    0.000    0.000    0.000 openmm.py:13762(setUseSwitchingFunction)
+        1    0.000    0.000    0.000    0.000 openmm.py:13782(setSwitchingDistance)
+    12002    0.065    0.000    0.185    0.000 openmm.py:13957(addParticle)
+    12002    0.072    0.000    0.201    0.000 openmm.py:14017(setParticleParameters)
+        1    0.000    0.000    0.036    0.036 openmm.py:14153(createExceptionsFromBonds)
+        1    0.000    0.000    0.001    0.001 openmm.py:14395(setUseDispersionCorrection)
+        1    0.000    0.000    0.001    0.001 openmm.py:14496(__init__)
+   175974    0.737    0.000   43.243    0.000 registry.py:354(_convert)
+        1    0.000    0.000    0.000    0.000 registry.py:395(_get_compatible_units)
+    12002    0.170    0.000    2.326    0.000 objects.py:31(__format__)
+    12002    0.042    0.000    1.282    0.000 objects.py:184(__format__)
+        1    0.000    0.000    0.000    0.000 registry.py:121(_get_compatible_units)
+   503942    1.797    0.000   12.540    0.000 registry.py:56(_parse_units)
+   575918    2.550    0.000    9.253    0.000 registry.py:107(_is_multiplicative)
+   351948    2.070    0.000   15.016    0.000 registry.py:124(<listcomp>)
+   351948    2.003    0.000   18.848    0.000 registry.py:122(_validate_and_extract)
+   175974    0.959    0.000   41.946    0.000 registry.py:165(_convert)
+        1    0.000    0.000    0.000    0.000 objects.py:15(_is_multiplicative)
+    63996    0.124    0.000    0.277    0.000 objects.py:22(<listcomp>)
+    63996    0.232    0.000    0.705    0.000 objects.py:20(_get_non_multiplicative_units)
+    39989    0.051    0.000    0.051    0.000 objects.py:43(_ok_for_muldiv)
+        1    0.000    0.000    0.000    0.000 quantity.py:68(_numpy_method_wrap)
+        2    0.000    0.000    0.000    0.000 quantity.py:162(shape)
+        1    0.000    0.000    0.000    0.000 quantity.py:204(__getattr__)
+    24004    0.069    0.000    1.218    0.000 quantity.py:235(__getitem__)
+        1    0.000    0.000    0.000    0.000 objects.py:72(members)
+        1    0.000    0.000    0.000    0.000 registry.py:229(_get_compatible_units)
+  1119847    1.219    0.000    1.219    0.000 registry.py:184(get)
+   291958    0.291    0.000    0.291    0.000 util.py:309(__missing__)
+   331947    0.457    0.000    0.457    0.000 util.py:312(copy)
+   303903    1.409    0.000    2.709    0.000 util.py:334(__init__)
+   331947    0.694    0.000    2.700    0.000 util.py:358(copy)
+   887851    1.784    0.000    2.678    0.000 util.py:408(__iter__)
+   851860    1.702    0.000    2.523    0.000 util.py:411(__len__)
+  1119821    1.207    0.000    1.207    0.000 util.py:414(__getitem__)
+  2791682    3.950    0.000    4.746    0.000 util.py:420(__hash__)
+  1119870    4.978    0.000    9.364    0.000 util.py:433(__eq__)
+        2    0.000    0.000    0.000    0.000 util.py:454(__str__)
+        2    0.000    0.000    0.000    0.000 util.py:463(__format__)
+   331947    1.209    0.000    2.005    0.000 util.py:469(__copy__)
+    39989    0.251    0.000    0.967    0.000 util.py:478(__mul__)
+     3999    0.021    0.000    0.078    0.000 util.py:494(__pow__)
+   287959    2.656    0.000    9.298    0.000 util.py:505(__truediv__)
+   183988    1.001    0.000    4.475    0.000 util.py:671(__eq__)
+        4    0.000    0.000    0.000    0.000 util.py:779(string_preprocessor)
+  3375568   15.173    0.000   33.164    0.000 util.py:816(__new__)
+   251949    0.686    0.000    1.066    0.000 util.py:826(_check)
+   943860    2.122    0.000    3.145    0.000 util.py:878(to_units_container)
+   503935    2.755    0.000    4.883    0.000 util.py:957(getattr_maybe_raise)
+        4    0.000    0.000    0.000    0.000 pint_eval.py:71(__init__)
+        4    0.000    0.000    0.001    0.000 pint_eval.py:89(evaluate)
+        4    0.000    0.000    0.001    0.000 pint_eval.py:130(build_eval_tree)
+1135874/631932    4.175    0.000   25.578    0.000 unit.py:39(__init__)
+   599926    1.273    0.000    1.860    0.000 definitions.py:185(is_multiplicative)
+    39989    0.113    0.000    5.311    0.000 quantity.py:81(wrapped)
+100000/75996    0.471    0.000    9.800    0.000 quantity.py:94(wrapped)
+   599926    0.587    0.000    0.587    0.000 converters.py:26(is_multiplicative)
+  1159836    1.273    0.000    1.273    0.000 quantity.py:152(force_ndarray)
+  1159836    1.230    0.000    1.230    0.000 quantity.py:156(force_ndarray_like)
+    39989    0.045    0.000    0.045    0.000 quantity.py:160(UnitsContainer)
+1703747/1119847   15.647    0.000   69.359    0.000 quantity.py:198(__new__)
+    24006    0.063    0.000    1.193    0.000 quantity.py:253(it_outer)
+        2    0.000    0.000    0.000    0.000 quantity.py:247(__iter__)
+   583900    2.043    0.000   32.110    0.000 quantity.py:259(__copy__)
+   279975    0.295    0.000    0.295    0.000 quantity.py:288(magnitude)
+    72020    0.074    0.000    0.074    0.000 quantity.py:293(m)
+   255969    0.925    0.000   65.627    0.000 quantity.py:298(m_as)
+    12006    0.043    0.000    0.148    0.000 quantity.py:312(units)
+    43985    0.211    0.000    5.466    0.000 quantity.py:327(dimensionless)
+   116007    0.231    0.000    1.759    0.000 quantity.py:336(dimensionality)
+   343943    0.869    0.000   51.661    0.000 quantity.py:466(_convert_magnitude_not_inplace)
+   255973    1.412    0.000   64.432    0.000 quantity.py:504(to)
+    43985    0.232    0.000    4.255    0.000 quantity.py:536(to_root_units)
+    43985    0.257    0.000    7.068    0.000 quantity.py:699(__int__)
+    12003    0.192    0.000    1.839    0.000 quantity.py:827(_add_sub)
+    12002    0.057    0.000    2.101    0.000 quantity.py:948(__iadd__)
+        1    0.000    0.000    0.000    0.000 quantity.py:970(__sub__)
+    39989    0.691    0.000    5.199    0.000 quantity.py:1050(_mul_div)
+    39989    0.109    0.000    5.704    0.000 quantity.py:1130(__mul__)
+    24004    0.051    0.000    0.274    0.000 quantity.py:1405(bool_result)
+    24004    0.213    0.000    1.677    0.000 quantity.py:1403(__eq__)
+    24004    0.081    0.000    2.130    0.000 quantity.py:1459(__ne__)
+        1    0.000    0.000    0.000    0.000 quantity.py:1511(__bool__)
+    24008    0.052    0.000    0.079    0.000 quantity.py:1541(_get_unit_definition)
+        1    0.000    0.000    0.000    0.000 unit.py:91(compatible_units)
+    87971    0.497    0.000   11.332    0.000 unit.py:136(__mul__)
+   111985    0.809    0.000    5.665    0.000 unit.py:151(__truediv__)
+     3999    0.024    0.000    0.155    0.000 unit.py:174(__pow__)
+        4    0.000    0.000    0.000    0.000 unit.py:182(__hash__)
+        1    0.000    0.000    0.000    0.000 unit.py:185(__eq__)
+   503935    2.395    0.000   34.993    0.000 registry.py:325(__getattr__)
+   259918    1.014    0.000    3.745    0.000 registry.py:375(UnitsContainer)
+   391873    0.410    0.000    0.410    0.000 registry.py:395(non_int_type)
+   131959    0.155    0.000    0.155    0.000 registry.py:573(get_name)
+   419948    1.911    0.000    9.926    0.000 registry.py:645(_get_dimensionality)
+   219959    0.980    0.000    4.472    0.000 registry.py:746(_get_root_units)
+        4    0.000    0.000    0.000    0.000 registry.py:838(<genexpr>)
+        1    0.000    0.000    0.000    0.000 registry.py:830(get_compatible_units)
+        1    0.000    0.000    0.000    0.000 registry.py:840(_get_compatible_units)
+   343943    1.786    0.000   50.792    0.000 registry.py:878(convert)
+   175974    1.806    0.000   22.139    0.000 registry.py:913(_convert)
+   503942    2.489    0.000   19.320    0.000 registry.py:1041(parse_units)
+   503942    2.755    0.000   10.743    0.000 registry.py:1072(_parse_units)
+        4    0.000    0.000    0.000    0.000 registry.py:1117(_eval_token)
+        4    0.000    0.000    0.000    0.000 registry.py:1256(<lambda>)
+        4    0.000    0.000    0.001    0.000 registry.py:1211(parse_expression)
+     7412    0.021    0.000    0.034    0.000 __init__.py:1455(debug)
+     7412    0.013    0.000    0.013    0.000 __init__.py:1724(isEnabledFor)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+   231984    0.460    0.000    0.757    0.000 oechem.py:22692(GetAtoms)
+    36009    0.072    0.000    0.109    0.000 oechem.py:22956(IsValid)
+    36009    0.157    0.000    0.501    0.000 oechem.py:22961(__iter__)
+    36006    0.071    0.000    0.112    0.000 oechem.py:22974(Target)
+    36006    0.077    0.000    0.122    0.000 oechem.py:22978(Next)
+    12002    0.026    0.000    0.043    0.000 oechem.py:23038(IsValid)
+    12002    0.059    0.000    0.242    0.000 oechem.py:23043(__iter__)
+    12001    0.071    0.000    0.089    0.000 oechem.py:23056(Target)
+    12001    0.030    0.000    0.052    0.000 oechem.py:23060(Next)
+   239384    0.481    0.000    0.734    0.000 oechem.py:23530(IsValid)
+   239384    1.012    0.000    3.253    0.000 oechem.py:23535(__iter__)
+   231984    0.471    0.000    0.734    0.000 oechem.py:23548(Target)
+   231984    0.489    0.000    0.772    0.000 oechem.py:23552(Next)
+   991898    1.939    0.000    2.939    0.000 oechem.py:23612(IsValid)
+   991898    3.659    0.000   11.354    0.000 oechem.py:23617(__iter__)
+   759914    1.468    0.000    2.343    0.000 oechem.py:23630(Target)
+   759914    1.526    0.000    2.413    0.000 oechem.py:23634(Next)
+     7400    0.021    0.000    0.040    0.000 oechem.py:24768(OEClearAromaticFlags)
+     7400    0.017    0.000    0.053    0.000 oechem.py:24772(OEAssignAromaticFlags)
+     7400    0.018    0.000    0.036    0.000 oechem.py:25990(OEAssignHybridization)
+        1    0.003    0.003    2.557    2.557 oechem.py:27626(OECreateSmiString)
+     7400    0.021    0.000    0.361    0.000 oechem.py:27877(OEParseSmarts)
+    12002    0.026    0.000    0.047    0.000 oechem.py:28205(OEAtomSetResidue)
+    12002    0.026    0.000    0.047    0.000 oechem.py:28209(OEAtomGetResidue)
+     7400    0.033    0.000    0.602    0.000 oechem.py:28836(__init__)
+     7400    0.026    0.000    1.093    0.000 oechem.py:28871(Match)
+     7400    0.022    0.000    0.035    0.000 oechem.py:28886(SetMaxMatches)
+     7400    0.018    0.000    0.059    0.000 oechem.py:28912(OEPrepareSearch)
+        2    0.000    0.000    0.001    0.000 openmm.py:206(to_openmm_inner)
+        2    0.000    0.000    0.001    0.000 openmm.py:179(to_openmm)
+      4/1    0.000    0.000  332.289  332.289 utilities.py:69(wrapper)
+    12004    0.039    0.000    0.064    0.000 formatting.py:23(_join)
+    12004    0.047    0.000    0.548    0.000 formatting.py:227(format_default)
+    12004    0.072    0.000    0.462    0.000 formatting.py:255(formatter)
+    12004    0.056    0.000    0.651    0.000 formatting.py:396(format_unit)
+    48008    0.056    0.000    0.056    0.000 formatting.py:459(extract_custom_flags)
+    48008    0.539    0.000    1.001    0.000 formatting.py:474(remove_custom_flags)
+    24004    0.131    0.000    1.189    0.000 formatting.py:481(split_format)
+       16    0.000    0.000    0.000    0.000 compat.py:32(tokenizer)
+  1159837    4.817    0.000    8.191    0.000 compat.py:52(_to_magnitude)
+  1803747    1.913    0.000    1.913    0.000 compat.py:181(is_upcast_type)
+   108019    0.534    0.000    0.996    0.000 compat.py:195(is_duck_array_type)
+    48008    0.098    0.000    0.539    0.000 compat.py:221(eq)
+        2    0.000    0.000    0.000    0.000 openmm.py:73(_ast_eval)
+        2    0.000    0.000    0.001    0.000 openmm.py:117(string_to_openmm_unit)
+        8    0.000    0.000    0.000    0.000 {method 'newbyteorder' of 'numpy.dtype' objects}
+        5    0.001    0.000    0.001    0.000 {method 'astype' of 'numpy.ndarray' objects}
+        4    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        4    0.000    0.000    0.000    0.000 {method 'tobytes' of 'numpy.ndarray' objects}
+        1    0.002    0.002    0.002    0.002 {built-in method numpy.asarray}
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
+        4    0.000    0.000    0.000    0.000 {built-in method numpy.frombuffer}
+    24004    0.058    0.000    0.058    0.000 {method '__copy__' of 'numpy.generic' objects}
+        4    0.000    0.000    0.000    0.000 tokenize.py:321(read_or_stop)
+        4    0.000    0.000    0.000    0.000 tokenize.py:327(find_cookie)
+        4    0.000    0.000    0.000    0.000 tokenize.py:297(detect_encoding)
+        4    0.000    0.000    0.000    0.000 tokenize.py:406(tokenize)
+       20    0.000    0.000    0.000    0.000 tokenize.py:431(_tokenize)
+     7400    0.048    0.000   58.252    0.008 molecule.py:3490(chemical_environment_matches)
+        1    0.162    0.162    1.810    1.810 molecule.py:5009(_construct_angles)
+        1    0.400    0.400    0.731    0.731 molecule.py:5026(_construct_torsions)
+        2    0.090    0.045    1.501    0.751 molecule.py:5067(_construct_bonded_atoms_list)
+    12001    0.120    0.000    0.200    0.000 molecule.py:5104(get_bond_between)
+        9    0.000    0.000    0.000    0.000 topology.py:108(__len__)
+        4    0.000    0.000    4.739    1.185 molecule.py:5187(__init__)
+    24006    0.022    0.000    0.022    0.000 molecule.py:5627(<genexpr>)
+        2    0.000    0.000    0.050    0.025 molecule.py:5618(_atom_nums_to_hill_formula)
+    91996    0.085    0.000    0.085    0.000 topology.py:114(__sortfunc__)
+        6    0.000    0.000    0.183    0.031 topology.py:105(__iter__)
+1167800/583900    5.008    0.000   36.957    0.000 copy.py:66(copy)
+   559896    0.555    0.000    0.555    0.000 copy.py:107(_copy_immutable)
+624610/10    3.227    0.000   14.497    1.450 copy.py:128(deepcopy)
+   552572    0.514    0.000    0.514    0.000 copy.py:182(_deepcopy_atomic)
+ 72030/12    0.852    0.000    6.972    0.581 copy.py:227(_deepcopy_dict)
+      6/2    0.098    0.016    6.968    3.484 copy.py:201(_deepcopy_list)
+    72038    0.216    0.000    0.350    0.000 copy.py:243(_keep_alive)
+        8    0.000    0.000    0.000    0.000 inspect.py:191(isclass)
+        2    0.000    0.000    0.001    0.000 ast.py:33(parse)
+        2    0.000    0.000    0.000    0.000 ast.py:531(__instancecheck__)
+   192016    0.181    0.000    0.181    0.000 molecule.py:109(molecule)
+   123976    0.255    0.000    0.376    0.000 typing.py:1278(__eq__)
+   162166    0.498    0.000    1.252    0.000 re.py:197(search)
+   162166    0.351    0.000    0.521    0.000 re.py:288(_compile)
+       36    0.000    0.000    0.000    0.000 re.py:324(_subx)
+    48008    0.115    0.000    0.570    0.000 molecule.py:160(__init__)
+    48008    0.239    0.000    7.029    0.000 molecule.py:191(__init__)
+    48008    0.236    0.000    0.663    0.000 molecule.py:276(to_dict)
+    96008    0.344    0.000    0.433    0.000 molecule.py:263(add_bond)
+    48008    0.049    0.000    0.049    0.000 molecule.py:294(metadata)
+    72012    0.072    0.000    0.072    0.000 molecule.py:301(formal_charge)
+    48008    0.243    0.000    6.174    0.000 molecule.py:308(formal_charge)
+    24004    0.087    0.000    1.338    0.000 molecule.py:346(partial_charge)
+    48008    0.048    0.000    0.048    0.000 molecule.py:390(is_aromatic)
+    91996    0.216    0.000    0.515    0.000 topology.py:96(__getitem__)
+        6    0.000    0.000    0.000    0.000 topology.py:92(__init__)
+    60010    0.058    0.000    0.058    0.000 molecule.py:397(stereochemistry)
+    12002    0.026    0.000    0.038    0.000 molecule.py:428(symbol)
+    96016    0.097    0.000    0.097    0.000 molecule.py:420(atomic_number)
+    12002    0.024    0.000    0.035    0.000 molecule.py:436(mass)
+    12002    0.013    0.000    0.013    0.000 molecule.py:449(name)
+    12001    0.016    0.000    0.016    0.000 molecule.py:471(bonds)
+    48004    0.173    0.000    0.268    0.000 molecule.py:491(is_bonded_to)
+   407984    0.580    0.000    4.460    0.000 molecule.py:529(molecule_atom_index)
+   231984    0.491    0.000    1.193    0.000 topology.py:99(__setitem__)
+    48004    0.406    0.000    1.261    0.000 molecule.py:635(__init__)
+    48004    0.280    0.000    2.626    0.000 molecule.py:666(to_dict)
+    48004    0.048    0.000    0.048    0.000 molecule.py:699(atom1)
+    48004    0.048    0.000    0.048    0.000 molecule.py:703(atom2)
+    72006    0.303    0.000    2.324    0.000 molecule.py:707(atom1_index)
+    72006    0.309    0.000    6.185    0.000 molecule.py:711(atom2_index)
+   156003    0.161    0.000    0.161    0.000 molecule.py:715(atoms)
+    12001    0.013    0.000    0.013    0.000 molecule.py:719(bond_order)
+    12001    0.013    0.000    0.013    0.000 molecule.py:736(fractional_bond_order)
+    60005    0.057    0.000    0.057    0.000 molecule.py:744(stereochemistry)
+    48004    0.048    0.000    0.048    0.000 molecule.py:748(is_aromatic)
+   144012    0.142    0.000    0.142    0.000 molecule.py:752(molecule)
+    12001    0.050    0.000    1.132    0.000 molecule.py:769(molecule_bond_index)
+        4    0.000    0.000    4.739    1.185 molecule.py:862(__init__)
+        4    0.052    0.013    0.716    0.179 molecule.py:1137(<listcomp>)
+        4    0.057    0.014    2.683    0.671 molecule.py:1138(<listcomp>)
+        4    0.000    0.000    3.404    0.851 molecule.py:1104(to_dict)
+     7401    0.136    0.000    3.898    0.001 molecule.py:1181(ordered_connection_table_hash)
+        2    0.000    0.000    5.065    2.532 molecule.py:1195(from_dict)
+        4    0.170    0.043    9.804    2.451 molecule.py:1216(_initialize_from_dict)
+        6    0.000    0.000    0.000    0.000 molecule.py:1290(_initialize)
+        2    0.004    0.002    7.524    3.762 molecule.py:1336(__deepcopy__)
+        7    0.000    0.000    0.000    0.000 molecule.py:1532(__getattr__)
+        1    0.004    0.004   11.583   11.583 molecule.py:1545(to_smiles)
+        2    0.458    0.229    8.822    4.411 molecule.py:1869(_is_exactly_the_same_as)
+        4    0.000    0.000    0.000    0.000 molecule.py:1999(_object_to_n_atoms)
+        1    0.001    0.001    0.001    0.001 molecule.py:2024(<dictcomp>)
+        2    0.000    0.000    8.922    4.461 molecule.py:1888(are_isomorphic)
+        1    0.000    0.000    4.724    4.724 molecule.py:2117(is_isomorphic_with)
+        6    0.000    0.000    0.000    0.000 molecule.py:2690(_invalidate_cached_properties)
+    48008    0.235    0.000    7.359    0.000 molecule.py:2836(_add_atom)
+    48004    0.472    0.000    2.274    0.000 molecule.py:2909(_add_bond)
+        4    0.000    0.000    0.000    0.000 molecule.py:3044(partial_charges)
+        1    0.000    0.000    0.001    0.001 molecule.py:3056(partial_charges)
+       17    0.000    0.000    0.000    0.000 molecule.py:3122(n_atoms)
+        1    0.000    0.000    0.000    0.000 molecule.py:3129(n_bonds)
+   324054    0.329    0.000    0.329    0.000 molecule.py:3160(atoms)
+   763914    0.758    0.000    0.758    0.000 molecule.py:3167(atom)
+    24004    0.059    0.000    0.095    0.000 molecule.py:3181(atom_index)
+        2    0.000    0.000    0.000    0.000 molecule.py:3210(n_conformers)
+    12008    0.013    0.000    0.013    0.000 molecule.py:3219(bonds)
+        1    0.000    0.000    1.810    1.810 molecule.py:3240(angles)
+        1    0.000    0.000    0.731    0.731 molecule.py:3264(propers)
+        1    0.030    0.030    2.144    2.144 molecule.py:3412(total_charge)
+        1    0.000    0.000    0.000    0.000 molecule.py:3422(name)
+        4    0.000    0.000    0.000    0.000 molecule.py:3429(name)
+        1    0.000    0.000    0.000    0.000 molecule.py:3441(properties)
+        2    0.024    0.012    0.048    0.024 molecule.py:3468(<listcomp>)
+        4    0.000    0.000    0.098    0.025 molecule.py:3455(to_hill_formula)
+        4    0.000    0.000    0.098    0.025 molecule.py:3473(_object_to_hill_formula)
+  1671245    3.328    0.000    5.387    0.000 abc.py:117(__instancecheck__)
+        1    0.001    0.001    0.001    0.001 compute_loading_times_variable_N.py:39(<dictcomp>)
+    48008    0.095    0.000    0.142    0.000 _collections_abc.py:836(keys)
+   691906    1.517    0.000    2.299    0.000 _collections_abc.py:840(items)
+   739914    0.828    0.000    0.828    0.000 _collections_abc.py:862(__init__)
+    24008    0.046    0.000    0.163    0.000 _collections_abc.py:865(__len__)
+    48008    0.096    0.000    0.238    0.000 _collections_abc.py:885(__iter__)
+  1771768    3.863    0.000    7.702    0.000 _collections_abc.py:909(__iter__)
+    55414    0.453    0.000    2.012    0.000 _collections_abc.py:991(update)
+        6    0.001    0.000    0.001    0.000 __init__.py:108(import_module)
+        1    0.000    0.000    0.000    0.000 contextlib.py:102(__init__)
+        1    0.000    0.000    0.000    0.000 contextlib.py:130(__enter__)
+        1    0.000    0.000    0.000    0.000 contextlib.py:139(__exit__)
+        1    0.000    0.000    0.000    0.000 contextlib.py:279(helper)
+        1    0.000    0.000    0.001    0.001 compute_loading_times_variable_N.py:27(_identify_all_molecules)
+        2    0.000    0.000    0.045    0.023 __init__.py:565(__init__)
+        2    0.000    0.000    0.045    0.023 __init__.py:640(update)
+   599930    0.704    0.000    0.704    0.000 __init__.py:980(__getitem__)
+  2159720    2.293    0.000    2.293    0.000 __init__.py:1001(<genexpr>)
+  1079860    3.647    0.000    8.230    0.000 __init__.py:1000(__contains__)
+   175975    0.371    0.000    0.560    0.000 __init__.py:1003(__bool__)
+    48008    0.091    0.000    0.142    0.000 __init__.py:1114(__iter__)
+    48008    0.051    0.000    0.051    0.000 __init__.py:1118(__contains__)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:71(__init__)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:100(acquire)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:125(release)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:165(__init__)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:169(__enter__)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:173(__exit__)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:198(cb)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:179(_get_module_lock)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:216(_lock_unlock_module)
+  1183859    2.672    0.000    3.940    0.000 <frozen importlib._bootstrap>:404(parent)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:968(_sanity_check)
+        6    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:1022(_find_and_load)
+        6    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:1038(_gcd_import)
+  1127256    3.779    0.000    5.969    0.000 <frozen importlib._bootstrap>:1053(_handle_fromlist)
+        1    0.003    0.003    0.003    0.003 {built-in method builtins.abs}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+  1255837    2.482    0.000    3.919    0.000 {built-in method builtins.any}
+        2    0.001    0.000    0.001    0.000 {built-in method builtins.compile}
+    24004    0.039    0.000    1.321    0.000 {built-in method builtins.format}
+2973982/2875136    3.378    0.000    5.888    0.000 {built-in method builtins.getattr}
+4834294/4834293    5.129    0.000    5.130    0.000 {built-in method builtins.hasattr}
+   807921    0.863    0.000    0.863    0.000 {built-in method builtins.hash}
+   768698    0.716    0.000    0.716    0.000 {built-in method builtins.id}
+16161202/16161200   17.290    0.000   21.871    0.000 {built-in method builtins.isinstance}
+   715925    0.696    0.000    0.696    0.000 {built-in method builtins.issubclass}
+   935871    0.945    0.000    0.945    0.000 {built-in method builtins.iter}
+3198468/3042496    3.250    0.000    3.564    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+    80023    0.276    0.000    0.628    0.000 {built-in method builtins.sorted}
+        1    0.001    0.001    0.001    0.001 {built-in method builtins.sum}
+     7401    0.011    0.000    0.011    0.000 {method 'move_to_end' of 'collections.OrderedDict' objects}
+        4    0.000    0.000    0.000    0.000 {method 'readline' of '_io.BytesIO' objects}
+       24    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+       24    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+       24    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+  1671245    2.060    0.000    2.060    0.000 {built-in method _abc._abc_instancecheck}
+        2    0.023    0.012    0.045    0.023 {built-in method _collections._count_elements}
+    12002    0.012    0.000    0.012    0.000 {built-in method _operator.add}
+        1    0.000    0.000    0.000    0.000 {built-in method _operator.sub}
+    79978    0.136    0.000    1.103    0.000 {built-in method _operator.mul}
+       12    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
+   174173    0.246    0.000    0.246    0.000 {method 'search' of 're.Pattern' objects}
+       40    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
+       30    0.000    0.000    0.000    0.000 {method 'group' of 're.Match' objects}
+        4    0.000    0.000    0.000    0.000 {method 'span' of 're.Match' objects}
+       24    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
+       24    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
+        4    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+   396079    0.361    0.000    0.361    0.000 {method 'replace' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+    12008    0.012    0.000    0.012    0.000 {method 'join' of 'str' objects}
+       12    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+   503935    0.511    0.000    0.511    0.000 {method 'lstrip' of 'str' objects}
+  1183859    1.267    0.000    1.267    0.000 {method 'rpartition' of 'str' objects}
+   143961    0.147    0.000    0.147    0.000 {method 'strip' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+   515948    0.545    0.000    0.545    0.000 {method 'startswith' of 'str' objects}
+   503935    0.583    0.000    0.583    0.000 {method 'endswith' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 {method 'isidentifier' of 'str' objects}
+    19402    0.044    0.000    0.044    0.000 {method 'format' of 'str' objects}
+   943860    1.023    0.000    1.023    0.000 {method 'mro' of 'type' objects}
+  3707534    3.828    0.000    3.828    0.000 {built-in method __new__ of type object at 0x7f96d39be5c0}
+   247986    0.262    0.000    0.262    0.000 {method 'add' of 'set' objects}
+  2429061    2.301    0.000    2.301    0.000 {method 'get' of 'dict' objects}
+   303907    0.309    0.000    0.309    0.000 {method 'pop' of 'dict' objects}
+    48020    0.046    0.000    0.046    0.000 {method 'keys' of 'dict' objects}
+   958695    0.964    0.000    0.964    0.000 {method 'items' of 'dict' objects}
+        8    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+        8    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+   267928    0.263    0.000    0.263    0.000 {function ParameterList.__getitem__ at 0x7f9678f1fc70}
+  1539963    1.417    0.000    1.417    0.000 {method 'append' of 'list' objects}
+        8    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+   296009   12.612    0.000   12.612    0.000 {method 'index' of 'list' objects}
+       12    0.000    0.000    0.000    0.000 {method 'decode' of 'bytes' objects}
+        4    0.000    0.000    0.000    0.000 {method 'startswith' of 'bytes' objects}
+
+

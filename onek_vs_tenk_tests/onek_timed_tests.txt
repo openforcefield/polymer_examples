@@ -1,1 +1,0 @@
-name, num_atoms, time_to_load, time_to_parameterize

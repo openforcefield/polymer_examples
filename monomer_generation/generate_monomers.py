@@ -54,8 +54,11 @@ def minimize_energy(off_topology, forcefield, max_iters):
     # omm_topology = pdbfile.topology
     omm_topology = off_topology.to_openmm()
 
+    for m in off_topology.molecules:
+        m.assign_partial_charges(partial_charge_method="gasteiger")
+
     start = time.time()
-    system = forcefield.create_openmm_system(off_topology, allow_nonintegral_charges=True)
+    system = forcefield.create_openmm_system(off_topology, allow_nonintegral_charges=True, charge_from_molecules=off_topology.molecules)
     time_to_parameterize = time.time() - start
 
     time_step = 2*unit.femtoseconds  # simulation timestep
@@ -89,7 +92,7 @@ os.chdir(current_dir)
 # set flag if the script should try to test_load the new json file
 test_load = True
 
-# # create object for json creation and loading:
+# create object for json creation and loading:
 # with open("polymer_energies.txt", "w") as file:
 #     file.write("name, num_atoms, energy, time_to_load, time_to_parameterize, time_to_energy_minimize\n")
 
@@ -152,6 +155,6 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
                     print(f"openmm exception: {e}")
 
             print(energy)
-            with open("polymer_energies.txt", "a") as file:
-                file.write(f"{pdb_file.stem}, {num_atoms}, {energy}, {time_to_load}, {time_to_parameterize}, {time_to_energy_minimize}\n")
-            #______________________________________________________________________________
+            # with open("polymer_energies.txt", "a") as file:
+            #     file.write(f"{pdb_file.stem}, {num_atoms}, {energy}, {time_to_load}, {time_to_parameterize}, {time_to_energy_minimize}\n")
+            # #______________________________________________________________________________
