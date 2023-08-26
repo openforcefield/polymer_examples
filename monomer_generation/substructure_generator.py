@@ -178,7 +178,8 @@ class SubstructureGenerator:
         return max([atom.GetAtomMapNum() for atom in rdmol.GetAtoms()])
     
     def _fill_out_query(self, query_input):
-        rdmol = Chem.MolFromSmarts(query_input.replace('&', ''))
+        # rdmol = Chem.MolFromSmarts(query_input.replace('&', ''))
+        rdmol = Chem.MolFromSmarts(query_input)
         current_map_num = 1 + self._get_maximum_map_num(rdmol)
         for atom in rdmol.GetAtoms():
             if atom.GetAtomMapNum() == 0:
@@ -208,7 +209,8 @@ class SubstructureGenerator:
                 bond.SetQuery(query)
 
         smarts_string = Chem.MolToSmarts(rdmol)
-        return [smarts_string.replace('&', '')] # all & are removed for rdkit to read query and read molecule info
+        return [smarts_string]
+        # return [smarts_string.replace('&', '')] # all & are removed for rdkit to read query and read molecule info
     
     def _enumerate_substructures_with_caps(self, name, remove_complete_substructures=True):
         # for a named substructure, returns all possible combinations

@@ -148,7 +148,7 @@ for label, function in functions.items():
 
 
     plt.bar(x_pos+0.5*bar_width, cum_time_1, width=bar_width, linewidth=0.25, bottom=bottom1,  color=cmap.colors[i], hatch="///", edgecolor="k")
-    plt.bar(x_pos-0.5*bar_width, cum_time_10, width=bar_width, linewidth=0.25, bottom=bottom10,            color=cmap.colors[i], hatch="oo", edgecolor="k")
+    plt.bar(x_pos-0.5*bar_width, cum_time_10, width=bar_width, linewidth=0.25, bottom=bottom10,            color=cmap.colors[i], edgecolor="k")
 
     bottom1 = bottom1 + cum_time_1.to_numpy()
     bottom10 = bottom10 + cum_time_10.to_numpy()
@@ -157,11 +157,11 @@ for label, function in functions.items():
 
 # final bar graph for all other 
 plt.bar(x_pos+0.5*bar_width, total_times1 - bottom1, width=bar_width, linewidth=0.25, bottom=bottom1, color=cmap.colors[i], hatch="///", edgecolor="k")
-plt.bar(x_pos-0.5*bar_width, total_times10 - bottom10, width=bar_width, linewidth=0.25, bottom=bottom10,              color=cmap.colors[i], hatch="oo", edgecolor="k")
+plt.bar(x_pos-0.5*bar_width, total_times10 - bottom10, width=bar_width, linewidth=0.25, bottom=bottom10,              color=cmap.colors[i], edgecolor="k")
 legend_handles.append(mpatches.Patch(color=cmap.colors[i], label="other"))
 
-legend_handles.append(mpatches.Patch(hatch="///", label="10*N"))
-legend_handles.append(mpatches.Patch(hatch="oo", label="10xN"))
+legend_handles.append(mpatches.Patch(color="w", ec="k", hatch="///", label="10*N"))
+legend_handles.append(mpatches.Patch(color="w", ec="k", label="10xN"))
 
 plt.legend(handles=legend_handles)
 

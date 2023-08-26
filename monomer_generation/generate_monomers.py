@@ -128,33 +128,33 @@ for file_name, monomer_info in ALL_SMILES_INPUT.items():
             time_to_load = time.time() - start
             assert successfully_loaded(top)
 
-            # desolvate since not all systems have solvent
-            new_top = Topology()
-            for mol in top.molecules:
-                if mol != Molecule.from_smiles("[H]-O-[H]"):
-                    new_top.add_molecule(mol)
-            top = new_top
+            # # desolvate since not all systems have solvent
+            # new_top = Topology()
+            # for mol in top.molecules:
+            #     if mol != Molecule.from_smiles("[H]-O-[H]"):
+            #         new_top.add_molecule(mol)
+            # top = new_top
 
-            num_atoms = top.n_atoms
+            # num_atoms = top.n_atoms
 
-            general_offxml = 'openff-2.0.0.offxml'
-            amber_offxml = 'ff14sb_off_impropers_0.0.3.offxml'
-            water_model = 'tip3p_fb-1.1.0.offxml'
-            forcefield = ForceField(general_offxml, amber_offxml, water_model)
-            # forcefield = ForceField(general_offxml, water_model)
-            forcefield.deregister_parameter_handler('ToolkitAM1BCC')
-            forcefield.get_parameter_handler('ChargeIncrementModel', {"version":0.3, "partial_charge_method":"gasteiger"})
+            # general_offxml = 'openff-2.0.0.offxml'
+            # amber_offxml = 'ff14sb_off_impropers_0.0.3.offxml'
+            # water_model = 'tip3p_fb-1.1.0.offxml'
+            # forcefield = ForceField(general_offxml, amber_offxml, water_model)
+            # # forcefield = ForceField(general_offxml, water_model)
+            # forcefield.deregister_parameter_handler('ToolkitAM1BCC')
+            # forcefield.get_parameter_handler('ChargeIncrementModel', {"version":0.3, "partial_charge_method":"gasteiger"})
 
-            energy = np.nan
-            for max_iters in [0]:
-                try:
-                    print(f"trying energy minimization with {max_iters} maximum iterations")
-                    energy, time_to_parameterize, time_to_energy_minimize = minimize_energy(top, forcefield, max_iters)
-                    break # if successfully minimized without coordinate explosion
-                except openmm.OpenMMException as e:
-                    print(f"openmm exception: {e}")
+            # energy = np.nan
+            # for max_iters in [0]:
+            #     try:
+            #         print(f"trying energy minimization with {max_iters} maximum iterations")
+            #         energy, time_to_parameterize, time_to_energy_minimize = minimize_energy(top, forcefield, max_iters)
+            #         break # if successfully minimized without coordinate explosion
+            #     except openmm.OpenMMException as e:
+            #         print(f"openmm exception: {e}")
 
-            print(energy)
-            # with open("polymer_energies.txt", "a") as file:
-            #     file.write(f"{pdb_file.stem}, {num_atoms}, {energy}, {time_to_load}, {time_to_parameterize}, {time_to_energy_minimize}\n")
-            # #______________________________________________________________________________
+            # print(energy)
+            # # with open("polymer_energies.txt", "a") as file:
+            # #     file.write(f"{pdb_file.stem}, {num_atoms}, {energy}, {time_to_load}, {time_to_parameterize}, {time_to_energy_minimize}\n")
+            # # #______________________________________________________________________________
