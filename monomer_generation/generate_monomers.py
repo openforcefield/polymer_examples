@@ -11,7 +11,6 @@ from monomer_smiles_input import ALL_SMILES_INPUT
 from pathlib import Path
 from partition import partition
 from rdkit import Chem
-from openeye import oechem
 import time
 import openmm
 from openmm.app import PDBFile

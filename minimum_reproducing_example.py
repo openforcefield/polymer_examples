@@ -4,7 +4,6 @@ import os
 from pathlib import Path
 from monomer_generation.partition import partition
 from rdkit import Chem
-from openeye import oechem
 import openmm
 from openmm.app import PDBFile
 from copy import deepcopy

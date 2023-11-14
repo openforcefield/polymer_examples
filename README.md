@@ -28,7 +28,7 @@ If the parameterization was successful, you should be met with a successful mess
 ## Generating Monomer Templates and Testing PDBs
 Now with a single example out of the way, we can go ahead with the rest of the files in the repository!
 
-1. First, run the pdb cleaner (this is unecessary as of 7/31/2023 since the post-cleaned files are uploaded. Running this step requires the pdbfixer library and OpenEye (which is a licenced toolkit)):
+1. [Skip if no OpenEye Licence] First, run the pdb cleaner (this is unecessary as of 7/31/2023 since the post-cleaned files are uploaded. Running this step requires the pdbfixer library and OpenEye (which is a licenced toolkit)):
 ```sh
 python pdb_cleaner.py
 ```

@@ -15,7 +15,6 @@ import os
 import numpy as np
 from pathlib import Path
 from rdkit import Chem
-from openeye import oechem
 import time
 import openmm
 from openmm.app import PDBFile
