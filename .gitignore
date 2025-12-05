@@ -8,3 +8,5 @@ File Search Benchmark.png
 # PyCache
 __pycache__
 */__pycache__
+
+results/
