@@ -3,19 +3,21 @@ Generates jsons files using the new format up-to-date as of 3/14/23
 """
 
 import enum
+import json
 import multiprocessing
 import os
+import signal
 import sys
 import time
 from collections.abc import Generator
 from pathlib import Path
-import json
-import signal
 from types import FrameType
+import logging
 
 import openmm
 import tqdm
 import tqdm.contrib
+from tqdm.contrib.logging import logging_redirect_tqdm
 from monomer_smiles_input import ALL_SMILES_INPUT
 from openff.toolkit import Topology
 from openff.toolkit.utils.toolkits import (
@@ -29,17 +31,35 @@ from substructure_generator import SubstructureGenerator
 sys.path.append(os.path.abspath(__file__ + "/../.."))  # TODO: fix this mess
 from pdb_file_search import PDBFiles
 
-class Columns(enum.Enum):
-    TIME = -1
+
+class Columns(enum.IntEnum):
     FILENAME = 0
+    SUCCESS = 1
+    EXCEPTION_MESSAGE = 2
+    TIME = 3
 
-WRITE_RESULTING_TOPOLOGIES = False
-SKIP_EXISTING_JSONTOPS = False
-N_PROCESSES = 8
-SORT_BY = Columns.TIME
 
+# CONFIGURATION CONSTANTS
+WRITE_RESULTING_TOPOLOGIES: bool = False
+SKIP_EXISTING_JSONTOPS: bool = False
+N_PROCESSES: int | None = 8  # None: Auto-detect
+SORT_BY: tuple[Columns, ...] = (Columns.SUCCESS, Columns.TIME)
+PDB_FILE_TIMEOUT_SEC: None | int = None  # None: No timeout.
+# END OF CONFIGURATION CONSTANTS
+
+# Note that PDB_FILE_TIMEOUT_SEC uses signal.alarm, which can't interrupt in the
+# middle of a Python bytecode instruction. This means that if the process is
+# in a long-running C calculation (such as matching SMARTS to an RDMol, or
+# splitting up an RDMol into its constituent molecules), the timeout will
+# fire at the end of that calculation. If the process is taking longer than you
+# expect, you can use ctrl+c to interrupt - you'll still get results for what's
+# already finished
 
 GLOBAL_TOOLKIT_REGISTRY.deregister_toolkit(OpenEyeToolkitWrapper)
+
+
+def timeout_handler(signum: int, frame: FrameType | None):
+    raise TimeoutError(f"Timeout after {PDB_FILE_TIMEOUT_SEC} seconds")
 
 
 def _identify_all_molecules(
@@ -125,9 +145,14 @@ def load_file(
             Topology._identify_chemically_identical_molecules = _identify_all_molecules
 
             current_dir = Path(__file__).parent.parent.resolve()
-            pdb_out = current_dir / "results" / Path(pdb_file).relative_to(current_dir / "compatible_pdbs")
+            pdb_out = (
+                current_dir
+                / "results"
+                / Path(pdb_file).relative_to(current_dir / "compatible_pdbs")
+            )
             monomers_out = pdb_out.with_suffix(".monomers.json")
             jsontop_out = pdb_out.with_suffix(".topology.json")
+            pdb_file_short = pdb_file.relative_to(pdb_file.parent.parent)
 
             if WRITE_RESULTING_TOPOLOGIES:
                 pdb_out.parent.mkdir(parents=True, exist_ok=True)
@@ -138,8 +163,14 @@ def load_file(
                 continue
 
             start = time.time()
+            if PDB_FILE_TIMEOUT_SEC is not None:
+                signal.signal(signal.SIGALRM, timeout_handler)
+                signal.alarm(PDB_FILE_TIMEOUT_SEC)
             try:
-                top: Topology = Topology.from_pdb(str(pdb_file), _custom_substructures=substructs)
+                top: Topology = Topology.from_pdb(
+                    str(pdb_file),
+                    _custom_substructures=substructs,
+                )
             except Exception as e:
                 success = False
                 exc = str(e)
@@ -148,9 +179,12 @@ def load_file(
                 exc = None
                 if WRITE_RESULTING_TOPOLOGIES and success:
                     jsontop_out.write_text(top.to_json())
+            finally:
+                if PDB_FILE_TIMEOUT_SEC is not None:
+                    signal.alarm(0)
             time_to_load = time.time() - start
 
-            yield (pdb_file, success, exc, time_to_load)
+            yield (pdb_file_short, success, exc, time_to_load)
 
             # # desolvate since not all systems have solvent
             # new_top = Topology()
@@ -206,33 +240,47 @@ if __name__ == "__main__":
     # with open("polymer_energies.txt", "w") as file:
     #     file.write("name, num_atoms, energy, time_to_load, time_to_parameterize, time_to_energy_minimize\n")
 
+    results: list[tuple[Path, bool, str | None, float]] = []
+    interrupt = False
     with multiprocessing.Pool(N_PROCESSES) as pool:
-        results = [
-            elem
+        try:
             for elems in tqdm.tqdm(
                 pool.imap_unordered(
                     load_file_star,
-                    [*ALL_SMILES_INPUT.items()][20:35],
+                    [*ALL_SMILES_INPUT.items()],
                 ),
                 total=len(ALL_SMILES_INPUT),
-            )
-            for elem in elems
-        ]
+            ):
+                results.extend(elems)
+        except KeyboardInterrupt:
+            interrupt = True
 
-    successes = []
-    failures = []
-    for pdb_file, success, exc, time_to_load in results:
-        pdb_file_short = str(pdb_file.relative_to(pdb_file.parent.parent))
+    longest_pdb_file = max(len(str(pdb_file)) for pdb_file, *_ in results)
+
+    n_successes = 0
+    n_failures = 0
+    for pdb_file, success, exc, time_to_load in sorted(
+        results,
+        key=lambda tup: tuple(tup[i] for i in SORT_BY),
+    ):
         if success:
-            successes.append((pdb_file_short, time_to_load))
+            msg = ""
+        elif exc is None:
+            msg = ": topology loaded but failed to validate"
         else:
-            failures.append((pdb_file_short, exc, time_to_load))
+            msg = f": {exc}"
 
-    print(f"There were {len(successes)} successes out of {len(results)} PDB files!")
-    longest_pdb_file = max(len(str(pdb_file)) for pdb_file, *_ in successes + failures)
+        if success:
+            n_successes += 1
+            success_str = "SUCCESS"
+        else:
+            n_failures += 1
+            success_str = "FAILURE"
 
-    for pdb_file, time_to_load in sorted(successes, key=lambda tup: tup[SORT_BY]):
-        print(f"SUCCESS: {pdb_file:{longest_pdb_file}} in {time_to_load:10.3f} s")
-    for pdb_file, exc, time_to_fail in sorted(failures, key=lambda tup: tup[SORT_BY]):
-        msg = "topology loaded but failed to validate" if exc is None else exc
-        print(f"FAILURE: {pdb_file:{longest_pdb_file}} in {time_to_fail:10.3f} s: {msg}")
+        print(
+            f"{success_str}: {str(pdb_file):{longest_pdb_file}} in {time_to_load:10.3f} s{msg}",
+        )
+
+    print(f"There were {n_successes} successes out of {len(results)} completed PDB files!")
+    if interrupt:
+        print("(processing was interrupted by user)")
