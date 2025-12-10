@@ -1,5 +1,5 @@
 """
-Simply a file to store input smiles info. There are two general ways to input monomer info. 
+Simply a file to store input smiles info. There are two general ways to input monomer info.
 
 1) There is the "hard" way where you input each mononmer and terminal group individually:
         ALL_SMILES_INPUT["peg_modified"] = {
@@ -8,7 +8,7 @@ Simply a file to store input smiles info. There are two general ways to input mo
                 "peg_TERM4": ("[#1:1]-[#6:4](-[#1:6])(-[#8:7]-[#6:11](-[#1:3])(-[#1:9])-[#6:12](-[#1:2])(-[#1:5])-[#8:8]-*)-[#1:10]", [])
             }
 2) There is an easiler way where you input the monomer as a complete molecule and "chop" off the ends. The ends that
-   were removed become the different possible terminal groups. 
+   were removed become the different possible terminal groups.
         ALL_SMILES_INPUT["peg_modified"] = {
                 "peg": ("[#1:1]-[#6:4](-[#1:6])(-[#8:7]-[#6:11](-[#1:3])(-[#1:9])-[#6:12](-[#1:2])(-[#1:5])-[#8:8]-[C](-[H])(-[H])(-[H]))-[#1:10]", [0,1,2,3,11,12,13,14,15])
             }
@@ -17,7 +17,7 @@ Sometimes for complex chemistry, the "hard" approach of specifying each monomer 
 is necessary because the terminal groups have atoms with different connectivity (example: carboxylic acis terminals)
 """
 
-ALL_SMILES_INPUT = dict()
+ALL_SMILES_INPUT: dict[str, dict[str, tuple[str, list[int]]]] = dict()
 
 # MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 #                             SIMPLE POLYMERS
@@ -153,13 +153,13 @@ ALL_SMILES_INPUT["vulcanizedrubber"] = {
         "rubber8": ("*-[#6:1](-[#6:2](-[#6:3](-[#6:4](-*)(-[#1:9])-[#1:10])(-[#1:8])-*)(-[#1:7])-[#1:11])(-[#1:5])-[#1:6]", []),
         "rubber9": ("*-[#6:1](-[#6:2](-[#6:3](-*)(-[#1:8])-[#1:9])(-[#1:6])-[#1:7])(-[#6:4](-*)(-*)-[#1:10])-[#1:5]", [])
     }
-        
+
 #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 #                           nucleic_acis
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 
 ALL_SMILES_INPUT["2q1r"] = {
-        "backbone": ("[#8:1](-[#6:2](-[#6:3]1(-[#8:4]-[#6:9](-[#6:7](-[#6:5]-1(-[#8:6]-[#15:10](=[#8:11])(-[#8-:12])-*)-[#1:16])(-[#8:8]-[#1:18])-[#1:17])(-*)-[#1:19])-[#1:15])(-[#1:13])-[#1:14])-*", []), 
+        "backbone": ("[#8:1](-[#6:2](-[#6:3]1(-[#8:4]-[#6:9](-[#6:7](-[#6:5]-1(-[#8:6]-[#15:10](=[#8:11])(-[#8-:12])-*)-[#1:16])(-[#8:8]-[#1:18])-[#1:17])(-*)-[#1:19])-[#1:15])(-[#1:13])-[#1:14])-*", []),
         "mid1": ("*-[#7:1]1-[#6:2](=[#7:3]-[#6:4]2-[#6:5](-[#7:6](-[#1:12])-[#1:13])=[#7:7]-[#6:8](=[#7:9]-[#6:10]=2-1)-[#1:14])-[#1:11]", []),
         "mid2": ("*-[#7:1]1-[#6:2](=[#8:3])-[#7:4](-[#6:5](=[#8:6])-[#6:7](=[#6:8]-1-[#1:11])-[#1:10])-[#1:9]", []),
         "mid3": ("*-[#7:1]1-[#6:2](=[#8:3])-[#7:4]=[#6:5](-[#7:6](-[#1:9])-[#1:10])-[#6:7](=[#6:8]-1-[#1:12])-[#1:11]", []),
@@ -319,7 +319,7 @@ ALL_SMILES_INPUT["bip23267_sup-0002-appendixs1"] = {"group1": ("[H]-N(-C([H])([H
 #                                    "COO_mid": ("*-N(C([H])([H])-C(-[O-])=O)-C([H])([H])-C(=O)-*", []),
 #                                    "Me_term": ("*-N([H])-C(C([H])([H])([H]))([H])-C(=O)-[O-]", []),
 #                                    "ring": ("n1:c([H]):c([H]):c([H]):c([H]):c([H]):1", [])}
-# ALL_SMILES_INPUT["c8sc04240c3"] = {"": ("", [])}  # poorly formatted input 
+# ALL_SMILES_INPUT["c8sc04240c3"] = {"": ("", [])}  # poorly formatted input
 
 ALL_SMILES_INPUT["ja7b02319_si_002"] = {"double_ring": ("[*]-[C](=[O])-[C](-[H])(-[H])-[N](-[*])-[C](-[H])(-[C]1=[C]2-[C](-[H])=[C](-[H])-[C](-[H])=[C](-[H])-[C]-2=[C](-[H])-[C](-[H])=[C]-1-[H])-[C](-[H])(-[H])-[H]", []),
                                         "ring_term1": ("[*]-[N](-[H])-[C](-[H])(-[C]1=[C]2-[C](-[H])=[C](-[H])-[C](-[H])=[C](-[H])-[C]-2=[C](-[H])-[C](-[H])=[C]-1-[H])-[C](-[H])(-[H])-[H]" ,[]),
